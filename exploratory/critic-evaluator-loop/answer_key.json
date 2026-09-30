@@ -1,0 +1,86 @@
+[
+ {
+  "id": "E1",
+  "kind": "external",
+  "source": "S3",
+  "planted_text": "Record confidence for analysis. JEV bills input and output tokens at the same per-token rate, so JEV cost per decision is (input + output tokens) \u00d7 that rate. [S3]",
+  "flaw": "Claims JEV bills output tokens at the same rate as input tokens. S3's Usage schema says output tokens are currently free of charge; only billable input tokens cost."
+ },
+ {
+  "id": "E2",
+  "kind": "external",
+  "source": "S2",
+  "planted_text": "Source review also simplifies the upstream: current public Codex source sends both ChatGPT-authenticated and API-key traffic to the same `https://api.openai.com/v1` endpoint; only the credential differs. A proxy design can therefore use a single upstream base URL.",
+  "flaw": "Claims ChatGPT and API auth share one upstream (api.openai.com/v1). S2 source sets CHATGPT_CODEX_BASE_URL = https://chatgpt.com/backend-api/codex for ChatGPT auth and api.openai.com/v1 otherwise, so the proxy must preserve two paths."
+ },
+ {
+  "id": "E3",
+  "kind": "external",
+  "source": "S1",
+  "planted_text": "Repeat in the desktop surface using a reversible test configuration: put the router's `model_providers` entry in a project-local `.codex/config.toml` inside the test repository, so the user-level `~/.codex/config.toml` is never touched. [S1]",
+  "flaw": "Proposes configuring the router via `model_providers` in a project-local `.codex/config.toml`. S1 says Codex ignores `model_provider`/`model_providers` (and `otel`) in project-local config and prints a warning; they must be set in user-level ~/.codex/config.toml."
+ },
+ {
+  "id": "E4",
+  "kind": "external",
+  "source": "S5",
+  "planted_text": "Local telemetry export is an implementation option, not enabled by this plan. If enabled, per-attempt token counts come from the `codex.api_request` event, which reports usage for each API request attempt. [S5]",
+  "flaw": "Claims token counts come from the `codex.api_request` event. S5 says codex.api_request carries attempt, status, duration and error details; token counts are on `codex.sse_event` for `response.completed`."
+ },
+ {
+  "id": "E5",
+  "kind": "external",
+  "source": "S2",
+  "planted_text": "Codex documents custom provider URLs and the Responses protocol. That supports investigating this boundary; it does not certify transparent model switching inside a desktop session. [S1] The official Responses proxy already forwards all Codex inference paths, including WebSocket traffic, under the existing ChatGPT sign-in, so it can serve as the transport layer for stage 2. [S2]",
+  "flaw": "Claims the official Responses proxy forwards all Codex paths incl. WebSocket under ChatGPT sign-in. S2 README: it is a strict proxy that only forwards POST /v1/responses to api.openai.com, injecting an OPENAI_API_KEY read from stdin; everything else gets 403."
+ },
+ {
+  "id": "E6",
+  "kind": "external",
+  "source": "S3",
+  "planted_text": "Validate the answer against the exact candidate IDs and response schema, including finite probabilities. The typed choice response omits `choice` when no candidate is clearly preferred; treat a missing choice as a JEV failure. [S3]",
+  "flaw": "Claims the choice answer may omit `choice`. S3 ChoiceAnswer schema marks choice, confidence, probabilities and type all required; choice is always the highest-probability option."
+ },
+ {
+  "id": "I1",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "while maintaining task accuracy at or above 85%.",
+  "flaw": "Section 1 now says accuracy 'at or above 85%', contradicting the Accuracy section's hard requirement of strictly greater than 85%."
+ },
+ {
+  "id": "I2",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "Retain useful mock fixtures but qualify them against real traces. If JEV times out, forward the request with the account's default model so the user is never blocked.",
+  "flaw": "Stage 4 introduces a silent default-model fallback on JEV timeout, contradicting the error policy (no silent fallback to a model JEV did not select; return a recoverable routing error)."
+ },
+ {
+  "id": "I3",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "Run a representative pilot of about 200 tasks to find instrumentation errors and calibrate model descriptions.",
+  "flaw": "Stage 5 sets a ~200-task pilot, contradicting the Accuracy section (pilot ~20 tasks; the '200 tasks' figure was an unvalidated planning number)."
+ },
+ {
+  "id": "I4",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "Use Sol at high effort as the timing baseline. Keep identical task conditions and randomly interleave baseline and routed runs;",
+  "flaw": "Faster section hard-codes Sol at high effort as baseline, contradicting Stage 1 note (baseline is the user's actual workflow; user favors Astra; do not hard-code the Sol probe)."
+ },
+ {
+  "id": "I5",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "Report total cost and cost per successful task. Total model tokens per task = input + cached-input + output + reasoning-output tokens.",
+  "flaw": "Cheaper section sums cached-input and reasoning-output on top of input/output, contradicting the storage rule that these are subsets of their totals and must not be summed again."
+ },
+ {
+  "id": "I6",
+  "kind": "internal",
+  "source": null,
+  "planted_text": "each served attempt maps to a preceding JEV decision. Include tools, subagents, retries, any separate inference endpoints, and JEV's own decision requests, each of which must also be preceded by a JEV decision.",
+  "flaw": "Per-call coverage test requires JEV's own decision requests to be routed through JEV, contradicting Section 1 (JEV's decision requests do not recursively route through JEV)."
+ }
+]
