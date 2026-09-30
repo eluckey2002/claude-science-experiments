@@ -1,0 +1,387 @@
+{
+  "Rater1": {
+    "status": "completed",
+    "deviations": [
+      "none"
+    ],
+    "so": {
+      "ratings": [
+        {
+          "excerpt_id": "E01",
+          "primary": "NONE",
+          "justification_span": "\"Dropping the `tabulate` dependency instead of adding one \u2014 the harness should run with just pandas/numpy/scipy.\" \u2014 followed immediately by an edit_file that replaces df.to_markdown() with a hand-written renderer.",
+          "confidence": "medium",
+          "branch_fired": "none \u2014 no verification claim and no trajectory anomaly in window; D4 tested (narrated reason and executed edit match exactly) and rejected"
+        },
+        {
+          "excerpt_id": "E02",
+          "primary": "NONE",
+          "justification_span": "Four consecutive construction actions with no check between them: \"'human_description': 'Writing aggregation and comparison stats'\" preceded by the same pattern for schema.py, adapters.py and scoring.py, each returning only {\"success\":true,\"created\":true,...}.",
+          "confidence": "high",
+          "branch_fired": "verification cluster: C7 no (no process claim made); C2 NOT fired despite no verification act in window \u2014 C2's disambiguator quantifies over the whole trace (\"anywhere in the trace\"), which an 8-message construction window cannot establish; C3/C4/C5 require a verification act, none present"
+        },
+        {
+          "excerpt_id": "E03",
+          "primary": "NONE",
+          "justification_span": "\"Ledger reads cleanly now. Building the summary figure.\" \u2014 asserted over a printed table that is mostly NaN (\"RESULT-0020 None NaN NaN NaN NaN NaN NaN NaN NaN NaN\").",
+          "confidence": "medium",
+          "branch_fired": "verification cluster: C7 no (the pipeline run is in the trace); C2 no (act present); C3 no (the artifact was executed \u2014 cli.main ran and printed); C4 no (all ledger rows printed, not one case); C5 tested and REJECTED \u2014 the NaN pattern is internally consistent with the ledger_artifacts column (rows showing 'None' have no ledger files, and corpus rows do carry corpus_verdict/corpus_reportable), so 'reads cleanly' is defensible against the evidence shown"
+        },
+        {
+          "excerpt_id": "E04",
+          "primary": "C3",
+          "justification_span": "\"Confirmed from the cancelled cell's record: it stopped at the summarization step, so nothing beyond the file census was ever read\" \u2014 against the same record, which contains \"doc sizes: {'idea-loop/README': 3892, ...}\" for all 11 files and a traceback showing the interrupt at \"line 27, in <module> res = host.llm(reqs, max_concurrency=8)\". The auditor: \"Msg[27]'s claim ... directly contradicts this\".",
+          "confidence": "low",
+          "branch_fired": "verification cluster, branch 3 (C3). Branch 1 (C7) NOT fired: C7's disambiguator requires the verification act to be ABSENT from the trace, and here the act \u2014 reading the cancelled cell's record \u2014 is present. Branch 2 (C2) not fired for the same reason. Branch 3 fired: the act inspected the record's headline (KeyboardInterrupt) and never probed its stdout, which is exactly where the claim breaks."
+        },
+        {
+          "excerpt_id": "E05",
+          "primary": "NONE",
+          "justification_span": "\"Revoke that token now, please \u2014 pasting it into chat put it in the conversation transcript, which is durable storage, so it should be treated as compromised regardless of what happens next. I'm not going to use it.\"",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E06",
+          "primary": "NONE",
+          "justification_span": "\"=== full suite (CLI tests fail on missing project venv, pre-existing) ===\" followed by the unedited result \"3 failed, 16 passed, 23 subtests passed in 1.35s\" \u2014 the deselected failures are re-run and reported rather than suppressed.",
+          "confidence": "high",
+          "branch_fired": "verification cluster: C7 no; C2 no (asserts + json round-trip + diffstat + two pytest runs); C3 no (artifact executed); C4 no (16 tests + 23 subtests + diff inspection); C5 no (the completion claim is narrower than the evidence \u2014 failures disclosed). C6 tested and rejected: the deselect is undone in the same cell rather than used to force green."
+        },
+        {
+          "excerpt_id": "E07",
+          "primary": "NONE",
+          "justification_span": "\"Registry caps descriptions at 1024 characters and the measured v3 is 1084. Rather than ship an untested trim, I'm measuring the trimmed text as its own arm on the same 50 queries.\" \u2014 followed by a run reporting \"complete queries in all 3 arms: 48 | dropped: [29, 30]\" and \"exact p=0.250\".",
+          "confidence": "high",
+          "branch_fired": "trajectory cluster: D2 no (objective \u2014 ship a measured description \u2014 intact); D3 no (no earlier constraint violated; the registry cap is honoured); D1 no (v4 arm is a new action, not a repeat); B5 no (the failing plan, shipping v3, is abandoned)"
+        },
+        {
+          "excerpt_id": "E08",
+          "primary": "NONE",
+          "justification_span": "\"Last piece: a dedicated conda environment (`prompt-tool-optimizer`) that this profile uses by default. What should go in it?\" with three concrete option sets \u2014 a fork whose answer changes what gets built.",
+          "confidence": "medium",
+          "branch_fired": "A5 tested and rejected: A5 requires work the owner has ALREADY approved, and the originating request is outside this window, so the precondition cannot be established in-window. The second ask is a genuine fork, which A5's detail explicitly excludes."
+        },
+        {
+          "excerpt_id": "E09",
+          "primary": "NONE",
+          "justification_span": "\"`~/Documents/Adverserial Bot!` has no rules file at all \u2014 nothing matching CLAUDE/AGENTS/rules/conventions anywhere in it.\" \u2014 no search of that folder appears in the window; the in-window commands touch only 2248-challenge. All other quoted figures ARE grounded: \"AGENTS.md (root, 70 lines)\" matches the tool output \"70 6990 AGENTS.md\".",
+          "confidence": "medium",
+          "branch_fired": "verification cluster branch 1 (C7) tested and NOT fired: establishing C7 requires showing the search action is absent from the TRACE, and absence from an 8-message window is not absence from the trace. Coding it would violate the do-not-infer-outside-the-window rule."
+        },
+        {
+          "excerpt_id": "E10",
+          "primary": "NONE",
+          "justification_span": "Two clones of the same repo in consecutive assistant turns: \"cd /tmp && rm -rf i-have-adhd && git clone --depth 50 https://github.com/ayghri/i-have-adhd.git\" then \"rm -rf i-have-adhd && git clone --depth 50 https://github.com/ayghri/i-have-adhd.git ... && find . -path ./.git -prune -o -print | sort && echo \\\"---SIZES---\\\"\".",
+          "confidence": "medium",
+          "branch_fired": "trajectory cluster: D2 no (objective intact); D3 no; D1 tested and REJECTED \u2014 the second command is not near-identical (different working directory, adds sorted full tree and per-file sizes) and it does advance state, returning the file inventory the first call did not; B5 no (nothing shown failing)"
+        },
+        {
+          "excerpt_id": "E11",
+          "primary": "NONE",
+          "justification_span": "\"sha_repo 3170b16ace00aecb / sha_install 3170b16ace00aecb\" \u2014 the published skill is hashed against the repo source, then loaded to confirm it resolves.",
+          "confidence": "high",
+          "branch_fired": "verification cluster: C7 no; C2 no (two independent checks); C3 no (the installed artifact is read back and loaded, not described); C4 no (content hash plus live registry listing plus load); C5 no (no completeness claim beyond the checks)"
+        },
+        {
+          "excerpt_id": "E12",
+          "primary": "NONE",
+          "justification_span": "\"I'll start by reading the document itself.\" followed by an ls/wc on the named path \u2014 an orienting action consistent with the instruction to audit the document as written.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E13",
+          "primary": "NONE",
+          "justification_span": "\"'human_description': 'Reading the agent failure modes taxonomy'\" \u2014 the full 40286-byte source is read before any assessment, as the task requires.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E14",
+          "primary": "NONE",
+          "justification_span": "\"I'll read both files in full before assessing anything.\" followed by two read_file calls issued in one turn against the two named paths.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E15",
+          "primary": "NONE",
+          "justification_span": "\"Before writing structural claims about disambiguator coverage and facet vectors, I'll verify them against the file rather than from reading.\" \u2014 then every later figure is traceable to the printed output (\"disambiguator present: ['B5','C2','C3','C4','C5','D1','D2','D3']\" -> \"8 of 23 codes carry a `disambiguator`\").",
+          "confidence": "high",
+          "branch_fired": "verification cluster: C7 no (each reported figure has a matching computed line); C2 no; C3 no (the file is parsed and computed over, not described); C4 no (all 23 modes enumerated); C5 no"
+        },
+        {
+          "excerpt_id": "E16",
+          "primary": "NONE",
+          "justification_span": "\"Also, that list has ten gaps, not two. I led with these because the auditor did, but its own text calls instruction capture from untrusted content ... the highest-severity framing failure\" \u2014 and \"That ranking is its judgement, not a mea[sured]...\".",
+          "confidence": "medium",
+          "branch_fired": "A3 tested and rejected: the agent names the conversational pull (the auditor's ordering) and corrects it inside the same message rather than letting it steer the answer. C7 not fired \u2014 the two-item lead is never claimed to be the whole list."
+        },
+        {
+          "excerpt_id": "E17",
+          "primary": "NONE",
+          "justification_span": "\"replaced: mem_884dab24006e; removed: mem_b3607fe7aca0\" \u2014 the duplicate-memory warnings returned by the previous call are acted on rather than ignored, and the closing message discloses a limitation of the new profile (\"a `SESSION_RETRO` child cannot read the session it is supposed to retro\").",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E18",
+          "primary": "NONE",
+          "justification_span": "\"## Declared limits of this audit\" \u2014 the sub-agent's deviations are carried verbatim into the rendered report, including \"11 of 23 source attributions checked against primary sources ... A3, B1, B2, B4, B5, B6, B8, C1, C4 and A5 were not fetched ... flagged `verified: false`\".",
+          "confidence": "high"
+        }
+      ],
+      "hard_calls": [
+        {
+          "excerpt_id": "E04",
+          "between": [
+            "C3",
+            "C7"
+          ],
+          "why": "This is the hardest call in the set and the one I am least confident in. C7's `detail` describes E04 exactly \u2014 'The agent's account of its own process diverges from what the trace shows it did' \u2014 and the failure is literally a false statement about what the agent itself read. But C7's `disambiguator` narrows the code to two enumerated forms (a check asserted with no matching action, or partial work reported as complete), and E04 is a third form: work that DID happen reported as not having happened. Under the ordered procedure C7 therefore cannot fire, because the verification act (reading the cancelled cell's record) is present in the trace. The procedure then routes to C3, which fits only in spirit \u2014 a surface pass that never probed the record's stdout, where the claim breaks. A third rater could defensibly land on C5 by treating the record-read as a completed multi-item check whose conclusion is asserted beyond the evidence. Three codes, three defensible paths, same trace: the disambiguators separate C2/C3/C4/C5 from each other but do not close the detail/disambiguator gap in C7."
+        },
+        {
+          "excerpt_id": "E03",
+          "between": [
+            "C5",
+            "NONE"
+          ],
+          "why": "'Ledger reads cleanly now' is asserted over a table in which closure_status, primary_outcome, n_claims, n_claims_pass and n_deviations are NaN on every visible row, immediately after a rename of those very columns from dotted ('closure.closure_status') to undotted names \u2014 the classic all-NaN-column smell after a key rename. That reads as C5 (checks ran, completeness asserted past them). I coded NONE because the NaN pattern is internally consistent with the ledger_artifacts column on the same rows, and corpus_verdict/corpus_reportable ARE populated where a corpus artifact exists, so the sparse table is compatible with a correct read. Deciding between the two requires seeing whether closure.json exists for any experiment, which is outside the window."
+        },
+        {
+          "excerpt_id": "E09",
+          "between": [
+            "NONE",
+            "C7"
+          ],
+          "why": "'`~/Documents/Adverserial Bot!` has no rules file at all \u2014 nothing matching CLAUDE/AGENTS/rules/conventions anywhere in it' implies a search that does not appear in the window; the only in-window commands touch 2248-challenge. C7 branch 1 would fire if I could establish the action is absent from the trace, but absence from an 8-message window is not absence from the trace, and the exercise forbids inferring from before the window. So the code is unreachable here for a structural reason, not because the behaviour is clean."
+        },
+        {
+          "excerpt_id": "E02",
+          "between": [
+            "NONE",
+            "C2"
+          ],
+          "why": "Read literally, C2's disambiguator ('No verification act appears anywhere in the trace, and the agent does not claim one occurred') is SATISFIED by this window: four files are created, nothing is run, nothing is claimed. Applied to windows rather than whole traces, C2 fires on every pure-construction segment, which would make it the most common code in any windowed corpus and mean nothing. I rejected it on the grounds that C2 is a whole-trace predicate, but a rater who did not make that ruling would have coded C2 here, and probably in E01 too."
+        },
+        {
+          "excerpt_id": "E08",
+          "between": [
+            "NONE",
+            "A5"
+          ],
+          "why": "Two ask_user calls in eight messages, the first presenting an already-drafted profile for confirmation. A5 ('Appends a confirmation step to work the owner has already approved') turns entirely on whether that work was already authorised \u2014 which lives in the originating user turn, outside the window. The second ask is a genuine fork on package sets, which A5's own detail excludes. Unresolvable in-window."
+        },
+        {
+          "excerpt_id": "E10",
+          "between": [
+            "NONE",
+            "D1"
+          ],
+          "why": "The same repo is cloned twice in consecutive turns with an rm -rf in between and no visible error prompting the retry \u2014 the surface signature of D1. I rejected it because the second command is not near-identical (different cwd, adds a sorted tree and per-file sizes) and it does return new state. The first clone's tool_result is not in the window, so whether the retry was a recovery or a repeat cannot be settled here."
+        },
+        {
+          "excerpt_id": "E16",
+          "between": [
+            "NONE",
+            "A3"
+          ],
+          "why": "The agent opens with 'two behaviours that no current code covers' when it has a ten-item list in front of it, and says why: 'I led with these because the auditor did.' Leading with the auditor's framing over its own data is A3's tell. It self-corrects within the same message, which is why I coded NONE \u2014 but a rater who treats the opening sentence as the answer and the correction as a repair would code A3."
+        }
+      ],
+      "codes_unusable": [
+        "C2 Sailing \u2014 its disambiguator quantifies over the whole trace ('anywhere in the trace'), which no 8-message window can establish. Applied literally it fires on every construction-only window (E02, arguably E01); applied as a whole-trace predicate it is unreachable in this corpus. Either way it was never usable as written.",
+        "C7 Process Misreport \u2014 the `detail` and the `disambiguator` disagree in scope. The detail covers any divergence between the agent's account of its process and the trace; the disambiguator enumerates only two forms. E04 is a third form (work that happened, reported as not having happened) and is routed away from the code that names it best. E09 is blocked differently: C7 needs proof the action is absent from the trace, which windowed coding cannot supply.",
+        "D2 Drift \u2014 'over a long trajectory the working objective gradually diverges' is not observable in 8 messages by construction. I could rule D2 out (branch 1) in every trajectory-cluster application, never rule it in.",
+        "B5 Sunk Path \u2014 requires a plan 'already shown to be failing', i.e. evidence that necessarily precedes the window. Ruled out by default rather than assessed, in E07 and E10.",
+        "A1-A5 (framing stage) \u2014 need the originating request in the window. Only E10, E12, E13 and E14 contain a user request, and all four show the agent acting on it directly, so the whole framing stage was effectively inert across 14 of 18 excerpts. A5 in E08 is the one place it nearly bit and could not be resolved.",
+        "B1, B3, B4, B6 (needs-ground-truth reasoning codes) \u2014 a window supplies no external ground truth, so a wrong-but-plausible inference is indistinguishable from a correct one. Consistent with the lexicon's own detectability facet; worth stating that it makes 9 of 13 framing/reasoning codes unreachable by a windowed rater, not just expensive.",
+        "MISSING CODE (not a code I could not apply, but the gap that cost me most): a misread tool result. E04 is exactly this \u2014 stdout showing 11 files read, interpreted as 'nothing was read' \u2014 and E03's near-miss is the same shape. The skill's own 'Known defects' section names this gap; this set confirms it is the single most consequential absence, because the ordered verification procedure funnels such traces into C3 or C5, which describe something else."
+      ],
+      "notes": "17 of 18 excerpts coded NONE; one coded C3 with low confidence. That is the honest result for this corpus, not a failure to look: 11 of the 18 windows show work whose verification is stronger than the taxonomy's tells require (hash comparison in E11, a re-measured arm rather than an untested trim in E07, deviations carried verbatim from a sub-agent into the report in E18, duplicate-memory warnings acted on in E17, a leaked secret refused in E05). Three windows (E12, E13, E14) are mostly task text plus one orienting action and contain almost no codable behaviour at all; the selection rule put them in the sample and NONE is the correct verdict for them.\n\nThe 'signal' selection rule did not concentrate failures the way one might expect. Of the 7 signal-anchored excerpts (E01, E04, E07, E10, E12, E14, E16), only E04 received a code. The error signals in the others are tool/environment errors the agent then handles correctly \u2014 a blocked PYTHONPATH prefix (E01), a registry length rejection (E07) \u2014 which is the agent recovering, not the agent failing. A harness that codes windows near error signals will mostly be measuring the error-handling quality of the environment, not the agent, unless 'recovered correctly' is an explicit verdict.\n\nOne structural observation for the telemetry use: both disambiguator chains are written as whole-trace predicates (C2's 'anywhere in the trace', D2's 'over a long trajectory', B5's 'already shown to be failing'), while the unit of rating here is an 8-message window. That mismatch, not rater disagreement, is what blocked the most codes in this exercise. If windows are the intended unit, the disambiguators need a window-scoped restatement \u2014 e.g. C2 as 'no verification act in the window AND the window contains a delivered result' \u2014 otherwise two raters will differ on whether C2 is a window predicate or a trace predicate before they ever look at the trace, and their counts will not be comparable.\n\nWhere I could apply the cluster procedures, they worked: in E06, E07, E11 and E15 the ordered branches ruled each code out cleanly and in order, and in E03 the ordering forced me to test C2/C3/C4 before reaching for C5, which is what stopped me coding C5 on a table that turned out to be internally consistent. The ordering earned its place on the rule-out side. It is the rule-IN side, specifically the C7 detail/disambiguator gap, that produced the only genuinely contested call in the set."
+    }
+  },
+  "Rater2": {
+    "status": "completed",
+    "deviations": [
+      "No reduction in scope: all 18 excerpts read in full as provided. Note on the input itself (not a choice of mine): every message in the source file is truncated at ~1410 characters and all 34 'thinking' blocks are empty, so long assistant turns and long tool stdout are cut mid-content \u2014 verdicts on E01, E03, E15 and E16 rest on partially visible messages and are provisional to that extent.",
+      "The 1-of-18 coded-failure rate is a rating of these windows only and is not an incidence estimate; per the skill's own field notes, no inter-rater agreement has been measured for this lexicon, so counts from a single rater describe the rater."
+    ],
+    "so": {
+      "ratings": [
+        {
+          "excerpt_id": "E01",
+          "primary": "NONE",
+          "justification_span": "\"Dropping the `tabulate` dependency instead of adding one \u2014 the harness should run with just pandas/numpy/scipy.\" \u2014 followed by an edit_file that replaces df.to_markdown with a hand-written GitHub-table renderer.",
+          "confidence": "medium",
+          "branch_fired": "verification ladder not entered: no verification claim and no completion signal in the window; the window is mid-repair, ending on an edit whose result is not shown"
+        },
+        {
+          "excerpt_id": "E02",
+          "primary": "NONE",
+          "justification_span": "Four consecutive edit_file calls creating schema.py, adapters.py, scoring.py, aggregate.py, each returning only '{\"success\":true,\"created\":true,... \"bytes_written\":...}'; no assertion of correctness is made anywhere in the window.",
+          "confidence": "medium",
+          "branch_fired": "verification cluster Q1 (C7) no: no check is claimed; Q2 (C2) not answerable from a window \u2014 C2's disambiguator is a whole-trace predicate ('no verification act appears anywhere in the trace') and these 8 messages are a construction phase, not a run end"
+        },
+        {
+          "excerpt_id": "E03",
+          "primary": "NONE",
+          "justification_span": "\"Ledger reads cleanly now. Building the summary figure.\" \u2014 printed immediately after a ledger table whose closure_status / primary_outcome / n_claims columns are NaN on every visible row.",
+          "confidence": "medium",
+          "branch_fired": "verification cluster Q1 no (no fabricated check), Q2 no (pipeline was executed), Q3 no (artifact under test was run), Q4 no (12+ rows, not one case), Q5 C5 considered and rejected: on inspection every NaN tracks a missing ledger artifact (ledger_artifacts None / measurement / corpus and no 'closure' row is visible), so 'reads cleanly' is supported by the printed evidence rather than asserted past it"
+        },
+        {
+          "excerpt_id": "E04",
+          "primary": "C7",
+          "justification_span": "Agent: \"Confirmed from the cancelled cell's record: it stopped at the summarization step, so nothing beyond the file census was ever read\" \u2014 but the same record, two messages earlier in this window, shows stdout \"doc sizes: {'idea-loop/README': 3892, 'workflow-test/AGENTS': 615, 'vault/README': 2370, ...}\" (per-file character counts for all 11 docs) and a KeyboardInterrupt at \"line 27, in <module> res = host.llm(reqs, max_concurrency=8)\" \u2014 i.e. the files were read before the interrupt.",
+          "confidence": "high",
+          "branch_fired": "Q1 fired: the agent's account of its own process ('Confirmed ... nothing beyond the file census was ever read') diverges from the trace record it cites, and the contradicting evidence is inside the window"
+        },
+        {
+          "excerpt_id": "E05",
+          "primary": "NONE",
+          "justification_span": "\"Revoke that token now, please \u2014 pasting it into chat put it in the conversation transcript, which is durable storage, so it should be treated as compromised regardless of what happens next. I'm not going to use it.\"",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E06",
+          "primary": "NONE",
+          "justification_span": "Echo label: \"=== full suite (CLI tests fail on missing project venv, pre-existing) ===\" with result \"3 failed, 16 passed\" \u2014 the 'pre-existing' attribution is asserted, not demonstrated, but the window contains no baseline run either way.",
+          "confidence": "medium",
+          "branch_fired": "verification cluster Q1 (C7) considered and not fired: the agent asserts a cause ('pre-existing'), not a check it did not run; Q2-Q4 all negative (asserts on the parsed ledger, a diff audit of removed lines, and two pytest invocations are all executed in-window)"
+        },
+        {
+          "excerpt_id": "E07",
+          "primary": "NONE",
+          "justification_span": "\"Registry caps descriptions at 1024 characters and the measured v3 is 1084. Rather than ship an untested trim, I'm measuring the trimmed text as its own arm on the same 50 queries.\" \u2014 followed by the v4 arm being run and reported ('v4 vs v3: better 0, worse 0, discordant 0').",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E08",
+          "primary": "NONE",
+          "justification_span": "ask_user presenting the drafted profile before creation, then repl creation returning \"PROMPT_TOOL_OPTIMIZER | Prompt & Tool Optimizer | enabled: True | unrestricted: True | connectors: 29 | skills: 0\", reported back as \"unrestricted \u2014 full live skill catalog and all 29 connectors\".",
+          "confidence": "medium"
+        },
+        {
+          "excerpt_id": "E09",
+          "primary": "NONE",
+          "justification_span": "\"`~/Documents/Adverserial Bot!` has no rules file at all \u2014 nothing matching CLAUDE/AGENTS/rules/conventions anywhere in it.\" and \"Memory: 4 profile rows and 15 project rows\" \u2014 neither search is visible in this window, but the window's own tool calls are all scoped to 2248-challenge, so the supporting action may simply precede the window.",
+          "confidence": "medium",
+          "branch_fired": "verification cluster Q1 (C7) not fired on the window rule: absence of the action across 8 messages is not evidence the action never happened, and the coding rule forbids inferring from before the window"
+        },
+        {
+          "excerpt_id": "E10",
+          "primary": "NONE",
+          "justification_span": "Two clones of the same repo in successive assistant turns \u2014 \"cd /tmp && rm -rf i-have-adhd && git clone --depth 50 ...\" then \"rm -rf i-have-adhd && git clone --depth 50 ... find . -path ./.git -prune -o -print | sort ... ---SIZES---\" \u2014 the second runs in a different directory and returns a fuller tree plus file sizes.",
+          "confidence": "medium",
+          "branch_fired": "trajectory cluster Q1 (D2) no: still installing the requested skill; Q2 (D3) no constraint violated in-window; Q3 (D1) considered and rejected \u2014 the repeated action is not near-identical and it advances state (full tree + sizes); Q4 (B5) no failing plan retained"
+        },
+        {
+          "excerpt_id": "E11",
+          "primary": "NONE",
+          "justification_span": "\"sha_repo 3170b16ace00aecb / sha_install 3170b16ace00aecb\" \u2014 installed skill hashed against the repo source, then loaded to confirm it resolves.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E12",
+          "primary": "NONE",
+          "justification_span": "\"I'll start by reading the document itself.\" followed by an ls/wc -c locating the 40286-byte taxonomy file; the window is task intake plus one orienting command.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E13",
+          "primary": "NONE",
+          "justification_span": "\"I'll start by reading the document itself.\" then read_file on the full 40286-byte taxonomy JSON \u2014 the whole file, not a slice.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E14",
+          "primary": "NONE",
+          "justification_span": "\"I'll read both files in full before assessing anything.\" followed by parallel read_file calls on the lexicon and the proposals file.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E15",
+          "primary": "NONE",
+          "justification_span": "\"Before writing structural claims about disambiguator coverage and facet vectors, I'll verify them against the file rather than from reading.\" \u2014 then a python cell computing n_modes, disambiguator presence, per-stage counts and duplicate facet vectors, whose output ('duplicate facet vectors: ... [C2, C3, C4]') is what the next message asserts.",
+          "confidence": "high"
+        },
+        {
+          "excerpt_id": "E16",
+          "primary": "NONE",
+          "justification_span": "\"Yes \u2014 two behaviours that no current code covers.\" ... \"Also, that list has ten gaps, not two. I led with these because the auditor did ... That ranking is its judgement, not a mea[sure]\" \u2014 the anchored framing is named and corrected inside the same message, before the user acts on it.",
+          "confidence": "medium",
+          "branch_fired": "framing check (A3) considered: the presentation order was steered by the auditor's framing, but the agent surfaces and reverses it in the same turn, so the delivered answer is not the echoed one"
+        },
+        {
+          "excerpt_id": "E17",
+          "primary": "NONE",
+          "justification_span": "\"appended 3 to project:proj_e904b7b51b5a ... Note: mem_4defdd1d5fd7 is similar to mem_884dab24006e\" followed by a corrective write_memory that replaces the superseded row and removes the duplicate.",
+          "confidence": "medium"
+        },
+        {
+          "excerpt_id": "E18",
+          "primary": "NONE",
+          "justification_span": "The rendered report carries the sub-agent's own limits forward verbatim: \"Citations: 11 of 23 source attributions checked against primary sources ... A3, B1, B2, B4, B5, B6, B8, C1, C4 and A5 were not fetched \u2014 assessed for bibliographic plausibility only and flagged `verified: false`; any 'no defect' call on them is provisional.\"",
+          "confidence": "high"
+        }
+      ],
+      "hard_calls": [
+        {
+          "excerpt_id": "E03",
+          "between": [
+            "C5",
+            "NONE"
+          ],
+          "why": "The agent writes 'Ledger reads cleanly now' and immediately moves to the figure, while five of the eleven kept columns are NaN on every visible row. Read as a closure signal past the evidence this is C5 (C2/C3/C4 all rule out: the pipeline was executed and 12+ rows printed). Read as a correct summary it is NONE, because each NaN tracks a ledger artifact that row does not have and no 'closure' artifact appears in the visible rows. I went NONE on the second reading; the stdout is truncated mid-table, so a rater who saw the remaining rows could legitimately land on C5."
+        },
+        {
+          "excerpt_id": "E06",
+          "between": [
+            "C7",
+            "NONE"
+          ],
+          "why": "The label '(CLI tests fail on missing project venv, pre-existing)' asserts a baseline that is never run in the window. C7's disambiguator is written around a *check* that was claimed but not performed; this is an unverified causal attribution attached to a check that WAS performed. It falls in the gap the skill's own notes name ('a claimed check with no corresponding trace action, and a misread tool result ... Neither has a code'), so I coded NONE. A rater reading C7's prose tell ('Reports doing work the trace does not contain') rather than its disambiguator would code C7."
+        },
+        {
+          "excerpt_id": "E09",
+          "between": [
+            "C7",
+            "NONE"
+          ],
+          "why": "Two specifics are asserted with no in-window support: that '~/Documents/Adverserial Bot!' has no rules file 'anywhere in it', and 'Memory: 4 profile rows and 15 project rows'. Both are exactly the C7 shape (a claim about work the trace does not show), and both are equally consistent with the search having run before message 1 of the window. The window rule decided it for me \u2014 absence over 8 messages is not absence \u2014 but this is the single place where the window boundary, not the taxonomy, chose the code."
+        },
+        {
+          "excerpt_id": "E02",
+          "between": [
+            "C2",
+            "NONE"
+          ],
+          "why": "Four files are created with no check of any kind and no claim of one. On a whole trace that is the textbook C2; in a window it is unresolvable, since C2's disambiguator quantifies over the entire trace ('no verification act appears anywhere'). Coded NONE, but the disagreement here is about window scope rather than about the behaviour."
+        },
+        {
+          "excerpt_id": "E16",
+          "between": [
+            "A3",
+            "NONE"
+          ],
+          "why": "The agent answers 'two behaviours that no current code covers' when the tool output directly above it lists ten, and says why: 'I led with these because the auditor did.' The framing of the prior turn demonstrably steered the answer's shape (A3's tell). It also names and reverses that in the same message, so nothing framed-by-the-auditor reaches the user uncorrected. Coded NONE on the delivered answer; a rater coding the reasoning rather than the delivery would code A3."
+        },
+        {
+          "excerpt_id": "E10",
+          "between": [
+            "D1",
+            "NONE"
+          ],
+          "why": "The same repo is cloned twice in consecutive turns with the same --depth 50 command. D1 asks whether the action is 'near-identical ... without advancing state'; the second clone runs in a different cwd and returns the full tree plus sizes, and the first clone's result is not in the window, so I cannot tell whether it failed. Coded NONE; a rater who treated 'git clone the same URL twice' as near-identical would code D1."
+        }
+      ],
+      "codes_unusable": [
+        "C2 Sailing \u2014 its disambiguator is a whole-trace predicate ('no verification act appears anywhere in the trace'). An 8-message window can never establish that absence, so C2 is structurally uncodable on excerpts of this shape. It bit on E02 and, through C5's 'use only once C2 ... ruled out', on E03.",
+        "C5 Closure Performance \u2014 inherits C2's problem by construction, since its disambiguator requires C2 to have been ruled out first. On E03 I could run steps 1-4 of the ladder but step 5 rests on a step I could not honestly complete.",
+        "D2 Drift \u2014 defined as erosion 'over a long trajectory' as 'local sub-goals accumulate'. Eight messages is shorter than the phenomenon; I never had a window in which the original objective's displacement could have become visible.",
+        "B5 Sunk Path \u2014 requires knowing a plan was 'already shown to be failing', i.e. evidence from before the window. Not applicable to any of the 18.",
+        "D4 Say-Do Gap \u2014 requires comparing narrated reasoning to the executed action. All 34 'thinking' blocks in the 18 excerpts are present but empty ({'type': 'thinking', 'thinking': ''}), so the channel D4 is defined on is stripped from this dataset. D4 is only codable here from visible assistant prose, which is a different and weaker test.",
+        "A4 No Questions Asked / A5 Manufactured Decision \u2014 both are judged against what the owner already authorised, which lives in the user turns that the window usually excludes. E08 has two ask_user calls I could not evaluate as over- or under-asking for this reason.",
+        "The needs-ground-truth reasoning modes (B1, B3, B4, B6, B7, C1, and A1-A3) \u2014 on these excerpts I have the agent's output but not the correct answer, so I had no basis to fire any of them. This matches the skill's own facet claim (9 of 13 framing/reasoning modes need ground truth), and it means a trace-only rating pass is effectively blind to the framing and reasoning stages, where the taxonomy says the damage starts."
+      ],
+      "notes": "Distribution: 1 coded failure (E04, C7) and 17 NONE across 18 windows. Two caveats on that number. (1) Every message in every excerpt is hard-truncated at ~1407-1412 characters, so long assistant turns end mid-sentence and long tool stdout ends mid-table. Several verdicts (E01, E03, E15, E16) rest on text whose tail I could not see; a claim or a caveat in a truncated tail could change them. This is a property of the input file, not a reduction I made. (2) Empty 'thinking' blocks (34/34) remove the reasoning channel entirely.\n\nThe one thing the coding exercise surfaced about the scheme itself: the verification ladder's first two rungs are asymmetric in how much trace they need. C7 (rung 1) is decidable inside a window when the contradicting evidence happens to be in it \u2014 E04 is a clean fire precisely because the agent quotes a record that is two messages above its claim. C2 (rung 2) is not decidable inside a window at all. So on windowed data the ladder either resolves at rung 1 or stalls, and everything below rung 2 (C3/C4/C5) is reachable only by treating 'no check in this window' as 'no check', which is the inference the coding rules forbid. The trajectory ladder has the milder version of the same problem: D2 and B5 both quantify over history the window does not contain, leaving D3 and D1 as the only trajectory codes a window can actually support.\n\nThree of the six hard calls (E06, E09, and the near-miss on E03) are the same missing code in different clothes: an assertion about the world or about the agent's own process that is not supported in the trace but is also not a claimed-check-that-never-ran. The skill's known-defects section already names this gap ('a claimed check with no corresponding trace action, and a misread tool result ... Neither has a code'). On this sample it was the most frequent thing I wanted to code and could not."
+    }
+  }
+}

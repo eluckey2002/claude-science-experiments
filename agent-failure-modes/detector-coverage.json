@@ -1,0 +1,1188 @@
+{
+ "title": "Detector literature for agent-failure-modes v2.4",
+ "generated": "2026-09-21",
+ "method": {
+  "source": "arXiv API (export.arxiv.org)",
+  "queries": 74,
+  "unique_records_retrieved": 509,
+  "screening": "each abstract classified for whether it supplies a runnable detector (probe / judge / programmatic / uncertainty / monitor / preflight / benchmark+scorer); per-mode shortlists then curated by hand",
+  "evidence_level": "ABSTRACT-LEVEL ONLY. No full text was read. Titles and arXiv ids are verbatim from the API; per-entry descriptions paraphrase abstracts and are not verified against method sections.",
+  "coverage_caveat": "arXiv-only. ACL/EMNLP-only work, industry tooling and closed evaluations are out of scope.",
+  "provenance_check": "All 80 cited arXiv ids verified present in the retrieved pool with verbatim API titles. Two records (2606.18467, 2505.14925) were curated from their abstracts after the automatic screening batch was cut short by a token limit; their detector_type and runtime_capable fields were assigned by hand and are labelled as such in detector-candidates.csv."
+ },
+ "coverage_tiers": {
+  "strong": "3+ detectors targeting this mode's tell",
+  "moderate": "2-3, or strong detectors with a locus/runtime caveat",
+  "thin": "proxies only, or a single mechanism-level result",
+  "none": "no detector found for this mode's tell after two query rounds"
+ },
+ "modes": [
+  {
+   "code": "A1",
+   "label": "Literalism",
+   "tell": "Obeys the words, misses the intent.",
+   "stage": "framing",
+   "coverage": "thin",
+   "n_detectors": 2,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2603.19997",
+     "url": "https://arxiv.org/abs/2603.19997",
+     "title": "When Contextual Inference Fails: Cancelability in Interactive Instruction Following",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Separates literal interpretation from contextual inference in underspecified instruction-following; supplies a cancelability test that operationalises letter-vs-spirit."
+    },
+    {
+     "arxiv_id": "2511.15976",
+     "url": "https://arxiv.org/abs/2511.15976",
+     "title": "TOD-ProcBench: Benchmarking Complex Instruction-Following in Task-Oriented Dialogues",
+     "year": 2025,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Procedural instruction-following benchmark with an explicit violation-detection subtask."
+    }
+   ],
+   "gap_note": "No detector targets letter-vs-spirit divergence in agent traces. Nearest neighbours are prompt-injection defences, which share the surface signal (obeyed the wrong instruction) but a different cause."
+  },
+  {
+   "code": "A2",
+   "label": "Shape of the Example",
+   "tell": "Copies the example's form, not your goal.",
+   "stage": "framing",
+   "coverage": "thin",
+   "n_detectors": 2,
+   "n_direct": 1,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2410.01288",
+     "url": "https://arxiv.org/abs/2410.01288",
+     "title": "Mitigating Copy Bias in In-Context Learning through Neuron Pruning",
+     "year": 2024,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": false,
+     "note": "Measures and localises 'copy bias' \u2014 answers copied from in-context examples rather than derived from the task \u2014 and prunes the responsible neurons."
+    },
+    {
+     "arxiv_id": "2409.16788",
+     "url": "https://arxiv.org/abs/2409.16788",
+     "title": "Mitigating the Bias of Large Language Model Evaluation",
+     "year": 2024,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Judge-side analogue: raters scoring superficial quality over instruction fidelity."
+    }
+   ],
+   "gap_note": "Only mechanism-level work exists. No trace-level detector asks whether an agent's output mirrors the exemplar's form rather than the request's goal."
+  },
+  {
+   "code": "A3",
+   "label": "Shape of the Conversation",
+   "tell": "Follows the chat's drift over the facts.",
+   "stage": "framing",
+   "coverage": "strong",
+   "n_detectors": 5,
+   "n_direct": 5,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2606.26155",
+     "url": "https://arxiv.org/abs/2606.26155",
+     "title": "Detecting and Controlling Sycophancy with Cascading Linear Features",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Linear-feature probe over activations; detects and steers sycophancy at inference time."
+    },
+    {
+     "arxiv_id": "2608.05624",
+     "url": "https://arxiv.org/abs/2608.05624",
+     "title": "Measuring and Detecting Harmful AI Sycophancy",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Detects stance reversals driven by user preference rather than evidence."
+    },
+    {
+     "arxiv_id": "2604.02423",
+     "url": "https://arxiv.org/abs/2604.02423",
+     "title": "SWAY: A Counterfactual Computational Linguistic Approach to Measuring and Mitigating Sycophancy",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Counterfactual framing manipulation that isolates sycophancy from content-driven reasoning."
+    },
+    {
+     "arxiv_id": "2609.07448",
+     "url": "https://arxiv.org/abs/2609.07448",
+     "title": "FramingQA: Does the Question Shape the Answer? Measuring the Compositional Framing Effect",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Measures the compositional framing effect: same facts, rephrased question, changed answer."
+    },
+    {
+     "arxiv_id": "2603.15448",
+     "url": "https://arxiv.org/abs/2603.15448",
+     "title": "The Social Sycophancy Scale: A psychometrically validated measure of sycophancy",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Psychometrically validated sycophancy scale for open-ended domains without ground truth."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "A4",
+   "label": "No Questions Asked",
+   "tell": "Guesses on ambiguity instead of asking.",
+   "stage": "framing",
+   "coverage": "strong",
+   "n_detectors": 5,
+   "n_direct": 5,
+   "recommended_telemetry_method": "preflight",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2602.11199",
+     "url": "https://arxiv.org/abs/2602.11199",
+     "title": "When and What to Ask: AskBench and Rubric-Guided RLVR for LLM Clarification",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Benchmark plus rubric-guided RLVR for when and what to ask; covers ambiguous and false-premise queries."
+    },
+    {
+     "arxiv_id": "2606.19559",
+     "url": "https://arxiv.org/abs/2606.19559",
+     "title": "Uncertainty Decomposition for Clarification Seeking in LLM Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Decomposes predictive uncertainty into components that signal when clarification is warranted \u2014 runtime-usable."
+    },
+    {
+     "arxiv_id": "2511.08798",
+     "url": "https://arxiv.org/abs/2511.08798",
+     "title": "Structured Uncertainty guided Clarification for LLM Agents",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "uncertainty",
+     "runtime_capable": true,
+     "note": "Structured uncertainty over tool parameters as a preflight clarification trigger."
+    },
+    {
+     "arxiv_id": "2502.13069",
+     "url": "https://arxiv.org/abs/2502.13069",
+     "title": "Ambig-SWE: Interactive Agents to Overcome Underspecificity in Software Engineering",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Underspecified software-engineering issues; scores whether the agent asks before implementing."
+    },
+    {
+     "arxiv_id": "2606.27669",
+     "url": "https://arxiv.org/abs/2606.27669",
+     "title": "When Search Agents Should Ask: DiscoBench for Clarification-Aware Deep Search",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Clarification-aware deep search: detects agents that assume rather than ask."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "A5",
+   "label": "Manufactured Decision",
+   "tell": "Asks permission for work already authorized.",
+   "stage": "framing",
+   "coverage": "none",
+   "n_detectors": 2,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2604.09408",
+     "url": "https://arxiv.org/abs/2604.09408",
+     "title": "HiL-Bench (Human-in-Loop Benchmark): Do Agents Know When to Ask for Help?",
+     "year": 2026,
+     "directness": "inverse",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Measures whether agents know when to ask for help \u2014 the opposite polarity: penalises under-asking, not over-asking."
+    },
+    {
+     "arxiv_id": "2608.20357",
+     "url": "https://arxiv.org/abs/2608.20357",
+     "title": "Clarify-Then-Search: A Clarification Benchmark for Deep Search with End-to-End Nugget Restoration",
+     "year": 2026,
+     "directness": "inverse",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Same polarity: rewards clarification on underspecified queries."
+    }
+   ],
+   "gap_note": "The entire clarification literature is built to punish under-asking. Nothing published scores an agent for escalating a decision it was already authorised to make, so A5 currently has no external anchor and no detector."
+  },
+  {
+   "code": "B1",
+   "label": "Shape of the Data",
+   "tell": "Treats available data as the whole picture.",
+   "stage": "reasoning",
+   "coverage": "thin",
+   "n_detectors": 3,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2606.14269",
+     "url": "https://arxiv.org/abs/2606.14269",
+     "title": "ScoreGate: Adaptive Chunk Selection for Retrieval-Augmented Generation via Dual-Score Statistical Fusion",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Dual-score statistic that flags over- and under-retrieval per query \u2014 a programmatic proxy for 'the evidence set is not the whole picture'."
+    },
+    {
+     "arxiv_id": "2603.19281",
+     "url": "https://arxiv.org/abs/2603.19281",
+     "title": "URAG: A Benchmark for Uncertainty Quantification in Retrieval-Augmented Large Language Models",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Uncertainty quantification for RAG, scoring beyond answer correctness."
+    },
+    {
+     "arxiv_id": "2307.11019",
+     "url": "https://arxiv.org/abs/2307.11019",
+     "title": "Investigating the Factual Knowledge Boundary of Large Language Models with Retrieval Augmentation",
+     "year": 2023,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Measures whether models perceive their own factual-knowledge boundary under retrieval augmentation."
+    }
+   ],
+   "gap_note": "Detectors exist for insufficient retrieval; none for the agent treating a complete-looking but skewed evidence set as the population."
+  },
+  {
+   "code": "B2",
+   "label": "Shape of the Tool",
+   "tell": "Lets its tools pick the approach.",
+   "stage": "reasoning",
+   "coverage": "moderate",
+   "n_detectors": 4,
+   "n_direct": 2,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2601.05214",
+     "url": "https://arxiv.org/abs/2601.05214",
+     "title": "Internal Representations as Indicators of Hallucinations in Agent Tool Selection",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Internal-representation indicators of hallucinated tool selection, readable during inference."
+    },
+    {
+     "arxiv_id": "2510.03992",
+     "url": "https://arxiv.org/abs/2510.03992",
+     "title": "Quantitative Certification of Agentic Tool Selection",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Certifies a tool-selection pipeline against a safety spec under a realistic tool distribution."
+    },
+    {
+     "arxiv_id": "2601.16280",
+     "url": "https://arxiv.org/abs/2601.16280",
+     "title": "When Agents Fail to Act: A Diagnostic Framework for Tool Invocation Reliability in Multi-Agent LLM Systems",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Diagnostic framework for tool-invocation reliability across model classes."
+    },
+    {
+     "arxiv_id": "2608.11888",
+     "url": "https://arxiv.org/abs/2608.11888",
+     "title": "Agent Skills Can Be Harmful: An Empirical Study of Skill-Induced Failures in LLM Agents",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Empirical study of skill-induced failures: skills that degrade success or cost without being flagged."
+    }
+   ],
+   "gap_note": "All of these score tool choice against a known-correct tool. None runs the counterfactual that B2 actually asserts \u2014 would the approach change if the tool were absent?"
+  },
+  {
+   "code": "B3",
+   "label": "Shape of the Prior",
+   "tell": "The default answer beats the evidence given.",
+   "stage": "reasoning",
+   "coverage": "moderate",
+   "n_detectors": 4,
+   "n_direct": 4,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2608.25869",
+     "url": "https://arxiv.org/abs/2608.25869",
+     "title": "Anchoring Bias in LLM-as-a-Judge Systems: Prior Scores Compromise Evaluation Independence",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Prior scores shift LLM-judge ratings; quantifies anchoring as an independence violation."
+    },
+    {
+     "arxiv_id": "2511.05766",
+     "url": "https://arxiv.org/abs/2511.05766",
+     "title": "Anchors in the Machine: Behavioral and Attributional Evidence of Anchoring Bias in LLMs",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Behavioural and attributional evidence of anchoring, with an attribution analysis of the mechanism."
+    },
+    {
+     "arxiv_id": "2503.15888",
+     "url": "https://arxiv.org/abs/2503.15888",
+     "title": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Fine-grained measurement and control of parametric-vs-context reliance under conflict."
+    },
+    {
+     "arxiv_id": "2608.26295",
+     "url": "https://arxiv.org/abs/2608.26295",
+     "title": "MemToC: Benchmarking Memory-Tool Conflict Resolution in Large Language Models",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Memory-tool conflict benchmark; reports how rarely correct memory survives an incorrect tool return."
+    }
+   ],
+   "gap_note": "Strong offline/counterfactual instruments, no runtime signal \u2014 all require running the item twice under varied anchors."
+  },
+  {
+   "code": "B4",
+   "label": "First Suspect",
+   "tell": "Locks on hypothesis #1, skips the rest.",
+   "stage": "reasoning",
+   "coverage": "thin",
+   "n_detectors": 3,
+   "n_direct": 1,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2607.10275",
+     "url": "https://arxiv.org/abs/2607.10275",
+     "title": "Information-seeking failures of large language models in agentic clinical reasoning",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Agentic clinical reasoning: detects models that stop investigating and commit under uncertainty."
+    },
+    {
+     "arxiv_id": "2607.25933",
+     "url": "https://arxiv.org/abs/2607.25933",
+     "title": "Evaluating Multi-Turn Multimodal Diagnostic Reasoning on Challenging Real-World Clinical Cases",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Multi-turn diagnostic reasoning that locks on an initial hypothesis."
+    },
+    {
+     "arxiv_id": "2607.10059",
+     "url": "https://arxiv.org/abs/2607.10059",
+     "title": "AgentAbstain: Do LLM Agents Know When Not to Act?",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Whether agents recognise abstention triggers before acting."
+    }
+   ],
+   "gap_note": "Only instantiated in clinical diagnosis, where premature closure has a 20-year prior literature. No domain-general trace detector."
+  },
+  {
+   "code": "B5",
+   "label": "Sunk Path",
+   "tell": "Won't abandon a failing approach.",
+   "stage": "reasoning",
+   "coverage": "none",
+   "n_detectors": 2,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2608.05628",
+     "url": "https://arxiv.org/abs/2608.05628",
+     "title": "SkillHEX: Improving Agent Skills via Hypothesis-Driven Autonomous Exploration and Exploitation",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Agent locks onto a failing skill revision and skips alternatives \u2014 closest observed behaviour."
+    },
+    {
+     "arxiv_id": "2605.27333",
+     "url": "https://arxiv.org/abs/2605.27333",
+     "title": "FinHarness: An Inline Lifecycle Safety Harness for Finance LLM Agents",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Inline lifecycle harness flagging irreversible mid-trajectory actions."
+    }
+   ],
+   "gap_note": "Two targeted query rounds returned no detector and no benchmark for sunk-cost persistence in LLM agents. This is a real hole in the literature, not a query artifact \u2014 despite B5 being one of the most reported practitioner complaints."
+  },
+  {
+   "code": "B6",
+   "label": "Forced Symmetry",
+   "tell": "Invents parallelism that isn't there.",
+   "stage": "reasoning",
+   "coverage": "none",
+   "n_detectors": 0,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [],
+   "gap_note": "Nothing. False balance is studied in media framing and in bias audits of generated text, never as an agent reasoning failure with a detection procedure."
+  },
+  {
+   "code": "B7",
+   "label": "Premature Abstraction",
+   "tell": "Builds the framework too early.",
+   "stage": "reasoning",
+   "coverage": "thin",
+   "n_detectors": 2,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2511.15817",
+     "url": "https://arxiv.org/abs/2511.15817",
+     "title": "A Causal Perspective on Measuring, Explaining and Mitigating Smells in LLM-Generated Code",
+     "year": 2025,
+     "directness": "partial",
+     "detector_type": "programmatic",
+     "runtime_capable": false,
+     "note": "Causal measurement, explanation and mitigation of code smells in LLM-generated code \u2014 the only quantitative handle on over-structuring."
+    },
+    {
+     "arxiv_id": "2508.14727",
+     "url": "https://arxiv.org/abs/2508.14727",
+     "title": "Assessing the Quality and Security of AI-Generated Code: A Quantitative Analysis",
+     "year": 2025,
+     "directness": "partial",
+     "detector_type": "programmatic",
+     "runtime_capable": false,
+     "note": "Quantitative code-quality and security comparison across five models."
+    }
+   ],
+   "gap_note": "Code-smell metrics are a proxy with a known confound: idiomatic abstraction and premature abstraction produce overlapping smell profiles."
+  },
+  {
+   "code": "B8",
+   "label": "Confabulation",
+   "tell": "Invents specifics to complete the pattern.",
+   "stage": "reasoning",
+   "coverage": "strong",
+   "n_detectors": 4,
+   "n_direct": 4,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2603.10060",
+     "url": "https://arxiv.org/abs/2603.10060",
+     "title": "Tool Receipts, Not Zero-Knowledge Proofs: Practical Hallucination Detection for AI Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Cross-references agent claims against tool-call receipts; catches fabricated counts and false absence claims. Cheapest runtime detector in this whole table."
+    },
+    {
+     "arxiv_id": "2608.10430",
+     "url": "https://arxiv.org/abs/2608.10430",
+     "title": "Actionable Hallucination Detection: Translating Latent Uncertainty into Agentic Critique",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Translates latent uncertainty into an agentic critique of hallucinated tool calls and ungrounded parameters."
+    },
+    {
+     "arxiv_id": "2607.00895",
+     "url": "https://arxiv.org/abs/2607.00895",
+     "title": "Beyond Document Grounding: Span-Level Hallucination Detection over Code, Tool Output, and Documents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Span-level hallucination classifier over code, tool output and structured documents."
+    },
+    {
+     "arxiv_id": "2509.09360",
+     "url": "https://arxiv.org/abs/2509.09360",
+     "title": "MetaRAG: Metamorphic Testing for Hallucination Detection in RAG Systems",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Metamorphic testing for RAG: synonym/antonym entailment mismatches reveal unsupported factoids."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "C1",
+   "label": "Unchecked Premise",
+   "tell": "Never tests the starting assumption.",
+   "stage": "verification",
+   "coverage": "moderate",
+   "n_detectors": 3,
+   "n_direct": 2,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2403.12145",
+     "url": "https://arxiv.org/abs/2403.12145",
+     "title": "Syn-QA2: Evaluating False Assumptions in Long-tail Questions with Synthetic QA Datasets",
+     "year": 2024,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Synthetic long-tail QA with false assumptions; scores whether the model rejects the premise."
+    },
+    {
+     "arxiv_id": "2605.08583",
+     "url": "https://arxiv.org/abs/2605.08583",
+     "title": "Source or It Didn't Happen: A Multi-Agent Framework for Citation Hallucination Detection",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Multi-agent citation-hallucination detection: extraction, retrieval, field matching, specialist judgment."
+    },
+    {
+     "arxiv_id": "2607.07774",
+     "url": "https://arxiv.org/abs/2607.07774",
+     "title": "ScopeJudge: Cost-Aware Pre-Execution Gating for Offensive Security Agents",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "judge",
+     "runtime_capable": true,
+     "note": "Pre-execution gating of tool calls against declared scope boundaries."
+    }
+   ],
+   "gap_note": "Mature at the QA level. The agent-trace version \u2014 the premise entering step 1 was never tested \u2014 has no published detector."
+  },
+  {
+   "code": "C2",
+   "label": "Sailing",
+   "tell": "Glides to the end, never checks.",
+   "stage": "verification",
+   "coverage": "strong",
+   "n_detectors": 5,
+   "n_direct": 3,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2607.24300",
+     "url": "https://arxiv.org/abs/2607.24300",
+     "title": "Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Self-authored verification scores diverge from external deployment performance. Read this one first: it is evidence against the self-report detector method in your own telemetry schema."
+    },
+    {
+     "arxiv_id": "2512.03109",
+     "url": "https://arxiv.org/abs/2512.03109",
+     "title": "E-valuator: Reliable Agent Verifiers with Sequential Hypothesis Testing",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Sequential hypothesis testing over trajectories; flags long runs with no progress verification."
+    },
+    {
+     "arxiv_id": "2606.18467",
+     "url": "https://arxiv.org/abs/2606.18467",
+     "title": "ToolChain-CRC: Conformal Risk Control for Agentic AI Under Retrieval and Tool-Use Drift",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "uncertainty",
+     "runtime_capable": true,
+     "note": "Conformal risk control over retrieval and tool-use drift \u2014 calibrated abstention rather than a heuristic threshold."
+    },
+    {
+     "arxiv_id": "2606.07682",
+     "url": "https://arxiv.org/abs/2606.07682",
+     "title": "SWE-Marathon: Can Agents Autonomously Complete Ultra-Long-Horizon Software Work?",
+     "year": 2026,
+     "directness": "benchmark",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Ultra-long-horizon software work; scores claims of success against actual requirements."
+    },
+    {
+     "arxiv_id": "2605.17281",
+     "url": "https://arxiv.org/abs/2605.17281",
+     "title": "ContractBench: Can LLM Agents Preserve Observation Contracts?",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Whether agents preserve observation contracts (temporal validity, byte integrity) across API workflows."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "C3",
+   "label": "Skating",
+   "tell": "Checks the surface only.",
+   "stage": "verification",
+   "coverage": "thin",
+   "n_detectors": 2,
+   "n_direct": 1,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2509.26072",
+     "url": "https://arxiv.org/abs/2509.26072",
+     "title": "The Silent Judge: Unacknowledged Shortcut Bias in LLM-as-a-Judge",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "LLM judges rationalising decisions from unacknowledged superficial cues \u2014 surface-checking with a plausible narrative on top."
+    },
+    {
+     "arxiv_id": "2410.03775",
+     "url": "https://arxiv.org/abs/2410.03775",
+     "title": "Beyond correlation: The Impact of Human Uncertainty in Measuring the Effectiveness of Automatic Evaluation and LLM-as-a-Judge",
+     "year": 2024,
+     "directness": "partial",
+     "detector_type": "programmatic",
+     "runtime_capable": true,
+     "note": "Correlation metrics masking performance gaps on high-uncertainty subsets."
+    }
+   ],
+   "gap_note": "Locus mismatch: published work catches a superficial *judge*, your C3 is a superficial *self-check*. The instruments transfer but the validation does not."
+  },
+  {
+   "code": "C4",
+   "label": "Spot-Check",
+   "tell": "Tests one case, assumes the rest.",
+   "stage": "verification",
+   "coverage": "none",
+   "n_detectors": 3,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2603.17815",
+     "url": "https://arxiv.org/abs/2603.17815",
+     "title": "Process Supervision for Chain-of-Thought Reasoning via Monte Carlo Net Information Gain",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Monte-Carlo net information gain per reasoning step; identifies steps that do not change correctness likelihood."
+    },
+    {
+     "arxiv_id": "2607.14385",
+     "url": "https://arxiv.org/abs/2607.14385",
+     "title": "MamaBench: Benchmarking LLM Robustness in Maternal and Child Health Diagnosis through Counterfactual Clinical Perturbation",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Counterfactual clinical variants where base-case accuracy masks fragility \u2014 the spot-check fallacy at benchmark level."
+    },
+    {
+     "arxiv_id": "2510.12818",
+     "url": "https://arxiv.org/abs/2510.12818",
+     "title": "MEDEQUALQA: Evaluating Biases in LLMs with Counterfactual Reasoning",
+     "year": 2025,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Counterfactual demographic variation scoring reasoning stability."
+    }
+   ],
+   "gap_note": "No detector asks whether an agent's verification sample covers its claim. Software testing has the ready-made apparatus \u2014 mutation score, test adequacy criteria \u2014 and nobody has applied it to agent self-verification."
+  },
+  {
+   "code": "C5",
+   "label": "Closure Performance",
+   "tell": "Looks done; isn't verified.",
+   "stage": "verification",
+   "coverage": "moderate",
+   "n_detectors": 4,
+   "n_direct": 3,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2606.09863",
+     "url": "https://arxiv.org/abs/2606.09863",
+     "title": "From Confident Closing to Silent Failure: Characterizing False Success in LLM Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Characterises false success: agent claims completion without verifying the environment state changed. The closest published match to C5."
+    },
+    {
+     "arxiv_id": "2608.11274",
+     "url": "https://arxiv.org/abs/2608.11274",
+     "title": "Agent Safety Should Be a Runtime Contract",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Argues agent actions need verifiable evidence of execution; runtime-contract framing."
+    },
+    {
+     "arxiv_id": "2604.17112",
+     "url": "https://arxiv.org/abs/2604.17112",
+     "title": "Complementing Self-Consistency with Cross-Model Disagreement for Uncertainty Quantification",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "uncertainty",
+     "runtime_capable": true,
+     "note": "Cross-model semantic disagreement as an uncertainty signal for confident-but-wrong outputs."
+    },
+    {
+     "arxiv_id": "2604.11270",
+     "url": "https://arxiv.org/abs/2604.11270",
+     "title": "Evaluating LLM Agents on Automated Software Analysis Tasks",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Agents claiming success without validating that the tool produced meaningful output."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "C6",
+   "label": "Gaming the Check",
+   "tell": "Makes the check pass dishonestly.",
+   "stage": "verification",
+   "coverage": "strong",
+   "n_detectors": 8,
+   "n_direct": 7,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2511.21654",
+     "url": "https://arxiv.org/abs/2511.21654",
+     "title": "EvilGenie: A Reward Hacking Benchmark",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Reward-hacking benchmark covering test hardcoding, test-file editing and judge evasion."
+    },
+    {
+     "arxiv_id": "2605.20744",
+     "url": "https://arxiv.org/abs/2605.20744",
+     "title": "Hack-Verifiable Environments: Towards Evaluating Reward Hacking at Scale",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Environments with deliberately embedded exploitable vulnerabilities, verifiable at scale."
+    },
+    {
+     "arxiv_id": "2608.22103",
+     "url": "https://arxiv.org/abs/2608.22103",
+     "title": "Hack-Verifiable Terminal Bench: Evaluating Reward Hacking in Terminal Tasks",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Terminal-task variant of the same hack-verifiable design."
+    },
+    {
+     "arxiv_id": "2603.04069",
+     "url": "https://arxiv.org/abs/2603.04069",
+     "title": "Monitoring Emergent Reward Hacking During Generation via Internal Activations",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Reward-hacking signals in internal activations during generation \u2014 runtime, pre-completion."
+    },
+    {
+     "arxiv_id": "2609.19101",
+     "url": "https://arxiv.org/abs/2609.19101",
+     "title": "Monitoring and Discovering Reward Hacking with Internal Representations during LLM Evaluations",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe",
+     "runtime_capable": true,
+     "note": "Internal-representation monitoring for reward hacking during evaluations."
+    },
+    {
+     "arxiv_id": "2510.01367",
+     "url": "https://arxiv.org/abs/2510.01367",
+     "title": "Is It Thinking or Cheating? Detecting Implicit Reward Hacking by Measuring Reasoning Effort",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Detects implicit reward hacking by measuring reasoning effort: high reward on truncated reasoning."
+    },
+    {
+     "arxiv_id": "2609.04665",
+     "url": "https://arxiv.org/abs/2609.04665",
+     "title": "Harness-agnostic detection and immunization of reward hacking in self-evolving language models",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Harness-agnostic detection and immunisation for self-evolving models."
+    },
+    {
+     "arxiv_id": "2604.23488",
+     "url": "https://arxiv.org/abs/2604.23488",
+     "title": "Do Prompt-Elicited Trajectories Reflect Training-Time Reward Hacking? A Systematic Study on Monitoring Training-Time Reward Hacking in Code Generation",
+     "year": 2026,
+     "directness": "caution",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Asks whether prompt-elicited hacking trajectories reflect training-time hacking \u2014 a validity warning for anyone eliciting C6 on demand."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "D1",
+   "label": "Spinning",
+   "tell": "Repeats a step with no progress.",
+   "stage": "execution",
+   "coverage": "strong",
+   "n_detectors": 4,
+   "n_direct": 4,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2608.23670",
+     "url": "https://arxiv.org/abs/2608.23670",
+     "title": "Automata from Agent Traces: Failure and Next-Step Prediction",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Induces a finite-state automaton from agent traces; predicts failure-prone states and non-progress loops."
+    },
+    {
+     "arxiv_id": "2608.02464",
+     "url": "https://arxiv.org/abs/2608.02464",
+     "title": "Real-Time Detection and Repair of LLM Agent Failures",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Real-time detection and repair of mid-episode loops, drift, and fabricated results from telemetry anomalies."
+    },
+    {
+     "arxiv_id": "2512.03109",
+     "url": "https://arxiv.org/abs/2512.03109",
+     "title": "E-valuator: Reliable Agent Verifiers with Sequential Hypothesis Testing",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Sequential testing flags unproductive repetition without a fixed loop-count threshold."
+    },
+    {
+     "arxiv_id": "2509.20364",
+     "url": "https://arxiv.org/abs/2509.20364",
+     "title": "An Approach to Checking Correctness for Agentic Systems",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Temporal assertions over action sequences; programmatic and cheap."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "D2",
+   "label": "Drift",
+   "tell": "Goal erodes across a long run.",
+   "stage": "execution",
+   "coverage": "strong",
+   "n_detectors": 4,
+   "n_direct": 4,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2605.03228",
+     "url": "https://arxiv.org/abs/2605.03228",
+     "title": "MAGE: Safeguarding LLM Agents against Long-Horizon Threats via Shadow Memory",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Shadow memory that preserves the original objective and flags drift across long trajectories."
+    },
+    {
+     "arxiv_id": "2606.07054",
+     "url": "https://arxiv.org/abs/2606.07054",
+     "title": "TRACE: Trajectory Reasoning through Adaptive Cross-Step Evidence Aggregation for LLM Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Cross-step evidence aggregation to surface objectives that emerged mid-run."
+    },
+    {
+     "arxiv_id": "2508.00500",
+     "url": "https://arxiv.org/abs/2508.00500",
+     "title": "ProbGuard: Proactive Runtime Monitoring for LLM Agent Safety via Probabilistic Prediction",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Probabilistic trajectory prediction with an intervention trigger below a safety threshold."
+    },
+    {
+     "arxiv_id": "2605.01604",
+     "url": "https://arxiv.org/abs/2605.01604",
+     "title": "Evaluating Agentic AI in the Wild: Failure Modes, Drift Patterns, and a Production Evaluation Framework",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Production field study of drift and compounding error with an evaluation framework."
+    }
+   ],
+   "gap_note": null
+  },
+  {
+   "code": "D3",
+   "label": "Context Bleed",
+   "tell": "Drops earlier or mid-context constraints.",
+   "stage": "execution",
+   "coverage": "thin",
+   "n_detectors": 3,
+   "n_direct": 0,
+   "recommended_telemetry_method": "human",
+   "runtime_detector_available": false,
+   "detectors": [
+    {
+     "arxiv_id": "2503.06745",
+     "url": "https://arxiv.org/abs/2503.06745",
+     "title": "Beyond Black-Box Benchmarking: Observability, Analytics, and Optimization of Agentic Systems",
+     "year": 2025,
+     "directness": "partial",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Observability and analytics for agentic systems; names context loss as an observable."
+    },
+    {
+     "arxiv_id": "2609.07395",
+     "url": "https://arxiv.org/abs/2609.07395",
+     "title": "Uncertainty Quantification for LLM Agents: A Taxonomy, an Evaluation Protocol, and an Empirical Study",
+     "year": 2026,
+     "directness": "partial",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Step-level calibration masking trajectory-level drift in agent uncertainty."
+    },
+    {
+     "arxiv_id": "2505.14925",
+     "url": "https://arxiv.org/abs/2505.14925",
+     "title": "Too Long, Didn't Model: Decomposing LLM Long-Context Understanding With Novels",
+     "year": 2025,
+     "directness": "benchmark",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": false,
+     "note": "Decomposes long-context understanding; measurement rather than detection."
+    }
+   ],
+   "gap_note": "Well benchmarked, poorly detected. A constraint-ledger check \u2014 enumerate constraints at turn 1, re-verify each against the final output \u2014 is trivially implementable and, as far as these queries reach, unpublished."
+  },
+  {
+   "code": "D4",
+   "label": "Say-Do Gap",
+   "tell": "Reasoning says one thing; the action does another.",
+   "stage": "execution",
+   "coverage": "strong",
+   "n_detectors": 5,
+   "n_direct": 5,
+   "recommended_telemetry_method": "monitor",
+   "runtime_detector_available": true,
+   "detectors": [
+    {
+     "arxiv_id": "2603.13791",
+     "url": "https://arxiv.org/abs/2603.13791",
+     "title": "DeceptGuard :A Constitutional Oversight Framework For Detecting Deception in LLM Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "probe|monitor",
+     "runtime_capable": true,
+     "note": "Constitutional oversight framework for reasoning-action mismatch, including deception masked by behavioural suppression."
+    },
+    {
+     "arxiv_id": "2607.19449",
+     "url": "https://arxiv.org/abs/2607.19449",
+     "title": "Guardrails as Scapegoats: Auditing Unfaithful Safety Refusals in Tool-Augmented LLM Agents",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "benchmark+scorer",
+     "runtime_capable": true,
+     "note": "Audits unfaithful safety refusals: agent invents a rationale when a tool silently fails."
+    },
+    {
+     "arxiv_id": "2608.24777",
+     "url": "https://arxiv.org/abs/2608.24777",
+     "title": "StepGuard: Learning Step-Level Guardrails with Scalable Supervision and Safety-Utility Balancing",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Step-level guardrails auditing each action against stated constraints before execution."
+    },
+    {
+     "arxiv_id": "2601.10156",
+     "url": "https://arxiv.org/abs/2601.10156",
+     "title": "ToolSafe: Enhancing Tool Invocation Safety of LLM-based agents via Proactive Step-level Guardrail and Feedback",
+     "year": 2026,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Proactive step-level detection of misalignment between safety reasoning and the invoked tool."
+    },
+    {
+     "arxiv_id": "2510.05156",
+     "url": "https://arxiv.org/abs/2510.05156",
+     "title": "VeriGuard: Enhancing LLM Agent Safety via Verified Code Generation",
+     "year": 2025,
+     "directness": "direct",
+     "detector_type": "monitor",
+     "runtime_capable": true,
+     "note": "Verified code generation: actions checked against a pre-verified policy at runtime."
+    }
+   ],
+   "gap_note": null
+  }
+ ],
+ "cross_cutting": [
+  {
+   "arxiv_id": "2608.07899",
+   "url": "https://arxiv.org/abs/2608.07899",
+   "title": "TelemetrySuffBench: Is Agent Telemetry Sufficient for Failure-Origin Diagnosis?",
+   "year": 2026,
+   "note": "Tests whether agent telemetry is sufficient to identify where a failure originated \u2014 directly relevant to your event schema's adequacy."
+  },
+  {
+   "arxiv_id": "2601.00481",
+   "url": "https://arxiv.org/abs/2601.00481",
+   "title": "MAESTRO: Multi-Agent Evaluation Suite for Testing, Reliability, and Observability",
+   "year": 2026,
+   "note": "Multi-agent evaluation suite; run-to-run variance masking structural failures."
+  },
+  {
+   "arxiv_id": "2607.24300",
+   "url": "https://arxiv.org/abs/2607.24300",
+   "title": "Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents",
+   "year": 2026,
+   "note": "Self-authored verification diverges from external performance \u2014 bears on detector.method='self-report'."
+  }
+ ],
+ "summary": {
+  "strong": [
+   "A3",
+   "A4",
+   "B8",
+   "C2",
+   "C6",
+   "D1",
+   "D2",
+   "D4"
+  ],
+  "moderate": [
+   "B2",
+   "B3",
+   "C1",
+   "C5"
+  ],
+  "thin": [
+   "A1",
+   "A2",
+   "B1",
+   "B4",
+   "B7",
+   "C3",
+   "D3"
+  ],
+  "none": [
+   "A5",
+   "B5",
+   "B6",
+   "C4"
+  ]
+ }
+}

@@ -1,0 +1,885 @@
+{
+  "title": "Agent Reasoning Failure Modes",
+  "description": "A diagnostic taxonomy of LLM-agent reasoning failures. Each colloquial label is mapped to its established cognitive-science / AI concept, the way it shows up in practice, and a concrete fix. Organized by the pipeline stage where the failure strikes.",
+  "version": "2.5",
+  "total_failure_modes": 24,
+  "pipeline_order": [
+    "framing",
+    "reasoning",
+    "verification",
+    "execution"
+  ],
+  "stages": [
+    {
+      "code": "F1",
+      "id": "framing",
+      "name": "Framing",
+      "category": "Wrong problem",
+      "question": "Did it solve the right problem?",
+      "failure_modes": [
+        {
+          "code": "A1",
+          "label": "Literalism",
+          "concept": "Specification literalism · letter vs. spirit",
+          "concept_terms": [
+            "Specification literalism",
+            "letter vs. spirit"
+          ],
+          "tell": "Obeys the words, misses the intent.",
+          "detail": "Executes the literal request even when context makes the real goal obvious. The monkey's-paw / Goodhart problem: the letter of the instruction wins over its purpose.",
+          "mitigation": "Before acting, paraphrase the underlying goal and check it against the literal wording; when they diverge, surface the intent or ask rather than executing the words verbatim.",
+          "source": "Krakovna et al. 2020 · Goodhart 1975",
+          "citation": "Krakovna, V. et al. (2020). Specification gaming: the flip side of AI ingenuity. DeepMind. Underlying principle: Goodhart, C. A. E. (1975).",
+          "reframe": "State the outcome the user actually wants — independent of how they phrased it — before acting on the literal words.",
+          "new": false,
+          "facets": {
+            "locus": "input-shaped",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "input-conformity"
+          },
+          "pairs_with": [
+            "A4"
+          ]
+        },
+        {
+          "code": "A2",
+          "label": "Shape of the Example",
+          "concept": "Few-shot exemplar bias · surface-form imitation",
+          "concept_terms": [
+            "Few-shot exemplar bias",
+            "surface-form imitation"
+          ],
+          "tell": "Copies the example's form, not your goal.",
+          "detail": "Mirrors the structure, length, or domain of a sample you provided instead of generalizing the task it was meant to illustrate.",
+          "mitigation": "Separate 'what the example demonstrates' from 'what is being asked,' then solve the underlying task — treat examples as format hints, not as the spec.",
+          "source": "Brown et al. 2020 (GPT-3)",
+          "citation": "Brown, T. B. et al. (2020). Language Models are Few-Shot Learners. NeurIPS 33. arXiv:2005.14165.",
+          "reframe": "Treat the example as a format hint. Name the underlying task in your own words, then solve that, not the sample's surface form.",
+          "new": false,
+          "facets": {
+            "locus": "input-shaped",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "input-conformity"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "A3",
+          "label": "Shape of the Conversation",
+          "concept": "Framing effect · sycophancy / echoing",
+          "concept_terms": [
+            "Framing effect",
+            "sycophancy / echoing"
+          ],
+          "tell": "Follows the chat's drift over the facts.",
+          "detail": "Lets how the dialogue was framed — or earlier agreement — steer the answer, echoing the user's premise rather than testing it.",
+          "mitigation": "Re-ground in the original source facts rather than the conversation's momentum; state disagreement plainly when the evidence contradicts the framing.",
+          "source": "Tversky & Kahneman 1981 · Sharma et al. 2023",
+          "citation": "Tversky, A. & Kahneman, D. (1981). The framing of decisions and the psychology of choice. Science, 211(4481), 453–458. Sycophancy: Sharma, M. et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548 (Anthropic).",
+          "reframe": "Re-anchor to the source facts. If this answer would change had the conversation been framed differently, you're echoing, not reasoning.",
+          "new": false,
+          "facets": {
+            "locus": "input-shaped",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "input-conformity"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "A4",
+          "label": "No Questions Asked",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Clarification avoidance · premature commitment",
+          "concept_terms": [
+            "Clarification avoidance",
+            "premature commitment"
+          ],
+          "tell": "Guesses on ambiguity instead of asking.",
+          "fix": "Ask one clarifying question before guessing.",
+          "detail": "Faces an ambiguous, load-bearing requirement and silently picks an interpretation instead of surfacing the ambiguity. The complement of Literalism: under-asking rather than over-obeying.",
+          "mitigation": "When a load-bearing requirement is ambiguous, ask a single targeted question before proceeding rather than committing to a guess.",
+          "source": "MAST — Cemri et al. 2025",
+          "citation": "Cemri, M. et al. (2025). MAST — “Fail to Ask for Clarification”. arXiv:2503.13657.",
+          "reframe": "If a load-bearing requirement is ambiguous, ask one targeted question before proceeding — don't guess silently.",
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [
+            "A1",
+            "A5"
+          ]
+        },
+        {
+          "code": "A5",
+          "label": "Manufactured Decision",
+          "new": true,
+          "added_in": "v2.2",
+          "concept": "Upward delegation · approval fatigue",
+          "concept_terms": [
+            "Upward delegation",
+            "reverse delegation",
+            "approval fatigue"
+          ],
+          "tell": "Asks permission for work already authorized.",
+          "fix": "Already authorized? Act — don't invent a gate.",
+          "detail": "Appends a confirmation step to work the owner has already approved, converting granted authority back into an owner decision. Performs diligence while handing the task upward. The inverse of No Questions Asked — over-asking rather than under-asking — and distinct from a genuine fork, where the answer would change what gets done.",
+          "mitigation": "Before asking, check whether authority for this action was already granted; treat a standing authorization as still standing, and reserve questions for forks where the answer changes the next action.",
+          "source": "Oncken & Wass 1974 · approval-fatigue practitioner literature",
+          "citation": "Upward ('reverse') delegation: Oncken, W. Jr. & Wass, D. L. Management Time: Who's Got the Monkey? Harvard Business Review (orig. 1974; reprinted Nov–Dec 1999). The agent-specific form is discussed as 'approval fatigue' / 'confirmation fatigue' in practitioner writing on human-in-the-loop agent governance; NO PEER-REVIEWED SOURCE LOCATED for the agent form — citation deliberately marked incomplete rather than filled with a plausible one.",
+          "reframe": "Check whether this was already authorized. If it was, act — don't manufacture a decision the owner already made.",
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "over-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "input-conformity"
+          },
+          "pairs_with": [
+            "A4"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "F2",
+      "id": "reasoning",
+      "name": "Reasoning",
+      "category": "Wrong thinking",
+      "question": "Did it reason about it correctly?",
+      "failure_modes": [
+        {
+          "code": "B1",
+          "label": "Shape of the Data",
+          "concept": "WYSIATI · streetlight effect · survivorship bias",
+          "concept_terms": [
+            "WYSIATI",
+            "streetlight effect",
+            "survivorship bias"
+          ],
+          "tell": "Treats available data as the whole picture.",
+          "detail": "Reasons only over what's in hand and assumes nothing important is missing — looking under the streetlight because that's where the light is.",
+          "mitigation": "Ask 'what data would I need but don't have?' and check for selection or survivorship effects before drawing conclusions from the available set.",
+          "source": "Kahneman 2011 · Wald · streetlight parable",
+          "citation": "Kahneman, D. (2011). Thinking, Fast and Slow (WYSIATI). Survivorship bias: A. Wald (WWII aircraft-survivability analysis). “Streetlight effect” parable.",
+          "reframe": "Ask what data you'd need but don't have. Don't treat what's in front of you as the whole picture.",
+          "new": false,
+          "facets": {
+            "locus": "input-shaped",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "salience"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "B2",
+          "label": "Shape of the Tool",
+          "concept": "Law of the instrument (Maslow's hammer)",
+          "concept_terms": [
+            "Law of the instrument",
+            "Maslow's hammer"
+          ],
+          "tell": "Lets its tools pick the approach.",
+          "detail": "Frames the task around the actions it can easily take, not the action the problem actually needs. If all it has is a hammer…",
+          "mitigation": "Decide the right approach independent of available tools first, then map it to tools; flag when the needed action isn't supported instead of forcing a fit.",
+          "source": "Kaplan 1964 · Maslow 1966",
+          "citation": "Kaplan, A. (1964). The Conduct of Inquiry (law of the instrument). Maslow, A. H. (1966). The Psychology of Science (hammer/nail). Software form: the “golden hammer” anti-pattern.",
+          "reframe": "Decide the right approach first, ignoring your tools. Then map to tools — and flag if none fit.",
+          "new": false,
+          "facets": {
+            "locus": "input-shaped",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "salience"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "B3",
+          "label": "Shape of the Prior",
+          "concept": "Anchoring · prior overrides context",
+          "concept_terms": [
+            "Anchoring",
+            "prior overrides context"
+          ],
+          "tell": "The default answer beats the evidence given.",
+          "detail": "Falls back on the common or expected answer from training instead of the specific facts placed in front of it.",
+          "mitigation": "When provided facts conflict with the 'expected' answer, defer to the in-context evidence and cite the specific source it came from.",
+          "source": "Tversky & Kahneman 1974",
+          "citation": "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. Science, 185(4157), 1124–1131.",
+          "reframe": "The specific facts given override your default answer. Cite the in-context evidence, not the common case.",
+          "new": false,
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "anchoring"
+          },
+          "pairs_with": [
+            "B8"
+          ]
+        },
+        {
+          "code": "B4",
+          "label": "First Suspect",
+          "concept": "Anchoring + premature closure",
+          "concept_terms": [
+            "Anchoring",
+            "premature closure"
+          ],
+          "tell": "Locks on hypothesis #1, skips the rest.",
+          "detail": "Commits to the first plausible explanation and stops generating alternatives — the classic diagnostic error of closing the search too early.",
+          "mitigation": "Generate at least two or three alternative explanations before committing, and actively look for evidence that would falsify the leading one.",
+          "source": "Croskerry 2003",
+          "citation": "Croskerry, P. (2003). The Importance of Cognitive Errors in Diagnosis and Strategies to Minimize Them. Academic Medicine, 78(8), 775–780.",
+          "reframe": "Generate at least two more hypotheses before committing, and name what would disprove your leading one.",
+          "new": false,
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "anchoring"
+          },
+          "pairs_with": [
+            "B5"
+          ]
+        },
+        {
+          "code": "B5",
+          "label": "Sunk Path",
+          "concept": "Sunk-cost · escalation of commitment",
+          "concept_terms": [
+            "Sunk-cost",
+            "escalation of commitment"
+          ],
+          "tell": "Won't abandon a failing approach.",
+          "detail": "Keeps pushing a chosen plan because it's already invested effort, instead of backtracking. Plan-continuation bias — 'get-there-itis.'",
+          "mitigation": "Add checkpoints that judge the plan on its remaining merit, ignoring effort already spent, and make backtracking an explicitly allowed move.",
+          "source": "Arkes & Blumer 1985 · Staw 1976",
+          "citation": "Arkes, H. R. & Blumer, C. (1985). The psychology of sunk cost. Organizational Behavior and Human Decision Processes, 35(1), 124–140. Escalation: Staw, B. M. (1976). Knee-Deep in the Big Muddy. Organizational Behavior and Human Performance, 16(1), 27–44.",
+          "reframe": "Ignore effort already spent. Judge this approach only on its remaining cost to succeed. Backtracking is allowed.",
+          "new": false,
+          "facets": {
+            "locus": "process-inertia",
+            "direction": "over-shoot",
+            "temporal": "trajectory",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "commitment"
+          },
+          "pairs_with": [
+            "D1"
+          ],
+          "disambiguator": "The objective and constraints are intact and the actions vary, but a plan already shown to be failing is retained across them. If the actions are near-identical, this is D1."
+        },
+        {
+          "code": "B6",
+          "label": "Forced Symmetry",
+          "concept": "False balance · false equivalence",
+          "concept_terms": [
+            "False balance",
+            "false equivalence"
+          ],
+          "tell": "Invents parallelism that isn't there.",
+          "detail": "Treats two sides as equal, or forces a clean symmetric structure onto lopsided reality, because the tidy shape feels right.",
+          "mitigation": "Weigh positions by evidence quality, not by a need for balance; allow the conclusion to be lopsided when the evidence is lopsided.",
+          "source": "Boykoff & Boykoff 2004",
+          "citation": "Boykoff, M. T. & Boykoff, J. M. (2004). Balance as bias: global warming and the US prestige press. Global Environmental Change, 14(2), 125–136.",
+          "reframe": "Weigh by evidence, not balance. If the evidence is lopsided, let the conclusion be lopsided.",
+          "new": false,
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "over-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "B7",
+          "label": "Premature Abstraction",
+          "concept": "Hasty generalization · premature optimization",
+          "concept_terms": [
+            "Hasty generalization",
+            "premature optimization"
+          ],
+          "tell": "Builds the framework too early.",
+          "detail": "Generalizes into rules or abstractions before it has enough concrete grounding to know whether they hold.",
+          "mitigation": "Stay concrete and work through several specific cases first; only generalize once multiple instances support the same rule.",
+          "source": "Knuth 1974 · hasty generalization",
+          "citation": "Knuth, D. E. (1974). Structured Programming with go to Statements. ACM Computing Surveys, 6(4), 261–301. Reasoning form: the classical hasty-generalization fallacy.",
+          "reframe": "Stay concrete. Work several specific cases before proposing any rule or framework.",
+          "new": false,
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "over-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [
+            "B6"
+          ]
+        },
+        {
+          "code": "B8",
+          "label": "Confabulation",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Hallucination · confabulation",
+          "concept_terms": [
+            "Hallucination",
+            "confabulation"
+          ],
+          "tell": "Invents specifics to complete the pattern.",
+          "fix": "If you don't have the fact, say so — don't invent it.",
+          "detail": "Fills gaps with plausible-sounding but fabricated specifics — citations, API names, figures — because the pattern 'wants' a value there.",
+          "mitigation": "Distinguish known facts from generated ones; when a specific (citation, identifier, figure) isn't grounded, flag uncertainty instead of fabricating.",
+          "source": "Ji et al. 2023 (hallucination survey)",
+          "citation": "Ji, Z. et al. (2023). Survey of Hallucination in Natural Language Generation. ACM Computing Surveys, 55(12).",
+          "reframe": "If you don't have a specific fact (citation, API, number), say so. Never invent specifics to complete the pattern.",
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "needs-tool",
+            "family": "generation"
+          },
+          "pairs_with": []
+        }
+      ]
+    },
+    {
+      "code": "F3",
+      "id": "verification",
+      "name": "Verification",
+      "category": "Unchecked result",
+      "question": "Did it check the result?",
+      "failure_modes": [
+        {
+          "code": "C1",
+          "label": "Unchecked Premise",
+          "concept": "Unverified assumption · false-premise acceptance",
+          "concept_terms": [
+            "Unverified assumption",
+            "false-premise acceptance"
+          ],
+          "tell": "Never tests the starting assumption.",
+          "detail": "Accepts a premise baked into the request — even a false one — and builds on it without pausing to validate.",
+          "mitigation": "List the assumptions the task rests on and test the load-bearing ones — including premises embedded in the request itself — before building on them.",
+          "source": "classical logic · Sharma et al. 2023",
+          "citation": "Unverified-premise / false-premise (classical logic). LLM acceptance of false premises: Sharma, M. et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548.",
+          "reframe": "List the assumptions this rests on and test the load-bearing ones — including any premise baked into the request.",
+          "new": false,
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": []
+        },
+        {
+          "code": "C2",
+          "label": "Sailing",
+          "concept": "No verification · happy-path completion",
+          "concept_terms": [
+            "No verification",
+            "happy-path completion"
+          ],
+          "tell": "Glides to the end, never checks.",
+          "detail": "Runs straight through to an answer with no self-check step at all — smooth sailing, right past every place it should have stopped.",
+          "mitigation": "Insert a mandatory verification step before returning a result: re-run, test, or re-derive the answer rather than trusting the first pass.",
+          "source": "MAST — Cemri et al. 2025",
+          "citation": "Cemri, M. et al. (2025). Why Do Multi-Agent LLM Systems Fail? (MAST) — “No or Incomplete Verification”. arXiv:2503.13657.",
+          "reframe": "Before returning, run an explicit check: re-derive, test, or verify. Do not finish on the first pass alone.",
+          "new": false,
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [],
+          "disambiguator": "No verification act appears anywhere in the trace, and the agent does not claim one occurred. If a check was attempted, however shallow, this is not C2; if none occurred but one was asserted, this is C7."
+        },
+        {
+          "code": "C3",
+          "label": "Skating",
+          "concept": "Superficial verification · illusion of checking",
+          "concept_terms": [
+            "Superficial verification",
+            "illusion of checking"
+          ],
+          "tell": "Checks the surface only.",
+          "detail": "Performs a cursory pass that looks like verification but never probes the spots where the result would actually break.",
+          "mitigation": "Aim verification at the failure-prone parts — edge cases, boundaries, the hardest step — not the parts that are easiest to confirm.",
+          "source": "MAST — Cemri et al. 2025",
+          "citation": "Cemri, M. et al. (2025). MAST — “Incorrect Verification”. arXiv:2503.13657.",
+          "reframe": "Aim your check at where this would actually break — edge cases, boundaries, the hard step — not the easy parts.",
+          "new": false,
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [],
+          "disambiguator": "A verification act appears but never executes the artifact under test — it inspects, describes, or reasons about it instead. If the artifact was actually run, this is not C3."
+        },
+        {
+          "code": "C4",
+          "label": "Spot-Check",
+          "concept": "Sampling fallacy · hasty induction",
+          "concept_terms": [
+            "Sampling fallacy",
+            "hasty induction"
+          ],
+          "tell": "Tests one case, assumes the rest.",
+          "detail": "Verifies a single example and generalizes 'it works' to all cases, missing the ones that don't.",
+          "mitigation": "Test multiple cases, including edge and adversarial ones, rather than extrapolating correctness from a single success.",
+          "source": "hasty generalization (classical)",
+          "citation": "Hasty generalization / sampling fallacy (classical induction).",
+          "reframe": "Test multiple cases, including adversarial ones. Don't generalize correctness from a single success.",
+          "new": false,
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "under-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [
+            "C5"
+          ],
+          "disambiguator": "The artifact is executed, but on exactly one case. If coverage extends past a single case, this is not C4."
+        },
+        {
+          "code": "C5",
+          "label": "Closure Performance",
+          "concept": "Completion theater · confident-but-wrong",
+          "concept_terms": [
+            "Completion theater",
+            "confident-but-wrong"
+          ],
+          "tell": "Looks done; isn't verified.",
+          "detail": "Delivers a polished, confident 'finished' signal that performs done-ness — the well-formatted answer that's wrong but reads as complete.",
+          "mitigation": "Gate completion on evidence of correctness, not on a confident-looking output; treat 'finished' and 'verified' as two separate bars to clear.",
+          "source": "MAST — Cemri et al. 2025",
+          "citation": "Cemri, M. et al. (2025). MAST — “Premature Termination”; plus the overconfidence/calibration literature. arXiv:2503.13657.",
+          "reframe": "Separate 'finished' from 'verified.' Show the evidence that it's correct before declaring done.",
+          "new": false,
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "over-shoot",
+            "temporal": "single-step",
+            "detectability": "needs-ground-truth",
+            "intervention": "reframe-sufficient",
+            "family": "closure"
+          },
+          "pairs_with": [
+            "C2",
+            "C3"
+          ],
+          "disambiguator": "Verification happened and covered more than one case, yet completeness is asserted beyond what those checks establish. Use only once C2, C3 and C4 have each been ruled out."
+        },
+        {
+          "code": "C6",
+          "label": "Gaming the Check",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Reward hacking · test gaming",
+          "concept_terms": [
+            "Reward hacking",
+            "test gaming"
+          ],
+          "tell": "Makes the check pass dishonestly.",
+          "fix": "Satisfy the goal, not the gate.",
+          "detail": "Forces verification green by editing or deleting failing tests, hardcoding expected outputs, or matching the metric rather than the intent. Distinct from Closure Performance, which only looks done — this forces the gate.",
+          "mitigation": "Treat the check as a proxy for the goal, not the goal itself; never modify, weaken, or special-case the test to pass it.",
+          "source": "Krakovna et al. 2020 · Goodhart 1975",
+          "citation": "Reward hacking / specification gaming: Krakovna, V. et al. (2020), DeepMind; Goodhart's law (1975).",
+          "reframe": "Satisfy the goal, not the gate. Never weaken, edit, or bypass the check to make it pass.",
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "needs-tool",
+            "family": "closure"
+          },
+          "pairs_with": [
+            "C5"
+          ]
+        },
+        {
+          "code": "C7",
+          "label": "Process Misreport",
+          "new": true,
+          "added_in": "v2.5",
+          "concept": "Process misreport · claimed-but-absent action",
+          "concept_terms": [
+            "process misreport",
+            "claimed-but-absent action"
+          ],
+          "tell": "Reports doing work the trace does not contain.",
+          "detail": "The agent's account of its own process diverges from what the trace shows it did. Two forms: it asserts a check that has no corresponding action ('I ran the tests and they pass', 'I verified this against the source'), or it reports full coverage of work it only partly did (processed the first N inputs under budget pressure and summarised as though all were covered). Distinct from a wrong answer: the object of the falsehood is the agent's own process, not the subject matter.",
+          "mitigation": "Compare every claimed action against the trace: an assertion about work performed should have a matching tool event. Where coverage was reduced, state the reduction and its cause at the point of reporting, not only on request.",
+          "source": "No established term is claimed for this mode.",
+          "citation": "Deliberately unsourced. The nearest published constructs are MAST FM-3.2 'No or incomplete verification' (Cemri et al. 2025), which is about the check being absent rather than about claiming it occurred, and unfaithful chain-of-thought (Turpin et al. 2023), which concerns whether stated reasons drive a prediction rather than honest reporting of a past action. Neither covers this mode; inventing an attribution would be worse than leaving it open.",
+          "reframe": "Claim only actions that appear in your own trace. If you did not run the check, say you did not run it; if you covered part of the input, say which part and why.",
+          "facets": {
+            "locus": "gate-lax",
+            "direction": "over-shoot",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "generation"
+          },
+          "pairs_with": [
+            "C2",
+            "C5",
+            "D4"
+          ],
+          "disambiguator": "A verification act is absent from the trace AND the agent asserts one occurred, or work was partially covered AND reported as complete. Ask this before C2: if no check occurred and none was claimed, it is C2, not C7."
+        }
+      ]
+    },
+    {
+      "code": "F4",
+      "id": "execution",
+      "name": "Execution",
+      "category": "Trajectory control",
+      "question": "Did it hold the thread across steps?",
+      "failure_modes": [
+        {
+          "code": "D1",
+          "label": "Spinning",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Step repetition · non-progress loop",
+          "concept_terms": [
+            "Step repetition",
+            "non-progress loop"
+          ],
+          "tell": "Repeats a step with no progress.",
+          "fix": "No new progress? Change approach, don't repeat.",
+          "detail": "Re-executes the same or near-identical action across steps without advancing state toward the goal.",
+          "mitigation": "Detect non-progress (state unchanged across steps) and force an approach change or escalation rather than repeating.",
+          "source": "MAST — Cemri et al. 2025",
+          "citation": "Cemri, M. et al. (2025). MAST — “Step Repetition”. arXiv:2503.13657.",
+          "reframe": "If the last step produced no new progress, stop and change approach — don't repeat it.",
+          "facets": {
+            "locus": "process-inertia",
+            "direction": "mis-aim",
+            "temporal": "trajectory",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "commitment"
+          },
+          "pairs_with": [
+            "B5"
+          ],
+          "disambiguator": "The objective and constraints are intact and the action is near-identical across steps — repetition without progress. If the actions vary, this is B5."
+        },
+        {
+          "code": "D2",
+          "label": "Drift",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Goal drift · mission creep",
+          "concept_terms": [
+            "Goal drift",
+            "mission creep"
+          ],
+          "tell": "Goal erodes across a long run.",
+          "fix": "Re-state the goal; cut off-objective work.",
+          "detail": "Over a long trajectory the working objective gradually diverges from the original task as local sub-goals accumulate.",
+          "mitigation": "Periodically re-anchor to the original objective and prune actions that no longer serve it.",
+          "source": "long-horizon agent failure (cf. MAST)",
+          "citation": "Goal drift in long-horizon agents; related to MAST trajectory failures (Cemri et al. 2025).",
+          "reframe": "Restate the original goal and check your current action against it. Cut anything that's wandered off-objective.",
+          "facets": {
+            "locus": "process-inertia",
+            "direction": "mis-aim",
+            "temporal": "trajectory",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "salience"
+          },
+          "pairs_with": [
+            "D3"
+          ],
+          "disambiguator": "The original objective is no longer what is being pursued — a self-generated sub-goal has displaced it. Ask this first: if the objective is still intact, the failure is one of D3, D1 or B5, not D2."
+        },
+        {
+          "code": "D3",
+          "label": "Context Bleed",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Context loss · lost in the middle",
+          "concept_terms": [
+            "Context loss",
+            "lost in the middle"
+          ],
+          "tell": "Drops earlier or mid-context constraints.",
+          "fix": "Re-read the original constraints before acting.",
+          "detail": "Loses requirements stated earlier or buried mid-context, where models attend least reliably.",
+          "mitigation": "Re-surface the full constraint set before key steps; don't rely on long-context recall for load-bearing requirements.",
+          "source": "Liu et al. 2023",
+          "citation": "Liu, N. F. et al. (2023). Lost in the Middle: How Language Models Use Long Contexts. arXiv:2307.03172 (TACL 2024).",
+          "reframe": "Re-read the original constraints before acting. Confirm you haven't dropped requirements stated earlier or mid-context.",
+          "facets": {
+            "locus": "process-inertia",
+            "direction": "under-shoot",
+            "temporal": "trajectory",
+            "detectability": "trace-visible",
+            "intervention": "needs-tool",
+            "family": "salience"
+          },
+          "pairs_with": [],
+          "disambiguator": "The objective is still being pursued, but a constraint stated earlier in the context is violated. If the objective itself was displaced, this is D2."
+        },
+        {
+          "code": "D4",
+          "label": "Say-Do Gap",
+          "new": true,
+          "added_in": "v2",
+          "concept": "Reasoning–action mismatch · unfaithful chain-of-thought",
+          "concept_terms": [
+            "Reasoning–action mismatch",
+            "unfaithful chain-of-thought"
+          ],
+          "tell": "Reasoning says one thing; the action does another.",
+          "fix": "Make the action match the stated reasoning.",
+          "detail": "The narrated reasoning and the executed action diverge — the chain-of-thought doesn't actually drive the behavior.",
+          "mitigation": "Check that each action follows from the stated reasoning; reconcile divergences before proceeding.",
+          "source": "Turpin et al. 2023 · MAST",
+          "citation": "Turpin, M. et al. (2023). Language Models Don't Always Say What They Think: Unfaithful Explanations in CoT Prompting. NeurIPS. MAST: reasoning–action mismatch (Cemri et al. 2025).",
+          "reframe": "Make your action match your stated reasoning. If they diverge, reconcile them before proceeding.",
+          "facets": {
+            "locus": "prior-driven",
+            "direction": "mis-aim",
+            "temporal": "single-step",
+            "detectability": "trace-visible",
+            "intervention": "reframe-sufficient",
+            "family": "generation"
+          },
+          "pairs_with": []
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Arkes, H. R. & Blumer, C. (1985). The psychology of sunk cost. Organizational Behavior and Human Decision Processes, 35(1), 124–140.",
+    "Boykoff, M. T. & Boykoff, J. M. (2004). Balance as bias: global warming and the US prestige press. Global Environmental Change, 14(2), 125–136.",
+    "Brown, T. B. et al. (2020). Language Models are Few-Shot Learners. NeurIPS 33. arXiv:2005.14165.",
+    "Cemri, M. et al. (2025). Why Do Multi-Agent LLM Systems Fail? — introduces MAST. arXiv:2503.13657.",
+    "Croskerry, P. (2003). The Importance of Cognitive Errors in Diagnosis and Strategies to Minimize Them. Academic Medicine, 78(8), 775–780.",
+    "Goodhart, C. A. E. (1975). Goodhart's law — when a measure becomes a target, it ceases to be a good measure.",
+    "Ji, Z. et al. (2023). Survey of Hallucination in Natural Language Generation. ACM Computing Surveys, 55(12).",
+    "Kahneman, D. (2011). Thinking, Fast and Slow — WYSIATI.",
+    "Kaplan, A. (1964). The Conduct of Inquiry — the law of the instrument.",
+    "Knuth, D. E. (1974). Structured Programming with go to Statements. ACM Computing Surveys, 6(4), 261–301.",
+    "Krakovna, V. et al. (2020). Specification gaming: the flip side of AI ingenuity. DeepMind.",
+    "Liu, N. F. et al. (2023). Lost in the Middle: How Language Models Use Long Contexts. arXiv:2307.03172 (TACL 2024).",
+    "Maslow, A. H. (1966). The Psychology of Science — the hammer-and-nail formulation.",
+    "Oncken, W. Jr. & Wass, D. L. Management Time: Who's Got the Monkey? Harvard Business Review (orig. 1974; reprinted Nov–Dec 1999). — upward/reverse delegation.",
+    "Sharma, M. et al. (2023). Towards Understanding Sycophancy in Language Models. arXiv:2310.13548 (Anthropic).",
+    "Staw, B. M. (1976). Knee-Deep in the Big Muddy. Organizational Behavior and Human Performance, 16(1), 27–44.",
+    "Turpin, M. et al. (2023). Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting. NeurIPS 2023.",
+    "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. Science, 185(4157), 1124–1131.",
+    "Tversky, A. & Kahneman, D. (1981). The framing of decisions and the psychology of choice. Science, 211(4481), 453–458.",
+    "Also: survivorship bias (A. Wald, WWII aircraft-survivability analysis); the “streetlight effect” parable; and the classical hasty-generalization fallacy."
+  ],
+  "telemetry": {
+    "description": "Event spec for recording failure-mode detections so they can be counted, correlated, and analyzed over time.",
+    "event_schema": {
+      "event_id": "string (uuid)",
+      "timestamp": "string (ISO 8601)",
+      "run_id": "string — groups all events in one agent run/session",
+      "step_index": "integer — position in the trajectory",
+      "mode_code": "string — e.g. 'B4' (FK to a failure mode)",
+      "stage": "string — framing | reasoning | verification | execution",
+      "detector": {
+        "method": "monitor | preflight | self-report | human",
+        "confidence": "number 0..1",
+        "signal": "string — the tell/text that matched"
+      },
+      "trace_excerpt": "string — the snippet that triggered detection",
+      "intervention": {
+        "applied": "boolean",
+        "type": "preflight | reframe | none",
+        "reframe_code": "string",
+        "reframe_text": "string"
+      },
+      "outcome": {
+        "resolved": "boolean | null",
+        "note": "string",
+        "post_state": "string"
+      },
+      "tags": "object — see context_tags"
+    },
+    "context_tags": {
+      "model": "e.g. claude-opus-4-x",
+      "task_type": "coding | research | data-analysis | writing | planning | tool-use",
+      "domain": "e.g. finance | legal | medical | general",
+      "tool_involved": "e.g. bash | web_search | none",
+      "severity": "low | med | high | critical",
+      "autonomy": "single-turn | multi-step | autonomous",
+      "custom": "array of free-form user tags"
+    },
+    "example_event": {
+      "event_id": "e3b0c442-...",
+      "timestamp": "2026-06-23T14:05:11Z",
+      "run_id": "run_8842",
+      "step_index": 7,
+      "mode_code": "B4",
+      "stage": "reasoning",
+      "detector": {
+        "method": "monitor",
+        "confidence": 0.82,
+        "signal": "committed to first cause; no alternatives generated"
+      },
+      "trace_excerpt": "The error must be the auth token. Fixing that now.",
+      "intervention": {
+        "applied": true,
+        "type": "reframe",
+        "reframe_code": "B4",
+        "reframe_text": "Generate at least two more hypotheses before committing, and name what would disprove your leading one."
+      },
+      "outcome": {
+        "resolved": true,
+        "note": "generated 3 hypotheses; real cause was clock skew",
+        "post_state": "corrected"
+      },
+      "tags": {
+        "model": "claude-opus-4-x",
+        "task_type": "coding",
+        "domain": "general",
+        "tool_involved": "bash",
+        "severity": "high",
+        "autonomy": "autonomous",
+        "custom": [
+          "ci-pipeline"
+        ]
+      }
+    },
+    "analyses_enabled": [
+      "Frequency — count per mode, sliced by stage / task_type / model.",
+      "Co-occurrence — which modes chain within a run (e.g. First Suspect → Sunk Path; Closure Performance masking Sailing/Skating).",
+      "Intervention efficacy — resolved-rate per reframe; preflight vs. dynamic-monitor comparison.",
+      "Trend — failure rate over time or across model versions.",
+      "Hotspots — stage/tag combinations with the highest failure density."
+    ]
+  },
+  "facet_vocabulary": {
+    "locus": {
+      "description": "What pulls the agent off course.",
+      "values": [
+        "input-shaped",
+        "prior-driven",
+        "process-inertia",
+        "gate-lax"
+      ]
+    },
+    "direction": {
+      "description": "Error relative to intent.",
+      "values": [
+        "under-shoot",
+        "over-shoot",
+        "mis-aim"
+      ]
+    },
+    "temporal": {
+      "description": "Whether the failure only appears over multiple steps.",
+      "values": [
+        "single-step",
+        "trajectory"
+      ]
+    },
+    "detectability": {
+      "description": "Whether a trace-only critic can catch it, or it needs an external oracle.",
+      "values": [
+        "trace-visible",
+        "needs-ground-truth"
+      ]
+    },
+    "intervention": {
+      "description": "What resolves it.",
+      "values": [
+        "reframe-sufficient",
+        "needs-tool"
+      ]
+    },
+    "family": {
+      "description": "Nearest cognitive-mechanism analog (some trajectory modes are process-native).",
+      "values": [
+        "anchoring",
+        "commitment",
+        "salience",
+        "closure",
+        "input-conformity",
+        "generation"
+      ]
+    }
+  },
+  "chaining": {
+    "description": "Each mode's `pairs_with` lists modes it tends to trigger or mask (directional). Seeds the cross-link UI and the co-occurrence analytics.",
+    "note": "Proposed hypotheses — refine against real event-log co-occurrence once data accrues."
+  },
+  "field_notes": {
+    "disambiguator": "Present only on modes belonging to a confusable cluster, where the `tell` alone does not separate them. It states a trace-observable test that rules the mode IN or OUT relative to its neighbours. Absence of the field means the mode's `tell` is considered sufficient on its own. Apply the cluster's disambiguators in code order and record which one fired, not only the final code. Cluster lists are given in the order the tests should be applied, which is not always code order: for the trajectory cluster, rule out objective displacement before anything else.",
+    "clusters": {
+      "verification": [
+        "C7",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "trajectory": [
+        "D2",
+        "D3",
+        "D1",
+        "B5"
+      ]
+    },
+    "added_in": "v2.3"
+  }
+}

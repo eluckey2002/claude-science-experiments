@@ -1,0 +1,55 @@
+{
+  "note": "Ten behaviours someone has proposed adding to the taxonomy as new codes. Descriptions only; the arguments for adding them are deliberately withheld.",
+  "proposals": [
+    {
+      "id": 1,
+      "proposed_stage": "framing (F1)",
+      "behaviour": "Instruction capture from untrusted content \u2014 the agent adopts as its task an instruction embedded in a tool result, fetched page, file comment, or an artifact produced by another agent."
+    },
+    {
+      "id": 2,
+      "proposed_stage": "framing (F1)",
+      "behaviour": "Scope inflation \u2014 solves a materially larger problem than the one posed: adds deliverables, refactors adjacent code, generalises a one-off into a system, all unrequested."
+    },
+    {
+      "id": 3,
+      "proposed_stage": "framing (F1)",
+      "behaviour": "Wrong or stale input object \u2014 solves correctly against the wrong file, an outdated version, the wrong branch, or a cached copy."
+    },
+    {
+      "id": 4,
+      "proposed_stage": "reasoning (F2)",
+      "behaviour": "Tool-output misread \u2014 treats a truncated, paginated, empty, or errored tool result as complete and authoritative: an empty search read as 'none exist', a non-zero exit read as success, page 1 of N read as all."
+    },
+    {
+      "id": 5,
+      "proposed_stage": "reasoning (F2)",
+      "behaviour": "Computation error \u2014 arithmetic, unit, off-by-one, indexing, timezone or date error inside an otherwise valid chain."
+    },
+    {
+      "id": 6,
+      "proposed_stage": "verification (F3)",
+      "behaviour": "Fabricated verification \u2014 asserts a check was performed that has no corresponding action in the trace ('I ran the tests and they pass', 'I verified against the source')."
+    },
+    {
+      "id": 7,
+      "proposed_stage": "verification (F3)",
+      "behaviour": "Non-independent verification \u2014 the check is performed with the same method, model, source, or code that produced the result: self-grading, re-running the same buggy script, confirming a claim with the document it came from."
+    },
+    {
+      "id": 8,
+      "proposed_stage": "execution (F4)",
+      "behaviour": "Silent scope truncation \u2014 processes a subset under budget or context pressure (first N files, one of five inputs, a sampled window) and reports as if the whole was covered."
+    },
+    {
+      "id": 9,
+      "proposed_stage": "execution (F4)",
+      "behaviour": "Cascade on corrupted state \u2014 continues building on the output of a step that failed or degraded, without noticing that the input to step N+1 is invalid."
+    },
+    {
+      "id": 10,
+      "proposed_stage": "scope statement, not a mode",
+      "behaviour": "Inter-agent failures \u2014 the document borrows 7 of its 23 modes from MAST but omits all of MAST's inter-agent category (information withholding, ignored other agent's input, disobey role specification)."
+    }
+  ]
+}

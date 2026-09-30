@@ -1,0 +1,424 @@
+{
+  "blocking": [
+    {
+      "area": "discriminability",
+      "json_path": "stages[2].failure_modes[1..4] (C2,C3,C4,C5)",
+      "span": "C2.tell: \"Glides to the end, never checks.\" | C3.tell: \"Checks the surface only.\" | C4.tell: \"Tests one case, assumes the rest.\" | C5.tell: \"Looks done; isn't verified.\"",
+      "defect": "Four of the six Verification modes partition a single observable \u2014 'the result was not adequately checked' \u2014 along distinctions that are not recoverable from a trace. C2/C3/C4 additionally carry IDENTICAL facet vectors (gate-lax, under-shoot, single-step, trace-visible, reframe-sufficient, closure), so the facets offer no tie-break either. A trace showing one quick passing test on the happy path followed by a confident summary satisfies all four tells simultaneously: no real check (C2), surface check (C3), single case (C4), polished done-signal (C5).",
+      "consequence_in_use": "Use (c) breaks: per-mode counts inside stage F3 are set by which rater or judge prompt is used, not by what the agent did. Two runs of the same harness with different judges are not comparable, and F3 is where the taxonomy puts a quarter of its modes.",
+      "fix": "Make the F3 codes mutually exclusive on a trace-observable decision procedure applied in order, e.g. (1) is there any verification act in the trace? no -> C2; (2) does the act execute the artifact under test? no -> C3; (3) does it cover >1 case? no -> C4; (4) all of the above present and the result still asserted as complete without evidence -> C5. State that procedure in the document and require the rater to record which branch fired."
+    },
+    {
+      "area": "discriminability",
+      "json_path": "stages[1].failure_modes[4] (B5) vs stages[3].failure_modes[0] (D1); stages[3].failure_modes[1] (D2) vs stages[3].failure_modes[2] (D3)",
+      "span": "B5.tell: \"Won't abandon a failing approach.\" | D1.tell: \"Repeats a step with no progress.\" -- and -- D2.tell: \"Goal erodes across a long run.\" | D3.tell: \"Drops earlier or mid-context constraints.\"",
+      "defect": "B5 and D1 differ on exactly one facet (direction: over-shoot vs mis-aim) and their tells do not name a discriminator. A retry loop against a failing approach is literally both. D2 and D3 share locus, temporal, detectability and family (salience) and differ on two facets (direction, and intervention: reframe-sufficient vs needs-tool); the goal is itself a constraint stated earlier, so an agent that forgets the objective in a long run satisfies both tells.",
+      "consequence_in_use": "Use (c): the trajectory cluster (B5,D1,D2,D3) is the only place the taxonomy can measure long-horizon degradation, and its internal allocation is rater-dependent. Cross-run trend claims about 'spinning' vs 'sunk path' are not comparable.",
+      "fix": "Add an explicit discriminator to each tell in the pattern C6 already uses. Suggested: B5 = the plan is retained while the actions vary; D1 = the action is near-identical across steps. D2 = the ORIGINAL OBJECTIVE is displaced by a self-generated sub-goal; D3 = a stated CONSTRAINT is violated while the objective is still being pursued."
+    },
+    {
+      "area": "facets",
+      "json_path": "facet_vocabulary.locus vs facet_vocabulary.temporal and stages[*].id",
+      "span": "facet_vocabulary.locus: {\"description\": \"What pulls the agent off course.\", \"values\": [\"input-shaped\", \"prior-driven\", \"process-inertia\", \"gate-lax\"]}",
+      "defect": "locus is not an independent axis as instantiated. Computed over all 23 modes: locus=process-inertia = {B5,D1,D2,D3} = temporal=trajectory exactly; locus=gate-lax = {C1,C2,C3,C4,C5,C6} = stage F3 (verification) exactly. Two of locus's four values are re-encodings of axes already present. Only input-shaped/prior-driven carry information locus alone supplies.",
+      "consequence_in_use": "Use (c): the document presents six facets as six slicing dimensions. Slicing counts by locus and then by temporal/stage reports the same partition twice, which reads as two independent confirmations of one pattern. Any correlation computed between locus and temporal is 1.0 by construction, not a finding.",
+      "fix": "Answering the question posed: as instantiated these are ONE axis named twice, and temporal is the one to keep -- 'appears only over multiple steps' is mechanically checkable from a trace (count the steps), whereas 'what pulls the agent off course' is an attribution. Either drop process-inertia from locus and assign those four modes a genuine puller (B5 prior-driven, D1/D2/D3 process-native if you want the value), or drop locus and derive it. Same for gate-lax, which is stage F3 restated."
+    },
+    {
+      "area": "schema / reframe injection",
+      "json_path": "stages[0].failure_modes[3].fix (and A5,B8,C6,D1,D2,D3,D4)",
+      "span": "A4.fix: \"Ask one clarifying question before guessing.\" alongside A4.reframe: \"If a load-bearing requirement is ambiguous, ask one targeted question before proceeding \u2014 don't guess silently.\" and A4.mitigation: \"When a load-bearing requirement is ambiguous, ask a single targeted question before proceeding rather than committing to a guess.\"",
+      "defect": "`fix` exists on exactly 8 of 23 modes (A4,A5,B8,C6,D1,D2,D3,D4 \u2014 precisely the modes with new:true) and is declared nowhere in the document: there is no mode-object schema, and the field is absent from the task-facing field list. It is a third prescriptive string duplicating `reframe` and `mitigation`, with no stated precedence or intended consumer.",
+      "consequence_in_use": "Use (b) breaks silently: a prompt builder keyed on `fix` emits nothing for 15 of 23 modes and will appear to work because the 8 modes it does cover are the recently added ones. A builder keyed on `reframe` ignores `fix` entirely, so two implementations of 'inject the reframe' inject different text for the same mode code, and the intervention-efficacy numbers in use (c) are not comparable between them.",
+      "fix": "Either populate `fix` for all 23 or delete it. Declare which single field is the injectable string; `reframe` is the one the telemetry schema already references (intervention.reframe_text), so make that normative and demote `fix` to a UI short label under a name that says so (e.g. `short_label`)."
+    },
+    {
+      "area": "facets / reframe injection",
+      "json_path": "stages[1].failure_modes[7].facets.intervention (B8), stages[2].failure_modes[5].facets.intervention (C6), stages[3].failure_modes[2].facets.intervention (D3) vs telemetry.event_schema.intervention.type",
+      "span": "facet_vocabulary.intervention: {\"description\": \"What resolves it.\", \"values\": [\"reframe-sufficient\", \"needs-tool\"]} -- and -- telemetry.event_schema.intervention.type: \"preflight | reframe | none\"",
+      "defect": "Three modes are labelled needs-tool, i.e. by the document's own definition of the facet ('What resolves it') a reframe does not resolve them. All three nonetheless ship a reframe, and the telemetry intervention.type enum has no value for a tool intervention. The taxonomy therefore asserts a treatment it cannot record and ships a treatment it says is insufficient.",
+      "consequence_in_use": "Use (b): a harness that injects reframes for all 23 modes is applying a treatment the taxonomy predicts will fail for B8/C6/D3, with no way to mark it as such. Use (c): 'Intervention efficacy \u2014 resolved-rate per reframe' will report a low resolved-rate for those three and the cause will be unrecoverable from the log, because the tool intervention that was (or was not) applied has no field.",
+      "fix": "Add \"tool\" (and \"tool+reframe\") to intervention.type, and state what the required tool is for each needs-tool mode (B8: grounded retrieval/citation check; C6: test-file diff guard; D3: constraint re-injection). If no tool is specified the facet is unactionable and should be dropped."
+    },
+    {
+      "area": "citation / discriminability",
+      "json_path": "stages[3].failure_modes[3].citation (D4)",
+      "span": "\"Turpin, M. et al. (2023). Language Models Don't Always Say What They Think: Unfaithful Explanations in CoT Prompting. NeurIPS. MAST: reasoning\u2013action mismatch (Cemri et al. 2025).\"",
+      "defect": "D4 fuses two different constructs. I read both sources. MAST FM-2.6 'Reasoning-action mismatch' is defined as 'Discrepancy between the logical reasoning process and the actual actions taken by the agent' \u2014 trace-observable by comparing narration to the executed call. Turpin et al. measure something else: that CoT explanations 'can systematically misrepresent the true reason for a model's prediction', demonstrated by adding biasing features to the input and observing that models fail to mention them. That is detectable only by a paired counterfactual run, never from one trace. D4.facets.detectability is \"trace-visible\", which is true of the MAST reading and false of the Turpin reading.",
+      "consequence_in_use": "Use (a): a rater who has read Turpin looks for unmentioned influences and codes almost nothing; a rater who has read MAST codes every narration/action divergence. Use (b): D4.reframe \"Make your action match your stated reasoning\" addresses only the MAST reading \u2014 under Turpin's finding the model cannot report the true cause, and the instruction can be satisfied by revising the narration to fit the action, which makes the failure less visible rather than fixing it.",
+      "fix": "Split, or scope D4 to the MAST construct and cite only MAST. If the Turpin phenomenon is wanted, it is a separate mode with detectability: needs-ground-truth and intervention: needs-tool (counterfactual probe), not a reframe."
+    },
+    {
+      "area": "telemetry",
+      "json_path": "telemetry.event_schema",
+      "span": "\"mode_code\": \"string \u2014 e.g. 'B4' (FK to a failure mode)\"",
+      "defect": "No taxonomy_version field. The document is v2.2, carries `added_in` values of \"v2\" and \"v2.2\" on 8 modes, and the codes are positional within a stage (A5 was appended at v2.2), so the code space is demonstrably mutable across versions.",
+      "consequence_in_use": "Use (c) breaks for exactly the purpose stated \u2014 'counted by mode/stage over many runs'. An event store spanning a taxonomy revision cannot tell whether zero A5 events before a date means the behaviour did not occur or the code did not exist, and a re-lettered or split mode silently merges with its predecessor.",
+      "fix": "Add a required `taxonomy_version` (and ideally a content hash of the mode list) to every event, and freeze code-to-mode bindings across versions: retire codes, never reuse or renumber them."
+    },
+    {
+      "area": "telemetry",
+      "json_path": "telemetry.analyses_enabled[0] and [3] vs telemetry.event_schema",
+      "span": "\"Frequency \u2014 count per mode, sliced by stage / task_type / model.\" ... \"Trend \u2014 failure rate over time or across model versions.\"",
+      "defect": "The schema records detections only. There is no run-level or step-level record of exposure: no total runs, no total steps, no record of which modes a given detector was even looking for on that run. A rate requires a denominator that the event stream does not contain.",
+      "consequence_in_use": "Use (c): 'failure rate' is not computable from these events, and raw counts confound behaviour change with monitoring-coverage change \u2014 adding a detector or running longer sessions raises the count with no change in agent behaviour. Trend and cross-model comparisons drawn from this stream will be wrong in a direction that flatters whatever was monitored least.",
+      "fix": "Add a companion run record (run_id, total_steps, model, task_type, detector set active, completed/aborted) emitted once per run, and define rate as detections per run and per step against it."
+    },
+    {
+      "area": "telemetry",
+      "json_path": "telemetry.event_schema.mode_code / telemetry.event_schema.detector",
+      "span": "\"detector\": {\"method\": \"monitor | preflight | self-report | human\", \"confidence\": \"number 0..1\", \"signal\": \"string \u2014 the tell/text that matched\"}",
+      "defect": "One mode_code per event, no field for a competing or secondary assignment, and no rater/annotator identifier. Combined with the confusable clusters above, every genuinely ambiguous trace is silently resolved to one code with no record that a choice was made. There is also no way to compute inter-rater agreement, which is the only empirical check on the discriminability problem \u2014 MAST itself validated its 14 modes with an inter-annotator kappa of 0.88 and this schema cannot produce that number.",
+      "consequence_in_use": "Use (c): the taxonomy's central weakness becomes invisible in its own data. Counts look clean and precise while being rater-dependent.",
+      "fix": "Add `rater_id` (or judge prompt hash) and an optional `alternatives: [mode_code]` list; log the same trace under >=2 raters on a held-out sample per model version and publish kappa alongside the counts."
+    },
+    {
+      "area": "citation",
+      "json_path": "stages[2].failure_modes[4].citation (C5)",
+      "span": "\"Cemri, M. et al. (2025). MAST \u2014 \u201cPremature Termination\u201d; plus the overconfidence/calibration literature. arXiv:2503.13657.\"",
+      "defect": "Checked against the MAST paper (arXiv:2503.13657, HTML v3). MAST defines premature termination as 'Ending a dialogue, interaction or task before all necessary information has been exchanged or objectives have been met'. C5's detail is a different construct: \"Delivers a polished, confident 'finished' signal that performs done-ness \u2014 the well-formatted answer that's wrong but reads as complete.\" MAST's mode is about stopping early; C5's diagnostic content is presentation and confidence, which MAST does not measure. Consistent with the mismatch, C5 is tagged direction: over-shoot while MAST's construct is an under-shoot. The second half of the citation, 'the overconfidence/calibration literature', names no work and has no entry in the 20-item `references` list \u2014 it is the only citation in the file with no resolvable referent.",
+      "consequence_in_use": "Use (c): MAST is the interoperability anchor for 7 of the 23 modes. C5 counts will be read as comparable to MAST FM-3.1 counts and are not. Use (a): a rater who consults the cited source is told to look for early stopping and will code the trace C5 for the wrong reason.",
+      "fix": "Cite MAST FM-3.1 only if C5 is re-scoped to early termination; otherwise drop it and cite the calibration work actually meant (and add it to `references`). Note MAST FM-3.2 'No or incomplete verification' is already correctly used by C2, so the early-stopping content may belong there."
+    }
+  ],
+  "confusable_pairs": [
+    {
+      "codes": [
+        "C2",
+        "C3"
+      ],
+      "why": "C2.tell \"Glides to the end, never checks.\" vs C3.tell \"Checks the surface only.\" \u2014 the boundary is whether a cursory pass counts as a check. C2.detail says 'no self-check step at all'; C3.detail says 'a cursory pass that looks like verification'. A one-line 'looks right to me' sits exactly on the line. Identical facet vectors.",
+      "disambiguator": "C2 only when the trace contains zero verification acts of any kind; any act, however shallow, routes to C3/C4."
+    },
+    {
+      "codes": [
+        "C3",
+        "C4"
+      ],
+      "why": "C3.tell \"Checks the surface only.\" vs C4.tell \"Tests one case, assumes the rest.\" \u2014 testing a single easy case is simultaneously superficial and a single-sample generalisation. Identical facet vectors; nothing in either tell separates 'wrong depth' from 'wrong breadth'.",
+      "disambiguator": "C3 = the check did not exercise the mechanism that would break (depth). C4 = the check exercised it correctly but on one input (breadth). Require the rater to record which."
+    },
+    {
+      "codes": [
+        "C5",
+        "C2"
+      ],
+      "why": "C5.tell \"Looks done; isn't verified.\" contains C2's condition ('isn't verified') as a literal conjunct. C5.pairs_with already lists C2 and C3 as masked modes, which concedes the overlap without resolving assignment.",
+      "disambiguator": "Reserve C5 for cases where verification WAS performed and the completion claim still outruns it; if no verification occurred, the code is C2 and C5 should not be available."
+    },
+    {
+      "codes": [
+        "C5",
+        "C6"
+      ],
+      "why": "Both concern a completion signal that is not earned. The document handles this one well \u2014 C6.detail: 'Distinct from Closure Performance, which only looks done \u2014 this forces the gate.' Listed here as the model the other pairs should follow, not as a defect.",
+      "disambiguator": "Already present in C6.detail; adopt the same in-detail contrast sentence for C2/C3/C4 and B5/D1/D2/D3."
+    },
+    {
+      "codes": [
+        "B5",
+        "D1"
+      ],
+      "why": "B5.tell \"Won't abandon a failing approach.\" vs D1.tell \"Repeats a step with no progress.\" Differ on exactly one facet (direction: over-shoot vs mis-aim). A retry loop is both. They are cross-linked via pairs_with, which signals co-occurrence but does not tell a rater which to log.",
+      "disambiguator": "D1 = near-identical action repeated (state unchanged). B5 = plan retained while actions vary. A run can emit both; the schema must allow it."
+    },
+    {
+      "codes": [
+        "D2",
+        "D3"
+      ],
+      "why": "D2.tell \"Goal erodes across a long run.\" vs D3.tell \"Drops earlier or mid-context constraints.\" The original goal IS a constraint stated earlier, so D3's tell subsumes D2's. Same family (salience), same locus, same temporal, same detectability; they differ on direction and on intervention (D2 reframe-sufficient, D3 needs-tool) \u2014 a facet distance of 2, so unlike B5/D1 they are not a distance-1 pair.",
+      "disambiguator": "D2 = the objective is displaced by a self-generated sub-goal. D3 = the objective is still pursued but a stated side-constraint is violated."
+    },
+    {
+      "codes": [
+        "A1",
+        "C1"
+      ],
+      "why": "A1.tell \"Obeys the words, misses the intent.\" vs C1.tell \"Never tests the starting assumption.\" A request built on a false premise that the agent executes verbatim satisfies both; they sit in different stages, so the stage-level counts in use (c) shift depending on the rater's choice.",
+      "disambiguator": "A1 when the request is well-formed but its purpose is missed; C1 when the request contains a factual claim that is wrong. Add this to both details."
+    },
+    {
+      "codes": [
+        "A3",
+        "D2"
+      ],
+      "why": "A3.tell \"Follows the chat's drift over the facts.\" vs D2.tell \"Goal erodes across a long run.\" Both use drift language for a moving objective in a long conversation. The real discriminator \u2014 user-induced (A3) vs self-induced (D2) \u2014 appears in neither tell.",
+      "disambiguator": "A3 = the shift traces to something the user said. D2 = the shift traces to the agent's own accumulated sub-goals."
+    },
+    {
+      "codes": [
+        "B4",
+        "B5"
+      ],
+      "why": "B4.tell \"Locks on hypothesis #1, skips the rest.\" vs B5.tell \"Won't abandon a failing approach.\" Separable in principle (selection vs persistence after disconfirming evidence) but neither tell states the temporal test.",
+      "disambiguator": "B4 is coded at the moment of commitment (no alternatives generated). B5 is coded only after disconfirming evidence has appeared in the trace."
+    },
+    {
+      "codes": [
+        "B7",
+        "C4"
+      ],
+      "why": "Not a trace-assignment collision but a concept collision: B7.concept_terms includes \"Hasty generalization\" and C4.citation reads \"Hasty generalization / sampling fallacy (classical induction).\" The same classical fallacy is the cited basis for two modes in two different stages.",
+      "disambiguator": "B7 generalises about the DOMAIN from too few cases; C4 generalises about CORRECTNESS from too few tests. Say so in both, and stop citing the same fallacy as the ground for both without the contrast."
+    }
+  ],
+  "weak_tells": [
+    {
+      "code": "B7",
+      "tell": "Builds the framework too early.",
+      "problem": "Restates the label (Premature Abstraction) with no criterion for 'too early'. There is no trace feature to match: every framework is built at some point, and whether it was early is a judgement about the outcome. Facet detectability: needs-ground-truth is honest about this, which means the tell cannot serve the detector.signal field."
+    },
+    {
+      "code": "C1",
+      "tell": "Never tests the starting assumption.",
+      "problem": "Restates the label (Unchecked Premise) and names an absence. Absences are not matchable without first enumerating which premises were load-bearing, which is the analyst's whole job. No guidance on that enumeration appears anywhere in the mode."
+    },
+    {
+      "code": "C3",
+      "tell": "Checks the surface only.",
+      "problem": "Restates the label (Skating) via its metaphor. 'Surface' is undefined; C3.detail's 'never probes the spots where the result would actually break' is the usable criterion and should be the tell."
+    },
+    {
+      "code": "C5",
+      "tell": "Looks done; isn't verified.",
+      "problem": "Restates the label (Closure Performance) and, in its second clause, restates C2. Four words, two of which duplicate a different mode's condition."
+    },
+    {
+      "code": "B5",
+      "tell": "Won't abandon a failing approach.",
+      "problem": "Restates the label (Sunk Path) with no threshold: 'failing' and 'won't abandon' both require a judgement about how many steps of persistence is too many. The operative signal \u2014 effort already spent is entering the decision \u2014 is in the detail, not the tell."
+    },
+    {
+      "code": "B6",
+      "tell": "Invents parallelism that isn't there.",
+      "problem": "Restates the label (Forced Symmetry). 'Isn't there' is a ground-truth claim about the domain, not a trace feature; there is no surface cue distinguishing warranted from unwarranted symmetry."
+    },
+    {
+      "code": "D2",
+      "tell": "Goal erodes across a long run.",
+      "problem": "Restates the label (Drift). 'Erodes' names the failure without naming what an observer would see; the observable \u2014 current action cannot be derived from the original objective \u2014 is absent."
+    },
+    {
+      "code": "A1",
+      "tell": "Obeys the words, misses the intent.",
+      "problem": "Restates the concept ('letter vs. spirit'). Matching it requires knowing the intent independently, which is why the mode is needs-ground-truth; as written it cannot drive a trace-only detector."
+    },
+    {
+      "code": "ALL",
+      "tell": "(structural) \u2014 23 tells, 4 to 8 words each",
+      "problem": "telemetry.event_schema.detector.signal is specified as \"string \u2014 the tell/text that matched\", which presupposes tells are matchable patterns. None of the 23 are: every one is a compressed diagnosis in the analyst's vocabulary, not a surface feature in the agent's. The strongest exceptions \u2014 D1 ('Repeats a step with no progress'), D4 ('Reasoning says one thing; the action does another'), C6 ('Makes the check pass dishonestly'), B4 ('Locks on hypothesis #1, skips the rest') \u2014 are strong precisely because they name a comparison a program could perform. Consider adding a separate `observable` field written as what appears in the trace, and leave `tell` as the human mnemonic."
+    }
+  ],
+  "weak_reframes": [
+    {
+      "code": "D4",
+      "reframe": "Make your action match your stated reasoning. If they diverge, reconcile them before proceeding.",
+      "problem": "Restates the tell (\"Reasoning says one thing; the action does another.\") as an imperative and supplies no procedure. Worse, it is satisfiable in the wrong direction: revising the narration to fit the action 'reconciles' them and removes the evidence. Under the Turpin construct the mode also cites, the instruction is inert \u2014 the finding there is that the model does not report the true cause of its behaviour, so asking it to align the two cannot surface it."
+    },
+    {
+      "code": "B1",
+      "reframe": "Ask what data you'd need but don't have. Don't treat what's in front of you as the whole picture.",
+      "problem": "Second sentence is the tell (\"Treats available data as the whole picture.\") negated. The first sentence is the only operative content; the second adds length to an injected prompt without adding an instruction."
+    },
+    {
+      "code": "B8",
+      "reframe": "If you don't have a specific fact (citation, API, number), say so. Never invent specifics to complete the pattern.",
+      "problem": "Second sentence is the tell (\"Invents specifics to complete the pattern.\") negated. It also asks the model to apply a distinction \u2014 grounded vs generated \u2014 that it does not reliably have access to, which is exactly why the mode is tagged intervention: needs-tool. The reframe and the facet disagree about whether prompting is the treatment."
+    },
+    {
+      "code": "A3",
+      "reframe": "Re-anchor to the source facts. If this answer would change had the conversation been framed differently, you're echoing, not reasoning.",
+      "problem": "The second sentence asks for a counterfactual the model cannot run on itself in-context; it is a diagnostic criterion addressed to an analyst, mis-packaged as an instruction to the agent. 'Re-anchor' is also undirected \u2014 to which facts, retrieved how."
+    },
+    {
+      "code": "A1",
+      "reframe": "State the outcome the user actually wants \u2014 independent of how they phrased it \u2014 before acting on the literal words.",
+      "problem": "Presupposes access to the very thing the mode says is missed. It is an instruction to succeed, not a procedure: nothing tells the agent what to do when the phrasing is the only evidence of intent \u2014 which is the case that produces the failure. Compare A4's reframe, which gives a concrete move (ask one question)."
+    },
+    {
+      "code": "B6",
+      "reframe": "Weigh by evidence, not balance. If the evidence is lopsided, let the conclusion be lopsided.",
+      "problem": "Actionable in direction but supplies no weighing procedure, and 'lopsided' is assessed against the same judgement that produced the failure. Borderline rather than a pure restatement."
+    },
+    {
+      "code": "A1 + A4 (interaction)",
+      "reframe": "A1: \"State the outcome the user actually wants \u2014 independent of how they phrased it \u2014 before acting on the literal words.\" | A4: \"If a load-bearing requirement is ambiguous, ask one targeted question before proceeding \u2014 don't guess silently.\"",
+      "problem": "These two prescribe opposite actions on the same input. Under ambiguity A1 says infer the intent and act; A4 says do not infer, ask. A1.pairs_with lists A4 and A4.pairs_with lists A1, so any UI or harness following the cross-links will co-inject them. A4/A5 have the same relation (ask vs do not ask) and are also mutually cross-linked. The document gives no injection policy \u2014 how many reframes, chosen how, in what precedence \u2014 which use (b) requires and which also determines what 'intervention applied' means in the telemetry."
+    }
+  ],
+  "facet_findings": [
+    "CO-EXTENSIVE AXES (the question asked): computed over all 23 modes, locus=process-inertia = {B5,D1,D2,D3} and temporal=trajectory = {B5,D1,D2,D3} \u2014 identical. Verdict: one axis named twice as instantiated. They are not conceptually identical (a gate-lax failure could in principle be trajectory-scoped, e.g. verification quality decaying over a long run), but no mode in this file exercises that combination, so in the data they will produce they are redundant. Keep temporal (mechanically checkable: does the failure require >1 step to appear) and drop or re-assign process-inertia. Full locus/temporal cross-tab: input-shaped x single-step = 5, prior-driven x single-step = 8, gate-lax x single-step = 6, process-inertia x trajectory = 4, all other cells empty.",
+    "SECOND CO-EXTENSIVE PAIR, not flagged in the brief: locus=gate-lax = {C1,C2,C3,C4,C5,C6} = exactly the members of stage F3 (verification). So locus has two redundant values out of four, and only input-shaped/prior-driven carry independent information.",
+    "A1 direction contradicts A4's own text. A4.detail (stages[0].failure_modes[3].detail): 'The complement of Literalism: under-asking rather than over-obeying.' The contrast asserts A1 over-shoots where A4 under-shoots. But A1.facets.direction = \"under-shoot\" and A4.facets.direction = \"under-shoot\" \u2014 the same value. Compare A5, whose parallel sentence ('The inverse of No Questions Asked \u2014 over-asking rather than under-asking') IS honoured by its facets (A5 over-shoot vs A4 under-shoot). Either A1 should be over-shoot or A4.detail's contrast is wrong.",
+    "A5 family contradicts its stated relationship to A4. A5.detail calls it 'The inverse of No Questions Asked', yet A4.facets.family = \"closure\" and A5.facets.family = \"input-conformity\". Two modes that are inverses of each other on the same behavioural dimension should share a family and differ on direction, which is exactly the pattern their `direction` values already follow.",
+    "C5 detectability contradicts its own tell. C5.facets.detectability = \"needs-ground-truth\", but C5.tell is \"Looks done; isn't verified.\" \u2014 the second clause is an absence of verification, which is trace-visible and is precisely what C2 is tagged trace-visible for. Only the 'wrong' part of C5 needs an oracle. As written, C5 will be under-reported by trace-only critics that honour the facet.",
+    "Three identical facet vectors, i.e. the facets cannot separate these modes at all: {A2,A3} (input-shaped, mis-aim, single-step, needs-ground-truth, reframe-sufficient, input-conformity); {B6,B7} (prior-driven, over-shoot, single-step, needs-ground-truth, reframe-sufficient, closure); {C2,C3,C4} (gate-lax, under-shoot, single-step, trace-visible, reframe-sufficient, closure). A further 18 pairs differ on exactly one facet. For a 23-item taxonomy with a 6-dimensional facet space, the facets are carrying much less discriminative load than their presence implies.",
+    "Facet-value balance is poor enough to make some slices uninformative: intervention is 20 reframe-sufficient / 3 needs-tool; temporal is 19 / 4; family=closure holds 9 of 23 modes (A4,B6,B7,C1,C2,C3,C4,C5,C6) and subsumes all of F3 plus three others. A 'family' slice is close to a 'was it verification' slice.",
+    "Stage F4's question ('Did it hold the thread across steps?') vs D4.facets.temporal = \"single-step\": D4 is the only member of the trajectory stage that the facets say is not a trajectory phenomenon. Either D4 is misplaced in F4 or its temporal value is wrong; a rater partitioning by 'is this a multi-step failure' will not look in F4 for it.",
+    "No mode uses the combinations (input-shaped, trajectory) or (gate-lax, trajectory). If those are impossible the vocabulary should say so; if they are possible they are coverage gaps \u2014 a constraint dropped because a tool result reshaped the task (input-shaped x trajectory) and verification quality decaying over a long run (gate-lax x trajectory) are both real."
+  ],
+  "citation_findings": [
+    {
+      "code": "A4",
+      "verified": true,
+      "method": "Fetched MAST full text (arXiv:2503.13657, HTML v3) and read the FM definitions.",
+      "finding": "Accurate. MAST FM-1.x 'Fail to ask for clarification \u2014 Inability to request additional information when faced with unclear or incomplete data' matches A4's detail directly."
+    },
+    {
+      "code": "C2",
+      "verified": true,
+      "method": "MAST full text (arXiv:2503.13657, HTML v3).",
+      "finding": "Accurate. MAST FM-3.2 'No or incomplete verification \u2014 (partial) omission of proper checking or confirmation of task outcomes or system outputs' matches C2."
+    },
+    {
+      "code": "C3",
+      "verified": true,
+      "method": "MAST full text (arXiv:2503.13657, HTML v3).",
+      "finding": "Accurate. MAST FM-3.3 'Incorrect verification \u2014 Failure to adequately validate or cross-check crucial information or decisions during the iterations' matches C3's 'cursory pass'."
+    },
+    {
+      "code": "D1",
+      "verified": true,
+      "method": "MAST full text (arXiv:2503.13657, HTML v3).",
+      "finding": "Accurate. MAST 'Step repetition \u2014 Unnecessary reiteration of previously completed steps in a process' matches D1."
+    },
+    {
+      "code": "C5",
+      "verified": true,
+      "method": "MAST full text (arXiv:2503.13657, HTML v3).",
+      "finding": "MISATTRIBUTED \u2014 see blocking. MAST 'Premature termination \u2014 Ending a dialogue, interaction or task before all necessary information has been exchanged or objectives have been met' is early stopping; C5 is confident presentation of an unverified result. Also, the citation's second source, 'the overconfidence/calibration literature', names no work and is the only citation in the file with no entry in `references`."
+    },
+    {
+      "code": "D2",
+      "verified": true,
+      "method": "MAST full text (arXiv:2503.13657, HTML v3).",
+      "finding": "Under-cited rather than wrong. D2.citation says only 'related to MAST trajectory failures', but MAST contains an exact match it does not name: FM-2.3 'Task derailment \u2014 Deviation from the intended objective or focus of a given task'. Naming it would make D2 counts comparable with MAST-annotated corpora."
+    },
+    {
+      "code": "D4",
+      "verified": true,
+      "method": "MAST full text plus the Turpin abstract fetched from arXiv:2305.04388.",
+      "finding": "Two incompatible constructs fused \u2014 see blocking. MAST FM-2.6 'Reasoning-action mismatch \u2014 Discrepancy between the logical reasoning process and the actual actions taken' supports D4 as written. Turpin et al. show CoT explanations 'can systematically misrepresent the true reason for a model's prediction', detected by adding biasing features to the input and observing they go unmentioned \u2014 a counterfactual-only measurement, not a trace comparison. Bibliographic note: the arXiv id is 2305.04388, which the citation omits and which is also missing from the `references` entry."
+    },
+    {
+      "code": "D3",
+      "verified": true,
+      "method": "MAST full text (for the omitted match); Liu et al. assessed from the known paper, not re-fetched.",
+      "finding": "Half-supported. Liu et al. 2023 'Lost in the Middle' supports the mid-context half of D3's detail ('buried mid-context, where models attend least reliably'). It does not support the other half, 'Loses requirements stated earlier' \u2014 that is MAST FM-1.4 'Loss of conversation history \u2014 Unexpected context truncation, disregarding recent interaction history', which is not cited. Two mechanisms, one code, one citation."
+    },
+    {
+      "code": "B7",
+      "verified": true,
+      "method": "web_search on the Knuth paper's content and bibliographic details.",
+      "finding": "Bibliographically correct, conceptually misapplied. Knuth 1974, ACM Computing Surveys 6(4), 261-301 is confirmed, and the 'premature optimization' passage is about spending effort on the speed of noncritical code before identifying the critical part. B7's detail is about generalising into rules before having concrete grounding. Premature optimization is not premature abstraction; the established term has been attached to a colloquial label it does not cover. The other half of the citation, the hasty-generalization fallacy, does support B7 \u2014 and is also the cited ground for C4 (see confusable pairs)."
+    },
+    {
+      "code": "A2",
+      "verified": true,
+      "method": "web_search on the in-context-learning demonstration-bias literature.",
+      "finding": "Wrong paper for the claim. Brown et al. 2020 introduces few-shot in-context learning as a capability; it does not document exemplar bias or surface-form imitation as a failure. The empirical support for A2 is elsewhere: Zhao et al. 2021 (Calibrate Before Use \u2014 majority-label, recency and common-token bias), Min et al. 2022 (Rethinking the Role of Demonstrations \u2014 randomly replacing labels barely hurts performance, i.e. models key on demonstration form over content), Lu et al. 2022 (order sensitivity), and there is a paper on precisely A2's phenomenon, 'Mitigating Copy Bias in In-Context Learning' (arXiv:2410.01288). As it stands the citation points a reader at a paper that will not tell them the failure exists."
+    },
+    {
+      "code": "A1 / C6 / references[5]",
+      "verified": true,
+      "method": "web_search on the Goodhart 1975 original wording vs the Strathern 1997 formulation.",
+      "finding": "Two issues. (1) references[5] reads \"Goodhart, C. A. E. (1975). Goodhart's law \u2014 when a measure becomes a target, it ceases to be a good measure.\" That phrasing is Strathern's 1997 restatement of Hoskin, not Goodhart's; Goodhart's 1975 wording (Problems of Monetary Management: The UK Experience, Reserve Bank of Australia) is that any observed statistical regularity tends to collapse once pressure is placed on it for control purposes. A quotation attributed to the wrong author in a taxonomy whose B8 mode is Confabulation. (2) A1 and C6 share the identical source string 'Krakovna et al. 2020 \u00b7 Goodhart 1975'. Specification gaming is the correct ground for C6 (test gaming); attaching it to A1 (missing user intent while obeying wording) stretches it \u2014 no reward signal is being gamed in A1, which is a comprehension failure, not an optimisation one."
+    },
+    {
+      "code": "B3",
+      "verified": false,
+      "method": "Assessed against the standard definition of anchoring from Tversky & Kahneman 1974; the paper was NOT re-fetched.",
+      "finding": "Term misapplied, provisional pending a read of the source. Anchoring-and-adjustment is insufficient adjustment away from a value PRESENT in the context. B3's detail is the reverse: 'Falls back on the common or expected answer from training instead of the specific facts placed in front of it' \u2014 the in-context value is what gets ignored. The literature that covers this is knowledge conflict / parametric-vs-contextual knowledge (e.g. Longpre et al. 2021), not T&K anchoring. Note the knock-on: B3 and B4 share family=anchoring, but B4's use of the term (via Croskerry, where the anchor is the initial hypothesis) is correct, so the family groups a correct and an incorrect application of the same term."
+    },
+    {
+      "code": "A5",
+      "verified": false,
+      "method": "Not checked; assessed as written.",
+      "finding": "No defect, and worth preserving as the document's best citation practice: it states plainly 'NO PEER-REVIEWED SOURCE LOCATED for the agent form \u2014 citation deliberately marked incomplete rather than filled with a plausible one.' Every other thin citation in the file (C5's 'overconfidence/calibration literature', D2's 'related to MAST trajectory failures') should be marked the same way."
+    },
+    {
+      "code": "A3, B1, B2, B4, B5, B6, B8, C1, C4",
+      "verified": false,
+      "method": "NOT CHECKED against sources. Assessed only for bibliographic plausibility and concept-to-label fit from existing knowledge.",
+      "finding": "No defect apparent, but treat as unverified. Bibliographic details look right where I can judge them (T&K 1981 Science 211(4481):453-458; Croskerry 2003 Academic Medicine 78(8):775-780; Arkes & Blumer 1985 OBHDP 35(1):124-140; Staw 1976 OBHP 16(1):27-44; Boykoff & Boykoff 2004 GEC 14(2):125-136; Ji et al. 2023 ACM CSUR 55(12); Sharma et al. 2023 arXiv:2310.13548). Two soft spots I did not resolve: B6's Boykoff source covers journalistic false balance but not the 'forces a clean symmetric structure onto lopsided reality' half of its detail; and B1's 'Survivorship bias: A. Wald (WWII aircraft-survivability analysis)' credits Wald with a framing (and a bullet-hole anecdote) that postdates his memoranda."
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "proposed_stage": "framing (F1) \u2014 'Did it solve the right problem?'",
+      "mode": "Instruction capture from untrusted content \u2014 the agent adopts as its task an instruction embedded in a tool result, fetched page, file comment, or an artifact produced by another agent.",
+      "why_not_covered": "A1-A5 all assume the task came from the user. Nothing in the file covers the task itself being replaced by content encountered mid-run. For tool-using agents this is the highest-severity framing failure and it is fully trace-visible (the new objective has a locatable origin in a tool result, not in the user turn)."
+    },
+    {
+      "proposed_stage": "framing (F1)",
+      "mode": "Scope inflation \u2014 solves a materially larger problem than the one posed: adds deliverables, refactors adjacent code, generalises a one-off into a system, all unrequested.",
+      "why_not_covered": "A1 is under-interpretation and A5 is over-asking; B7 is premature abstraction within the reasoning. None covers committing, at framing time, to a bigger job than was asked. It is the over-shoot counterpart of A1 and the framing-stage counterpart of D2, and the direction facet has an unused over-shoot slot at this locus."
+    },
+    {
+      "proposed_stage": "framing (F1)",
+      "mode": "Wrong or stale input object \u2014 solves correctly against the wrong file, an outdated version, the wrong branch, or a cached copy.",
+      "why_not_covered": "C1 covers false premises asserted in the request; this is a failure to establish the identity of the artifact being operated on. It is common in repo and data work and produces results that are internally consistent and entirely wrong."
+    },
+    {
+      "proposed_stage": "reasoning (F2) \u2014 'Did it reason about it correctly?'",
+      "mode": "Tool-output misread \u2014 treats a truncated, paginated, empty, or errored tool result as complete and authoritative: an empty search read as 'none exist', a non-zero exit read as success, page 1 of N read as all.",
+      "why_not_covered": "B1 is about reasoning from an unrepresentative data sample; this is misreading the return value of a call. It is arguably the most frequent reasoning failure in real agent traces, it is fully trace-visible (the result and the claim about it are both in the log), and no code covers it."
+    },
+    {
+      "proposed_stage": "reasoning (F2)",
+      "mode": "Computation error \u2014 arithmetic, unit, off-by-one, indexing, timezone or date error inside an otherwise valid chain.",
+      "why_not_covered": "B8 covers invented specifics; nothing covers miscomputed ones. The taxonomy currently has no code for 'the reasoning was sound and the number is wrong', which means a large class of real failures gets forced into B8 and inflates the confabulation count."
+    },
+    {
+      "proposed_stage": "verification (F3) \u2014 'Did it check the result?'",
+      "mode": "Fabricated verification \u2014 asserts a check was performed that has no corresponding action in the trace ('I ran the tests and they pass', 'I verified against the source').",
+      "why_not_covered": "C5 is a polished completion signal without verification; C6 forces a real gate to go green. Neither covers claiming a check that never occurred. It is the most consequential gap for trace-based auditing because it is trivially trace-visible \u2014 the assertion has no matching tool event \u2014 and because it silently corrupts every other count: a fabricated check reads as a check."
+    },
+    {
+      "proposed_stage": "verification (F3)",
+      "mode": "Non-independent verification \u2014 the check is performed with the same method, model, source, or code that produced the result: self-grading, re-running the same buggy script, confirming a claim with the document it came from.",
+      "why_not_covered": "C3 is a badly aimed check and C4 is too few cases. A check can be well aimed and multi-case and still be circular. This is the failure mode of every LLM-as-judge setup, which matters because the telemetry's own detector.method includes 'self-report'."
+    },
+    {
+      "proposed_stage": "execution (F4) \u2014 'Did it hold the thread across steps?'",
+      "mode": "Silent scope truncation \u2014 processes a subset under budget or context pressure (first N files, one of five inputs, a sampled window) and reports as if the whole was covered.",
+      "why_not_covered": "C4 is sampling in the CHECK; this is sampling in the WORK, with the reduction undeclared. Distinct from D2 (goal displaced) and D3 (constraint dropped) because the objective and constraints are both retained \u2014 only the coverage silently shrinks."
+    },
+    {
+      "proposed_stage": "execution (F4)",
+      "mode": "Cascade on corrupted state \u2014 continues building on the output of a step that failed or degraded, without noticing that the input to step N+1 is invalid.",
+      "why_not_covered": "D1 covers repeating without progress; this is progressing confidently on bad state, which looks like healthy progress in the trace and is caught only downstream. It is the mechanism by which a single early failure becomes a whole wasted run."
+    },
+    {
+      "proposed_stage": "scope statement, not a mode",
+      "mode": "Inter-agent failures \u2014 the document borrows 7 of its 23 modes from MAST but omits all of MAST's inter-agent category (information withholding, ignored other agent's input, disobey role specification).",
+      "why_not_covered": "That may be a deliberate single-agent scoping, but the document never says so, and it cites a multi-agent taxonomy as its most-used source. State the scope explicitly, otherwise a user annotating multi-agent traces will find a third of their failures uncodable and will force them into D2/D3."
+    }
+  ],
+  "telemetry_findings": [
+    "BLOCKING (listed above): no taxonomy_version; no denominator for the rate and trend analyses claimed in analyses_enabled; one mode_code per event with no alternatives list and no rater_id, so inter-rater agreement \u2014 the only empirical test of the discriminability problem \u2014 is uncomputable.",
+    "mode_code and stage are both stored although stage is functionally determined by mode_code ('mode_code': 'string \u2014 e.g. B4 (FK to a failure mode)', 'stage': 'string \u2014 framing | reasoning | verification | execution'). Nothing constrains them to agree, so the store can hold rows where B4 is tagged stage 'framing'; a stage-sliced count then disagrees with a mode-sliced count rolled up to stage. Derive stage at query time, or add the constraint.",
+    "'preflight' appears with two different meanings and is defined nowhere: detector.method: 'monitor | preflight | self-report | human' (a detection channel) and intervention.type: 'preflight | reframe | none' (an injection timing). A field whose values are undefined will be filled inconsistently across harnesses, which is the failure mode the schema exists to prevent.",
+    "detector.signal: 'string \u2014 the tell/text that matched' is unfillable as specified for most modes. It presumes the tells are matchable strings; they are compressed diagnoses (see weak_tells). In practice the field will hold a rater's free-text paraphrase, so it cannot be used to audit detector precision or to compare detectors \u2014 which is what a 'signal' field is for.",
+    "outcome.resolved: 'boolean | null' cannot be determined from the trace for the 11 needs-ground-truth modes (A1,A2,A3,B1,B2,B3,B6,B7,B8,C1,C5), and no field records HOW resolution was adjudicated. 'Intervention efficacy \u2014 resolved-rate per reframe' will therefore mix oracle judgements with the agent's own self-report and will be systematically higher for trace-visible modes. Add an `outcome.adjudicated_by` with the same enum as detector.method, and treat resolved-rates as non-comparable across detectability classes.",
+    "intervention.applied: 'boolean' and intervention.type: '... | none' encode the same information and can contradict each other (applied: true, type: none). Drop `applied` and treat type: none as not-applied.",
+    "intervention.type has no value for the tool interventions that three modes require by their own intervention facet (B8, C6, D3). See blocking.",
+    "No field identifies the taxonomy entry's prescriptive text version beyond the inline reframe_text. Storing the text inline is the right call and does let you group an A/B by exact string \u2014 but only if harnesses inject `reframe` and not `fix`; with two undocumented candidate strings per mode for 8 modes, grouping by text will split one experiment into two arms that look like two treatments.",
+    "severity ('low | med | high | critical') sits in context_tags alongside model and domain. Severity is a per-detection judgement, not a property of the run context; putting it in a free-form tags object means it will be missing on some events, and 'Hotspots \u2014 stage/tag combinations with the highest failure density' depends on it being present. Promote it to a top-level field with a stated rubric.",
+    "Co-occurrence analysis is supported only implicitly, via two events sharing run_id and step_index. That works, but chaining.note says pairs_with should be refined against real co-occurrence, and pairs_with is directional ('lists modes it tends to trigger or mask') while same-step co-occurrence is symmetric. To test a directional hypothesis you need the triggering event identified; add an optional `caused_by_event_id`.",
+    "No field records the trace or run artifact the excerpt came from (a path, a URI, a content hash). trace_excerpt alone is not re-auditable \u2014 a disputed assignment cannot be re-examined in context, which matters most for exactly the confusable clusters above.",
+    "example_event is internally consistent (mode_code B4 with stage 'reasoning' matches the file, and reframe_text is byte-identical to B4.reframe). Verified; no defect."
+  ],
+  "improvements": [
+    "Add a mode-object schema (JSON Schema or an explicit field table) to the document. The audit found `fix` on 8 of 23 modes and `added_in` on the same 8, both undeclared; a schema plus a validator run in CI would have caught that and would catch code/stage drift in future versions.",
+    "Adopt C6's disambiguation pattern as a requirement: every mode whose pairs_with is non-empty carries one sentence in its detail contrasting it with each linked mode. C6 does this ('Distinct from Closure Performance, which only looks done \u2014 this forces the gate.'), A4 and A5 do it for each other, and those are the three least confusable entries in the file. Eleven modes have empty pairs_with and no contrast sentence at all.",
+    "Reconsider metaphor labels for use (a). 'Sailing' (C2), 'Skating' (C3), 'Spinning' (D1) and 'Drift' (D2) carry no diagnostic content for a rater or a judge model reading the label alone, and Sailing/Skating are near-homophones for adjacent codes \u2014 a transcription or judge-output error between C2 and C3 is both easy to make and invisible in the counts. Labels like 'No Verification' / 'Shallow Verification' would cost nothing in use and remove a class of silent miscoding.",
+    "Add an `observable` field distinct from `tell`: what a reader would literally see in the trace, written in the agent's vocabulary rather than the analyst's. `tell` then stays as the human mnemonic and `detector.signal` gets something it can actually reference.",
+    "State an injection policy for use (b): how many reframes are injected, selected by what (stage, prior failure history, task type), and what happens when two selected reframes conflict (A1/A4 and A4/A5 are direct conflicts and are cross-linked to each other). Without it, 'intervention applied' is not a defined treatment and efficacy numbers are not comparable between harnesses.",
+    "The pipeline framing implies F1->F2->F3->F4 ordering ('pipeline_order'), but the F4 modes are cross-cutting: they can occur during framing, reasoning or verification within a long run. Verification is also not a phase that follows execution \u2014 it happens inside it. Consider presenting F4 as a scope dimension rather than a fourth stage, or say explicitly that stage is a category of failure and not a position in time; otherwise stage-sliced counts will be read as a temporal profile of the run.",
+    "`new: true` and `added_in` overlap; `new` is a flag that will be wrong at the next version bump and will need a sweep across 23 entries. `added_in` alone carries the information \u2014 derive `new` at render time by comparing against the document version.",
+    "Consider recording, per mode, the minimum evidence a rater must cite to assign it (e.g. C4 requires a pointer to the single test; D1 requires two step indices). This is the cheapest available lever on rater-dependence and it makes assignments auditable after the fact."
+  ],
+  "verdict": "NOT READY for use (c) as written; usable for use (a) with a rater guide; usable for use (b) after the fix/reframe duplication is resolved. Ten blocking defects. The load-bearing one is discriminability inside the Verification stage: C2, C3 and C4 carry identical facet vectors and tells that a single trace can satisfy simultaneously, with C5 overlapping all three, so per-mode counts in F3 \u2014 a quarter of the taxonomy \u2014 are set by the rater rather than by the agent's behaviour. The trajectory cluster has the same problem: B5/D1 are separated by a single facet (direction), and D2/D3 by two (direction and intervention) while sharing locus, temporal, detectability and family. Second, the facet space is less informative than it presents: locus=process-inertia is exactly temporal=trajectory and locus=gate-lax is exactly stage F3, so slicing by locus re-reports partitions already available, and any locus-temporal correlation is 1.0 by construction. Answering the question posed directly \u2014 these are one axis named twice as instantiated; keep temporal, which is mechanically checkable, and drop or re-assign process-inertia. Third, the telemetry schema cannot support the analyses it claims: no taxonomy_version (codes demonstrably change \u2014 8 modes carry added_in of v2 or v2.2), no denominator for 'failure rate over time', no rater_id or secondary-assignment field, so the discriminability problem is invisible in the resulting data. On citations, I checked eleven attributions against sources and found four defects: C5's MAST 'Premature Termination' is a different construct from the confident-completion behaviour C5 describes; A2 cites the GPT-3 paper for a failure mode it does not document (the support is Zhao 2021 / Min 2022); B7 attaches Knuth's premature optimization to premature abstraction, which it does not cover; and references[5] attributes Strathern's 1997 formulation to Goodhart 1975. D4 fuses a trace-visible MAST construct with Turpin's counterfactual-only one and tags the result trace-visible. Nine attributions I did not check are listed as unverified. Against this, three things are done unusually well and should be kept as the pattern for the rest: A5's citation explicitly refuses to invent a source; C6, A4 and A5 each contain an in-detail contrast sentence against their nearest neighbour, and they are the file's least confusable entries; and the reframes as a group are markedly more actionable than the tells \u2014 only D4, B1 and B8 are restatements. Coverage: ten concrete gaps, of which the two I would add first are fabricated verification (claiming a check with no corresponding trace action \u2014 trace-visible, and it corrupts every other count) and tool-output misread (empty result read as 'none exist', error read as success), which is probably the single most common reasoning failure in real agent traces and has no code."
+}
