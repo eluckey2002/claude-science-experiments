@@ -1,0 +1,16 @@
+{
+ "meta": {
+  "model": "claude-sonnet-5",
+  "temperature": 1.0,
+  "max_tokens": 10000,
+  "k_per_arm": 5,
+  "preflight_pages_per_arm": 1,
+  "same_settings_as": "runs/2026-09-28-thin-thick-coffee-v2/run_log.json",
+  "v2_input_tokens_per_page": 85,
+  "cost_cap_usd": 1.0
+ },
+ "arms": {
+  "guide|absent": "Content guide (follow exactly):\n- Voice: plain and concrete. No superlatives, no exclamation marks, no puns.\n- Sections, in this order: header, hero, menu, opening hours, footer.\n- Header: the shop name and three links labelled Menu, Hours and Find us.\n- Hero: the headline \"Coffee, made to order.\" One line under it: \"Open every day on Albion Street.\" One button labelled \"See the menu\".\n- Menu: exactly six items, in this order: Espresso, Flat white, Filter coffee, Cold brew, Hot chocolate, Almond croissant. One short sentence for each. Prices written like $3.50 (dollar sign, two decimals, no other currency text).\n- Opening hours: Mon–Fri 7:00am–4:00pm; Sat–Sun 8:00am–3:00pm.\n- Footer: the line \"12 Albion Street\" and the line \"© Northside Roast\". No social links and no newsletter form.\n\nBuild a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Return only the HTML.",
+  "guide|modern": "Content guide (follow exactly):\n- Voice: plain and concrete. No superlatives, no exclamation marks, no puns.\n- Sections, in this order: header, hero, menu, opening hours, footer.\n- Header: the shop name and three links labelled Menu, Hours and Find us.\n- Hero: the headline \"Coffee, made to order.\" One line under it: \"Open every day on Albion Street.\" One button labelled \"See the menu\".\n- Menu: exactly six items, in this order: Espresso, Flat white, Filter coffee, Cold brew, Hot chocolate, Almond croissant. One short sentence for each. Prices written like $3.50 (dollar sign, two decimals, no other currency text).\n- Opening hours: Mon–Fri 7:00am–4:00pm; Sat–Sun 8:00am–3:00pm.\n- Footer: the line \"12 Albion Street\" and the line \"© Northside Roast\". No social links and no newsletter form.\n\nBuild a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Make it modern. Return only the HTML."
+ }
+}

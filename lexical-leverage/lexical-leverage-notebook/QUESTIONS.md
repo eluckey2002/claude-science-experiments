@@ -9,7 +9,7 @@ ANSWERED | Does "Make it modern" change a one-line coffee-shop page, and does th
 OPEN | Does a descriptor WITHOUT a built-in recipe ("professional", "clean", "minimal") scatter results, or converge on its own recipe? | F3 next question | 
 OPEN | Do Opus 5.5 and Fable 5.1 carry the same recipe for "modern" as Sonnet 5, or different ones? | F1 (Opus split 2-1), F3 | 
 OPEN | Does the recipe depend on the business? (coffee shop pulled serif, Bitcoin app pulled Inter + dark) | F2, F3 | 
-OPEN | If a style guide pins only some properties, does the word act on the rest, or still go silent? | F3 (P3 not supported) | 
+PARKED | If a style guide pins only some properties, does the word act on the rest, or still go silent? | F3 (P3 not supported) | protocol written, not run: runs/2026-09-30-coherence-test
 OPEN | Do extra irrelevant sentences ever matter? (neutral arm inert in v2; moved a heading font 2/5 in the failed Bitcoin run) | F2, F3 | 
 OPEN | White paper: how strong is each model's "house default", and does it change across generations? Metrics: brief sensitivity, identifiability, checklist rate. ~10 briefs x 5 runs x models, ~$100. | 2026-09-26 session | 
 

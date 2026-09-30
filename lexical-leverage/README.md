@@ -28,7 +28,7 @@
 | 2026-09-26 | Thin vs thick brief, Bitcoin app | Ran | 2 x 3 x 5 = 30 pages, Sonnet 5 (~$7) | Brief choice already matched the thick spec's defaults, so the manipulation had little room to act |
 | 2026-09-26 | GitHub rule-file collector smoke test | Stopped | 2 attempts | Stopped by user; collection moved to Claude Code on your machine |
 | 2026-09-27 | Thin vs thick brief, v2 (four conditions) | Ran | 4 conditions x 5 pages | Thin: blur 0/5 without 'modern', 5/5 with it. Thick: 0/5 both ways; the style guide suppresses the word |
-| 2026-09-27 | Coherence test and recipe-dictionary test | Designed, not run | 10 pages; ~$6 for 10 descriptors | Waiting on go-ahead |
+| 2026-09-27 | Coherence test (content-only guide) and recipe-dictionary test | Designed, not run | Coherence: 12 pages (~$0.55); dictionary: 10 descriptors (~$6) | Coherence protocol, frozen prompts and decision rule written 2026-09-30 (notebook run folder 2026-09-30-coherence-test); no model calls yet. Recipe dictionary still proposed. |
 | 2026-09-28 | Design fingerprint extraction pipeline | Built + tested | 14 regex-parsed properties | Used to score all pages above |
 | 2026-09-28 | Vendor design-claim audit (Anthropic release pages) | Ran | 5 primary pages | Explicit design claims in Opus 4.5, narrowing afterwards, none by Opus 5.5 |
 | 2026-09-28 | Stimulus set for 'describe in one word' study | Built | 26 images (11 originals, 11 light, 4 off-centre) | 260-call pilot proposed; waiting on model choice |
