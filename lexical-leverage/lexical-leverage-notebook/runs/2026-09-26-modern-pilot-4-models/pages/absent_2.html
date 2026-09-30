@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northside Roast - Neighbourhood Coffee Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c2416;
+            background-color: #faf8f3;
+        }
+
+        /* Header */
+        header {
+            background-color: #3d2817;
+            color: #faf8f3;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            font-style: italic;
+            color: #d4a574;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6f4e37 0%, #8b6239 100%);
+            color: #faf8f3;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #d4a574;
+            color: #2c2416;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e6c69a;
+            transform: translateY(-2px);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #3d2817;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .menu-category h3 {
+            color: #6f4e37;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d4a574;
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-item-name {
+            font-weight: bold;
+            color: #2c2416;
+            margin-bottom: 0.25rem;
+        }
+
+        .menu-item-desc {
+            font-size: 0.95rem;
+            color: #5c5048;
+            font-style: italic;
+        }
+
+        /* Hours Section */
+        .hours {
+            background-color: #efe8df;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hours h2 {
+            font-size: 2rem;
+            color: #3d2817;
+            margin-bottom: 2rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .day {
+            background-color: #faf8f3;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .day-name {
+            font-weight: bold;
+            color: #6f4e37;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-time {
+            color: #2c2416;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #3d2817;
+            color: #d4a574;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #d4a574;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #faf8f3;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu h2 {
+                font-size: 2rem;
+            }
+
+            .hours-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>NORTHSIDE ROAST</h1>
+        <p>Specialty Coffee & Community</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Freshly Roasted, Made With Care</h2>
+        <p>Welcome to your neighbourhood coffee destination. We source the finest beans and craft every cup with passion.</p>
+        <a href="#menu" class="cta-button">See Our Menu</a>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Espresso Drinks</h3>
+                <div class="menu-item">
+                    <div class="menu-item-name">Espresso</div>
+                    <div class="menu-item-desc">Single or double shot of our signature blend</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">Cappuccino</div>
+                    <div class="menu-item-desc">Rich espresso with velvety steamed milk</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">Flat White</div>
+                    <div class="menu-item-desc">Espresso and microfoam for a silky finish</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">Latte</div>
+                    <div class="menu-item-desc">Smooth espresso with steamed milk and foam</div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Filter & Brews</h3>
+                <div class="menu-item">
+                    <div class="menu-item-name">Pour Over</div>
+                    <div class="menu-item-desc">Single-origin beans prepared fresh to order</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">French Press</div>
+                    <div class="menu-item-desc">Full-bodied coffee for coffee lovers</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">Cold Brew</div>
+                    <div class="menu-item-desc">Smooth and refreshing, served over ice</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-name">Americano</div>
+                    <div class="menu-item-desc">Bold espresso topped with hot water</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section class="hours">
+        <h2>Opening Hours</h2>
+        <div class="hours-grid">
+            <div class="day">
+                <div class="day-name">Monday – Friday</div>
+                <div class="day-time">7:00 AM – 6:00 PM</div>
+            </div>
+            <div class="day">
+                <div class="day-name">Saturday</div>
+                <div class="day-time">8:00 AM – 5:00 PM</div>
+            </div>
+            <div class="day">
+                <div class="day-name">Sunday</div>
+                <div class="day-time">8:00 AM – 4:00 PM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Northside Roast</strong></p>
+        <p>123 Main Street, Your City | (555) 123-4567</p>
+        <p><a href="mailto:hello@northsideroast.com">hello@northsideroast.com</a></p>
+        <p style="margin-top: 1rem; border-top: 1px solid #6f4e37; padding-top: 1rem;">
+            © 2024 Northside Roast. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>

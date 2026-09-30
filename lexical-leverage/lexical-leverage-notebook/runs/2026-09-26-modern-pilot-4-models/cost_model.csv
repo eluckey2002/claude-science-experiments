@@ -1,0 +1,5 @@
+model,measured_out_mean,budget_out,per_gen_usd,one_word_1200,one_word_batch,ten_words
+Haiku 4.5,2934,3800,0.0192,22.98,11.49,229.8
+Sonnet 5,4638,6000,0.0603,72.36,36.18,723.6
+Opus 5.5,6900,9000,0.1806,216.72,108.36,2167.2
+Fable 5.1,5071,6600,0.3315,397.8,198.9,3978.0

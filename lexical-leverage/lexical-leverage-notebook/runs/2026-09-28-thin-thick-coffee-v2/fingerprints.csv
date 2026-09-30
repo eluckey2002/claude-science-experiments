@@ -1,0 +1,31 @@
+body_font,body_font_class,heading_font,heading_font_class,bg,bg_lightness,dark_theme,accent,accent_hue,n_distinct_colors,n_gradients,max_radius_px,container_px,n_keyframes,uses_backdrop_blur,n_sections,html_chars,thick,arm,run,out_tok,in_tok,stop,extracted
+georgia,serif,georgia,serif,#faf3e9,0.95,False,#3b2317,orange,12,1,30.0,1100,0,False,3,10524,thin,absent,0,4734,85,end_turn,True
+trebuchet ms,named-sans,trebuchet ms,named-sans,#f7f1e6,0.94,False,#c8763a,orange,14,2,30.0,1000,0,False,3,7639,thin,absent,1,3571,85,end_turn,True
+georgia,serif,georgia,serif,#f6f1e7,0.94,False,#3b2418,orange,11,1,30.0,900,0,False,3,7282,thin,absent,2,3409,85,end_turn,True
+georgia,serif,georgia,serif,#f5ede1,0.92,False,#3b2a20,orange,15,1,10.0,900,0,False,3,8159,thin,absent,3,3745,85,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#f5ede1,0.92,False,#d98e4a,orange,11,1,30.0,1000,0,False,3,7142,thin,absent,4,3360,85,end_turn,True
+trebuchet ms,named-sans,trebuchet ms,named-sans,#f6efe4,0.93,False,#f6efe4,orange,10,1,30.0,1000,0,False,3,7586,thin,neutral,0,3442,93,end_turn,True
+trebuchet ms,named-sans,trebuchet ms,named-sans,#f6efe6,0.93,False,#3b2a20,orange,14,1,30.0,1100,0,False,3,9523,thin,neutral,1,4332,93,end_turn,True
+georgia,serif,georgia,serif,#f5ede1,0.92,False,#3b2418,orange,15,1,30.0,960,0,False,3,8379,thin,neutral,2,3815,93,end_turn,True
+georgia,serif,georgia,serif,#f5efe6,0.93,False,#f5efe6,orange,13,1,30.0,1000,0,False,3,8030,thin,neutral,3,3692,93,end_turn,True
+georgia,serif,georgia,serif,#f5ede2,0.92,False,#d98e3f,orange,17,3,30.0,1000,0,False,3,10712,thin,neutral,4,4678,93,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#f6efe6,0.93,False,#d98a3d,orange,12,3,50.0,1100,0,True,3,10346,thin,modern,0,4628,91,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#f7f1e8,0.94,False,#d98e3f,orange,14,3,999.0,1100,0,True,3,12767,thin,modern,1,5529,91,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#f5efe6,0.93,False,#2b1d14,orange,14,1,50.0,1100,0,True,3,8531,thin,modern,2,3964,91,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#f7f1e8,0.94,False,#2b1c14,orange,17,4,50.0,1100,0,True,3,11064,thin,modern,3,4975,91,end_turn,True
+segoe ui,system-sans,segoe ui,system-sans,#0f0d0c,0.05,True,#c9793f,orange,11,6,999.0,1140,1,True,3,15883,thin,modern,4,7242,91,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,7,0,4.0,1100,0,False,3,10417,thick,absent,0,4642,288,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,6,0,4.0,1100,0,False,3,10987,thick,absent,1,4850,288,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,8,0,4.0,1100,0,False,3,9051,thick,absent,2,4280,288,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,10,0,4.0,1100,0,False,3,11039,thick,absent,3,4805,288,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,9,0,4.0,1100,0,False,3,8570,thick,absent,4,3844,288,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,7,0,4.0,1100,0,False,3,11794,thick,neutral,0,5043,296,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,6,0,4.0,1100,0,False,3,10731,thick,neutral,1,4655,296,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,7,0,4.0,1100,0,False,3,8348,thick,neutral,2,3841,296,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,8,0,4.0,1100,0,False,3,10708,thick,neutral,3,4507,296,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,10,0,4.0,1100,0,False,3,10536,thick,neutral,4,4570,296,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,10,0,4.0,1100,0,False,3,10226,thick,modern,0,4600,294,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,8,0,4.0,1100,0,False,3,10807,thick,modern,1,4839,294,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#2b1d14,orange,3,0,4.0,1100,0,False,3,10676,thick,modern,2,4842,294,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,9,0,4.0,1100,0,False,3,12142,thick,modern,3,5462,294,end_turn,True
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,9,0,4.0,1100,0,False,4,12739,thick,modern,4,5564,294,end_turn,True

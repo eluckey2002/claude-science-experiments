@@ -1,0 +1,27 @@
+id,base,change,source
+img01,img01,original,trefoil-ribbons-12345 (3)
+img02,img02,original,trefoil-ribbons-1978491538
+img03,img03,original,trefoil-ribbons-1913517686 (5)
+img04,img04,original,trefoil-ribbons-12345 (7)
+img05,img05,original,chaos-shell-12345 (1)
+img06,img06,original,pasted-1 mesh ring
+img07,img07,original,pasted-2 geodesic sphere
+img08,img08,original,pasted-3 loops gold
+img09,img09,original,pasted-5 scalloped arcs
+img10,img10,original,pasted-6 chevron spiral
+img11,img11,original,pasted-7 string-art ring
+img01_L,img01,light background,trefoil-ribbons-12345 (3)
+img02_L,img02,light background,trefoil-ribbons-1978491538
+img03_L,img03,light background,trefoil-ribbons-1913517686 (5)
+img04_L,img04,light background,trefoil-ribbons-12345 (7)
+img05_L,img05,light background,chaos-shell-12345 (1)
+img06_L,img06,light background,pasted-1 mesh ring
+img07_L,img07,light background,pasted-2 geodesic sphere
+img08_L,img08,light background,pasted-3 loops gold
+img09_L,img09,light background,pasted-5 scalloped arcs
+img10_L,img10,light background,pasted-6 chevron spiral
+img11_L,img11,light background,pasted-7 string-art ring
+img03_O,img03,"off-centre, 60% scale",trefoil-ribbons-1913517686 (5)
+img07_O,img07,"off-centre, 60% scale",pasted-2 geodesic sphere
+img10_O,img10,"off-centre, 60% scale",pasted-6 chevron spiral
+img11_O,img11,"off-centre, 60% scale",pasted-7 string-art ring

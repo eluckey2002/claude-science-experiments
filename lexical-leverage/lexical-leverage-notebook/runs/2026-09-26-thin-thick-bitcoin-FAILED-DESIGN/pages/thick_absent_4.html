@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Vault — Sovereign Bitcoin Savings</title>
+<meta name="description" content="Northside Vault is the disciplined way to stack, secure, and grow Bitcoin — automated saving with cold-storage grade security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     TOKENS
+  ============================================================ */
+  :root{
+    --bg: #030304;
+    --surface: #0F1115;
+    --fg: #FFFFFF;
+    --muted: #94A3B8;
+    --border: #1E293B;
+    --orange: #F7931A;
+    --burnt: #EA580C;
+    --gold: #FFD600;
+
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --shadow-orange: 0 0 20px -5px rgba(234,88,12,0.5);
+    --shadow-orange-lg: 0 0 30px -5px rgba(247,147,26,0.6);
+    --shadow-gold: 0 0 20px rgba(255,214,0,0.3);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .font-heading{ font-family:'Space Grotesk',sans-serif; }
+  .font-mono{ font-family:'JetBrains Mono',monospace; }
+
+  h1,h2,h3,h4{ font-family:'Space Grotesk',sans-serif; line-height:1.15; letter-spacing:-0.01em; }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  .container{ max-width:1280px; margin:0 auto; padding:0 24px; }
+
+  ::selection{ background:rgba(247,147,26,0.35); color:#fff; }
+
+  :focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--orange); color:#030304; padding:10px 16px; z-index:999;
+    font-family:'JetBrains Mono',monospace; font-size:13px;
+  }
+  .skip-link:focus{ left:12px; top:12px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  /* ============================================================
+     SHARED PATTERNS
+  ============================================================ */
+  .grad-text{
+    background-image:linear-gradient(to right,var(--orange),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--orange);
+  }
+  .eyebrow::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--orange); box-shadow:0 0 8px var(--orange);
+  }
+
+  .section-head{
+    max-width:640px; margin:0 auto 64px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+  }
+  .section-head h2{ font-size:clamp(1.75rem,4vw,2.75rem); font-weight:600; }
+  .section-head p{ color:var(--muted); font-size:1.05rem; line-height:1.7; }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    min-height:48px; padding:0 28px; border-radius:999px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    letter-spacing:0.04em; text-transform:uppercase;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(to right,var(--burnt),var(--orange));
+    color:#fff;
+    box-shadow:var(--shadow-orange);
+  }
+  .btn-primary:hover{ transform:scale(1.05); box-shadow:var(--shadow-orange-lg); }
+
+  .btn-outline{
+    background:transparent; border:2px solid rgba(255,255,255,0.2); color:#fff;
+  }
+  .btn-outline:hover{ border-color:#fff; background:rgba(255,255,255,0.08); }
+
+  .btn-ghost{
+    background:transparent; color:#fff;
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.08); color:var(--orange); }
+
+  .btn-sm{ min-height:40px; padding:0 20px; font-size:12.5px; }
+
+  /* Badge */
+  .badge{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:8px 16px; border-radius:999px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.04);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:0.08em; color:var(--muted);
+    backdrop-filter:blur(8px);
+  }
+  .ping-wrap{ position:relative; width:8px; height:8px; }
+  .ping-dot{
+    position:absolute; inset:0; border-radius:50%; background:var(--orange);
+  }
+  .ping-dot::after{
+    content:''; position:absolute; inset:0; border-radius:50%;
+    background:var(--orange); animation:ping 1.8s cubic-bezier(0,0,0.2,1) infinite;
+  }
+  @keyframes ping{
+    0%{ transform:scale(1); opacity:0.7; }
+    75%,100%{ transform:scale(2.8); opacity:0; }
+  }
+
+  /* Icon box */
+  .icon-box{
+    width:52px; height:52px; border-radius:var(--radius-sm);
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(234,88,12,0.15); border:1px solid rgba(234,88,12,0.5);
+    transition:box-shadow 0.3s ease;
+  }
+  .icon-box svg{ width:24px; height:24px; stroke:var(--orange); }
+  .feature-card:hover .icon-box{ box-shadow:0 0 20px rgba(234,88,12,0.4); }
+
+  /* ============================================================
+     HEADER
+  ============================================================ */
+  .site-header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(3,3,4,0.7);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px;
+    letter-spacing:-0.01em;
+  }
+  .logo-mark{
+    width:36px; height:36px; border-radius:10px;
+    background:linear-gradient(135deg,var(--orange),var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    color:#030304; font-weight:700; font-size:20px;
+    box-shadow:0 0 18px rgba(247,147,26,0.45);
+    font-family:'Space Grotesk',sans-serif;
+  }
+
+  .main-nav{
+    display:flex; align-items:center; gap:36px;
+  }
+  .nav-links{ display:flex; align-items:center; gap:32px; }
+  .nav-links a{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--muted);
+    letter-spacing:0.03em; transition:color 0.2s ease;
+  }
+  .nav-links a:hover{ color:var(--orange); }
+
+  .nav-toggle-checkbox{ display:none; }
+  .nav-toggle-label{
+    display:none; cursor:pointer; padding:8px;
+    border-radius:8px; border:1px solid rgba(255,255,255,0.1);
+  }
+  .nav-toggle-label svg{ width:22px; height:22px; stroke:#fff; display:block; }
+  .nav-toggle-label .icon-close{ display:none; }
+
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed; inset:76px 0 0 0; height:calc(100vh - 76px);
+      background:rgba(3,3,4,0.97); backdrop-filter:blur(20px);
+      flex-direction:column; align-items:flex-start; gap:8px;
+      padding:32px 24px; transform:translateY(-12px);
+      opacity:0; pointer-events:none; transition:opacity 0.25s ease, transform 0.25s ease;
+    }
+    .nav-links a{ font-size:16px; padding:14px 8px; width:100%; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .nav-toggle-label{ display:flex; }
+    .nav-toggle-checkbox:checked ~ .nav-links{
+      opacity:1; pointer-events:auto; transform:translateY(0);
+    }
+    .nav-toggle-checkbox:checked ~ .nav-toggle-label .icon-open{ display:none; }
+    .nav-toggle-checkbox:checked ~ .nav-toggle-label .icon-close{ display:block; }
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  .hero{
+    position:relative; padding:96px 0 120px;
+    background:var(--bg); overflow:hidden;
+  }
+  .hero-grid-pattern{
+    position:absolute; inset:0;
+    background-size:50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(30,41,59,0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30,41,59,0.5) 1px, transparent 1px);
+    -webkit-mask-image:radial-gradient(circle at center, black 40%, transparent 100%);
+    mask-image:radial-gradient(circle at center, black 40%, transparent 100%);
+  }
+  .hero-glow{ position:absolute; border-radius:50%; filter:blur(120px); opacity:0.18; pointer-events:none; }
+  .hero-glow-1{ width:480px; height:480px; background:var(--orange); top:-120px; left:-140px; }
+  .hero-glow-2{ width:420px; height:420px; background:var(--gold); bottom:-160px; right:-120px; opacity:0.12; }
+
+  .hero-inner{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+  }
+  .hero-copy h1{
+    margin:24px 0 22px;
+    font-size:clamp(2.25rem, 5.5vw, 4.25rem);
+    font-weight:700;
+  }
+  .hero-copy p{
+    color:var(--muted); font-size:clamp(1rem,1.4vw,1.15rem); line-height:1.75;
+    max-width:520px; margin-bottom:36px;
+  }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:44px; }
+
+  .hero-trust{ display:flex; gap:36px; flex-wrap:wrap; }
+  .hero-trust-item{ display:flex; flex-direction:column; gap:4px; }
+  .hero-trust-item .stat{
+    font-family:'JetBrains Mono',monospace; font-size:1.4rem; font-weight:500;
+    color:#fff;
+  }
+  .hero-trust-item .label{ font-size:12px; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase; }
+
+  /* orbital graphic */
+  .hero-graphic{
+    position:relative; height:440px; display:flex; align-items:center; justify-content:center;
+  }
+  .orbit{ position:absolute; border-radius:50%; border:1px dashed rgba(247,147,26,0.3); }
+  .orbit-outer{ width:340px; height:340px; animation:spin 10s linear infinite; }
+  .orbit-inner{ width:230px; height:230px; border-color:rgba(255,214,0,0.35); animation:spin 15s linear infinite reverse; }
+  @keyframes spin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+
+  .orb-core{
+    width:150px; height:150px; border-radius:50%;
+    background:radial-gradient(circle at 32% 30%, var(--gold), var(--orange) 55%, var(--burnt) 100%);
+    box-shadow:0 0 60px 10px rgba(247,147,26,0.55), 0 0 130px 40px rgba(234,88,12,0.25);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:56px; color:#030304;
+    animation:float 8s ease-in-out infinite;
+  }
+  @keyframes float{ 0%,100%{ transform:translateY(0px); } 50%{ transform:translateY(-18px); } }
+
+  .float-card{
+    position:absolute; padding:12px 16px; border-radius:var(--radius-md);
+    background:rgba(0,0,0,0.45); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 30px -10px rgba(247,147,26,0.25);
+    font-family:'JetBrains Mono',monospace; font-size:12.5px;
+    animation:bob 4s ease-in-out infinite;
+  }
+  .float-card .fc-title{ color:var(--muted); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; }
+  .float-card .fc-value{ color:#fff; font-weight:500; font-size:15px; }
+  .float-card .fc-value.up{ color:var(--gold); }
+  @keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+
+  .fc-1{ top:6%; left:-4%; animation-delay:0s; }
+  .fc-2{ bottom:12%; right:-8%; animation-delay:1s; animation-duration:5s; }
+  .fc-3{ bottom:-2%; left:8%; animation-delay:0.5s; animation-duration:4.5s; }
+
+  @media (max-width:1024px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .hero-graphic{ height:340px; order:-1; }
+    .fc-1{ left:0; } .fc-3{ left:0; }
+  }
+  @media (max-width:520px){
+    .hero-graphic{ height:300px; }
+    .orbit-outer{ width:250px; height:250px; }
+    .orbit-inner{ width:170px; height:170px; }
+    .orb-core{ width:110px; height:110px; font-size:40px; }
+    .float-card{ font-size:11px; padding:9px 12px; }
+  }
+
+  /* ============================================================
+     FEATURES
+  ============================================================ */
+  .features{ background:var(--surface); padding:112px 0; position:relative; }
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  }
+  .feature-card{
+    position:relative; background:var(--bg);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius-lg);
+    padding:36px 32px; overflow:hidden;
+    transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(247,147,26,0.5);
+    box-shadow:0 0 30px -10px rgba(247,147,26,0.2);
+  }
+  .feature-card::before{
+    content:''; position:absolute; top:0; left:0; width:28px; height:28px;
+    border-top:2px solid rgba(247,147,26,0.6); border-left:2px solid rgba(247,147,26,0.6);
+    border-radius:var(--radius-lg) 0 0 0;
+  }
+  .feature-card::after{
+    content:''; position:absolute; bottom:0; right:0; width:28px; height:28px;
+    border-bottom:2px solid rgba(247,147,26,0.6); border-right:2px solid rgba(247,147,26,0.6);
+    border-radius:0 0 var(--radius-lg) 0;
+  }
+  .feature-watermark{
+    position:absolute; right:-10px; bottom:-10px; width:120px; height:120px;
+    opacity:0.06; transform:rotate(-12deg); transition:opacity 0.3s ease;
+  }
+  .feature-card:hover .feature-watermark{ opacity:0.14; }
+  .feature-watermark svg{ width:100%; height:100%; stroke:var(--orange); }
+
+  .feature-card h3{ font-size:1.35rem; font-weight:600; margin:22px 0 12px; position:relative; z-index:1; }
+  .feature-card p{ color:var(--muted); font-size:0.95rem; line-height:1.7; position:relative; z-index:1; }
+
+  @media (max-width:900px){
+    .feature-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ============================================================
+     PRICING
+  ============================================================ */
+  .pricing{ background:var(--bg); padding:112px 0; position:relative; }
+  .pricing-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:center;
+  }
+  .price-card{
+    background:var(--surface); border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius-lg); padding:40px 32px;
+    display:flex; flex-direction:column; gap:24px;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+    opacity:0.85;
+  }
+  .price-card:hover{ transform:translateY(-4px); opacity:1; }
+  .price-card.popular{
+    background:linear-gradient(180deg, rgba(247,147,26,0.08), rgba(15,17,21,1));
+    border:1px solid var(--orange);
+    transform:scale(1.04);
+    box-shadow:0 0 40px -10px rgba(247,147,26,0.35);
+    opacity:1; position:relative; z-index:2;
+  }
+  .popular-tag{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(to right,var(--burnt),var(--orange));
+    color:#fff; font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.1em; text-transform:uppercase; padding:6px 16px; border-radius:999px;
+    box-shadow:var(--shadow-orange);
+  }
+  .price-tier{ font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange); }
+  .price-amount{ display:flex; align-items:baseline; gap:6px; }
+  .price-amount .num{ font-family:'Space Grotesk',sans-serif; font-size:2.75rem; font-weight:700; }
+  .price-amount .period{ color:var(--muted); font-size:0.9rem; }
+  .price-desc{ color:var(--muted); font-size:0.9rem; line-height:1.6; }
+
+  .price-list{ display:flex; flex-direction:column; gap:14px; margin:8px 0 4px; }
+  .price-list li{ list-style:none; display:flex; align-items:flex-start; gap:10px; font-size:0.92rem; color:#e2e8f0; }
+  .price-list svg{ width:18px; height:18px; stroke:var(--gold); flex-shrink:0; margin-top:2px; }
+
+  @media (max-width:960px){
+    .pricing-grid{ grid-template-columns:1fr; max-width:440px; margin:0 auto; }
+    .price-card.popular{ transform:none; order:-1; }
+  }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  footer{ background:var(--surface); border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 32px; }
+  .footer-top{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:48px; padding-bottom:56px;
+  }
+  .footer-brand p{ color:var(--muted); font-size:0.9rem; line-height:1.7; margin-top:16px; max-width:280px; }
+  .footer-col h4{ font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#fff; font-family:'JetBrains Mono',monospace; margin-bottom:18px; }
+  .footer-col a{ display:block; color:var(--muted); font-size:0.9rem; margin-bottom:12px; transition:color 0.2s ease; }
+  .footer-col a:hover{ color:var(--orange); }
+
+  .newsletter-input{
+    display:flex; align-items:center; margin-top:16px; border-bottom:2px solid rgba(255,255,255,0.2);
+    background:rgba(0,0,0,0.5); border-radius:8px 8px 0 0; overflow:hidden;
+  }
+  .newsletter-input input{
+    flex:1; background:transparent; border:none; color:#fff; font-size:14px;
+    padding:14px 16px; height:48px; font-family:'Inter',sans-serif;
+  }
+  .newsletter-input input::placeholder{ color:rgba(255,255,255,0.3); }
+  .newsletter-input input:focus-visible{ outline:none; }
+  .newsletter-input:has(input:focus-visible){
+    border-color:var(--orange); box-shadow:0 10px 20px -10px rgba(247,147,26,0.3);
+  }
+  .newsletter-input button{
+    height:48px; padding:0 18px; background:linear-gradient(to right,var(--burnt),var(--orange));
+    border:none; color:#fff; font-family:'JetBrains Mono',monospace; font-size:12px;
+    letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;
+  }
+
+  .footer-bottom{
+    padding-top:28px; border-top:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  }
+  .footer-bottom p{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); }
+  .footer-socials{ display:flex; gap:14px; }
+  .footer-socials a{
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center; transition:border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .footer-socials a:hover{ border-color:var(--orange); box-shadow:0 0 14px rgba(247,147,26,0.35); }
+  .footer-socials svg{ width:16px; height:16px; stroke:var(--muted); }
+  .footer-socials a:hover svg{ stroke:var(--orange); }
+
+  @media (max-width:900px){
+    .footer-top{ grid-template-columns:1fr 1fr; gap:36px; }
+  }
+  @media (max-width:560px){
+    .footer-top{ grid-template-columns:1fr; }
+    .footer-bottom{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#hero" class="logo" aria-label="Northside Vault home">
+      <span class="logo-mark" aria-hidden="true">₿</span>
+      Northside Vault
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-hidden="true">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu" role="button" tabindex="0">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </label>
+
+    <nav class="main-nav" aria-label="Primary">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#security">Security</a>
+        <a href="#" class="btn btn-primary btn-sm">Open Vault</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero" id="hero">
+    <div class="hero-grid-pattern" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="badge">
+          <span class="ping-wrap"><span class="ping-dot"></span></span>
+          LIVE ON BITCOIN MAINNET
+        </span>
+        <h1>
+          Stack sats with discipline.<br>
+          Build a fortress of <span class="grad-text">generational wealth.</span>
+        </h1>
+        <p>Northside Vault automates your Bitcoin savings, locks it behind institutional-grade cold storage, and shows you exactly how your stack is growing — sat by sat, block by block.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary">Open Your Vault</a>
+          <a href="#features" class="btn btn-outline">See How It Works</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <span class="stat font-mono">$412M+</span>
+            <span class="label">Secured in Vaults</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="stat font-mono">38,204</span>
+            <span class="label">Active Stackers</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="stat font-mono">99.98%</span>
+            <span class="label">Uptime, 4yrs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-graphic" role="img" aria-label="Animated illustration of an orbiting Bitcoin vault core with live balance and yield indicators">
+        <div class="orbit orbit-outer" aria-hidden="true"></div>
+        <div class="orbit orbit-inner" aria-hidden="true"></div>
+        <div class="orb-core" aria-hidden="true">₿</div>
+
+        <div class="float-card fc-1" aria-hidden="true">
+          <div class="fc-title">Vault Balance</div>
+          <div class="fc-value">$128,404.12</div>
+        </div>
+        <div class="float-card fc-2" aria-hidden="true">
+          <div class="fc-title">Annualized Yield</div>
+          <div class="fc-value up">+12.4% APY</div>
+        </div>
+        <div class="float-card fc-3" aria-hidden="true">
+          <div class="fc-title">Storage Status</div>
+          <div class="fc-value">Cold — Secured</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== FEATURES ============================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Northside</span>
+        <h2>Engineered for <span class="grad-text">Sovereign Savings</span></h2>
+        <p>Every layer of Northside Vault is built to remove friction from saving and remove trust from security. This is Bitcoin, held the way it was meant to be held.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-watermark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div class="icon-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <h3>Automated Stacking</h3>
+          <p>Set a recurring buy schedule and let dollar-cost averaging do the disciplined work. Northside routes every deposit straight into your vault — no manual trades, no emotional decisions.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-watermark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2 3 6v6c0 6 4 9 9 10 5-1 9-4 9-10V6l-9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="icon-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 6 4 9 9 10 5-1 9-4 9-10V6l-9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Cold-Storage Grade Security</h3>
+          <p>Assets are secured by multi-signature cold storage across geographically distributed vaults, with withdrawal delays and hardware-key confirmation on every outbound transaction.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-watermark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 15l4-5 4 3 5-7"/></svg>
+          </div>
+          <div class="icon-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 4 3 5-7"/></svg>
+          </div>
+          <h3>Real-Time Vault Analytics</h3>
+          <p>Track your cost basis, growth curve, and network fees in a live technical dashboard. Precision data, presented the way an engineer would want to see it.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== PRICING ============================== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Plans</span>
+        <h2>Choose Your <span class="grad-text">Vault Tier</span></h2>
+        <p>Transparent, flat-rate pricing. No spread markup, no hidden custody fees — ever.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Starter -->
+        <div class="price-card">
+          <div>
+            <span class="price-tier font-mono">Starter</span>
+            <div class="price-amount">
+              <span class="num">$0</span><span class="period">/ month</span>
+            </div>
+          </div>
+          <p class="price-desc">For new stackers building their first cold-storage position.</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Up to $5,000 vaulted</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Weekly auto-stack</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Standard cold storage</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Email support</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Get Started</a>
+        </div>
+
+        <!-- Vault (popular) -->
+        <div class="price-card popular">
+          <span class="popular-tag">Most Popular</span>
+          <div>
+            <span class="price-tier font-mono">Vault</span>
+            <div class="price-amount">
+              <span class="num">$19</span><span class="period">/ month</span>
+            </div>
+          </div>
+          <p class="price-desc">For serious stackers who want daily automation and deeper security.</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Unlimited vaulted balance</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Daily auto-stack + DCA insights</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Multi-sig cold storage</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Priority support, 24/7</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Real-time analytics dashboard</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Open Vault</a>
+        </div>
+
+        <!-- Fortress -->
+        <div class="price-card">
+          <div>
+            <span class="price-tier font-mono">Fortress</span>
+            <div class="price-amount">
+              <span class="num">$79</span><span class="period">/ month</span>
+            </div>
+          </div>
+          <p class="price-desc">For treasuries, funds, and high-net-worth holders.</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Dedicated vault infrastructure</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Custom multi-sig policy</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Geographically sharded keys</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Dedicated account engineer</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer id="security">
+  <div class="container">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <a href="#hero" class="logo" aria-label="Northside Vault home">
+          <span class="logo-mark" aria-hidden="true">₿</span>
+          Northside Vault
+        </a>
+        <p>Sovereign Bitcoin savings, engineered for security and stacked with discipline. Your keys, your coins, compounding quietly in the void.</p>
+
+        <form class="newsletter-input" onsubmit="return false;">
+          <label for="newsletter-email" class="visually-hidden" style="position:absolute;left:-9999px;">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="you@domain.com" required>
+          <button type="submit">Notify Me</button>
+        </form>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Vault Security</a>
+        <a href="#">Status Page</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Custody Agreement</a>
+        <a href="#">Compliance</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 Northside Vault. All Bitcoin secured with multi-signature cold storage.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Northside Vault on X">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4 4 20"/></svg>
+        </a>
+        <a href="#" aria-label="Northside Vault on GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2-.2 4-1 4-4.5 0-1-.4-2-1-2.7.1-.3.5-1.5-.1-3 0 0-1.3-.4-4 1.5a13 13 0 0 0-7 0C4.7 3.9 3.4 4.3 3.4 4.3c-.6 1.5-.2 2.7-.1 3-.6.7-1 1.7-1 2.7 0 3.5 2 4.3 4 4.5-.4.4-.4 1-.5 1.8V19"/></svg>
+        </a>
+        <a href="#" aria-label="Northside Vault on Nostr">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M8 14c1.5 1.3 6.5 1.3 8 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

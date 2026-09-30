@@ -1,0 +1,33 @@
+full_name,private,owner,pushed_at,created_at,language,size_mb,default_branch,archived,description
+LuckeyOrg/loop-lab,True,LuckeyOrg,2026-09-21,2026-08-06,JavaScript,48.0,main,False,"A measured optimization loop for policies you can only score with judgment: freeze a case pack, revise from one real counterexample, keep the candidate only if it earns it."
+eluckey2002/Map-Elites-2248,False,eluckey2002,2026-09-18,2026-08-21,JavaScript,33.2,main,False,"2248 puzzle: level authoring, exact-score solver study, and bot policy search"
+LuckeyOrg/courier-arena-lab,True,LuckeyOrg,2026-09-16,2026-09-04,JavaScript,1.4,main,False,
+LuckeyOrg/pattern-atlas-vault,True,LuckeyOrg,2026-09-16,2026-08-06,JavaScript,41.6,main,False,"Pattern Atlas — cross-project knowledge vault of reusable patterns, methods, and evidence"
+eluckey2002/orchflows,False,eluckey2002,2026-09-15,2026-09-09,,17.9,main,False,Composable orchestration skills for Codex and Claude Code
+LuckeyOrg/loop-runtime,True,LuckeyOrg,2026-09-13,2026-09-02,TypeScript,1.6,main,False,"The spine every loop runs on: one runtime, one receipt format, many faces"
+LuckeyOrg/osbrain-vault,True,LuckeyOrg,2026-09-08,2026-07-02,HTML,30.3,master,False,
+LuckeyOrg/VaultOnly,True,LuckeyOrg,2026-09-08,2026-08-18,JavaScript,4.6,main,False,Governed evidence graph with explicit provenance and editorial workflows
+LuckeyOrg/loop-studio,True,LuckeyOrg,2026-09-08,2026-09-02,JavaScript,54.4,main,False,"Loop Studio, iteration 2: a React front end for browsing, customizing, and running the eight loop families"
+LuckeyOrg/okf-vault,True,LuckeyOrg,2026-09-04,2026-09-04,JavaScript,1.8,master,False,
+eluckey2002/mathart,False,eluckey2002,2026-08-23,2025-12-28,JavaScript,0.0,claude/publish-here-now-ce19kt,False,
+eluckey2002/Threadlight,False,eluckey2002,2026-07-31,2026-07-31,,0.0,research/threadlight-log-sources,False,
+All-About-AI-YouTube/hermes-agent,False,All-About-AI-YouTube,2026-07-14,2026-07-13,,486.8,main,False,The agent that grows with you
+All-About-AI-YouTube/oh-my-taiyiforge,False,All-About-AI-YouTube,2026-07-13,2026-07-13,,71.6,main,False,AI workflow automation plugin for intelligent code generation with Claude/Codex
+eluckey2002/concept-connector,False,eluckey2002,2026-06-16,2024-11-11,TypeScript,0.2,main,False,
+All-About-AI-YouTube/cca-f-game,False,All-About-AI-YouTube,2026-06-11,2026-08-16,,4.4,main,False,cca-f-exam-game
+eluckey2002/GenDesignLab,False,eluckey2002,2026-05-26,2026-05-06,HTML,0.2,main,False,
+eluckey2002/unfolder,False,eluckey2002,2026-05-22,2026-05-14,TypeScript,2.9,main,False,
+All-About-AI-YouTube/realtimepage,False,All-About-AI-YouTube,2025-12-09,2025-12-09,TypeScript,0.0,main,False,real time webpage
+All-About-AI-YouTube/ai-hedge-fund,False,All-About-AI-YouTube,2025-12-01,2025-12-14,,2.3,main,False,An AI Hedge Fund Team
+All-About-AI-YouTube/bingo-game,False,All-About-AI-YouTube,2025-11-26,2025-11-26,TypeScript,0.1,main,False,
+All-About-AI-YouTube/ace-playbook,False,All-About-AI-YouTube,2025-10-14,2025-10-14,,0.5,main,True,Self-improving LLM system using Generator-Reflector-Curator pattern for online learning from execution feedback
+eluckey2002/evanffcli-monorepo,False,eluckey2002,2025-09-12,2025-09-12,Smarty,0.5,master,False,FireFoundry monorepo with evanffcli app runner and infrastructure components
+All-About-AI-YouTube/StreamDrop,False,All-About-AI-YouTube,2025-09-07,2025-09-07,,1.6,main,False,"Stream any website, PyGame, or local HTML file to YouTube 24/7 on a $4/mo Ubuntu Droplet :signal_strength:"
+All-About-AI-YouTube/infographic,False,All-About-AI-YouTube,2025-07-19,2025-07-19,,0.0,main,False,
+All-About-AI-YouTube/Flowise3,False,All-About-AI-YouTube,2025-06-04,2025-06-04,,57.8,main,False,"Build AI Agents, Visually"
+All-About-AI-YouTube/fps_game,False,All-About-AI-YouTube,2025-03-20,2025-03-20,JavaScript,17.1,main,False,FPS Game
+All-About-AI-YouTube/deeptype-backup,False,All-About-AI-YouTube,2025-02-18,2025-02-18,,0.0,main,False,
+All-About-AI-YouTube/kokoro-tts,False,All-About-AI-YouTube,2025-01-23,2025-02-05,,0.3,main,False,"A CLI text-to-speech tool using the Kokoro model, supporting multiple languages, voices (with blending), and various input formats including EPUB books."
+All-About-AI-YouTube/cookbook,False,All-About-AI-YouTube,2024-12-13,2024-12-13,,56.7,main,False,Examples and guides for using the Gemini API
+All-About-AI-YouTube/swarm_agents,False,All-About-AI-YouTube,2024-10-20,2024-10-20,Python,0.0,main,False,OpenAI Swarm Agents
+eluckey2002/eluckey2002.github.io,False,eluckey2002,2022-11-27,2020-09-22,JavaScript,52.2,master,False,

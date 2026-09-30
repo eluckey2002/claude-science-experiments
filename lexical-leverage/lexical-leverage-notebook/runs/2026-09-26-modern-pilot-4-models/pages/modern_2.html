@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northside Roast - Neighbourhood Coffee Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: #fafaf8;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #5c3a1f;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8b5a2b;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #5c3a1f 0%, #8b5a2b 100%);
+            color: #fff;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #5c3a1f;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Menu Section */
+        .menu {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #5c3a1f;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .menu-item h3 {
+            color: #5c3a1f;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-price {
+            font-weight: 600;
+            color: #8b5a2b;
+            font-size: 1.1rem;
+        }
+
+        /* Hours Section */
+        .hours {
+            background: #fff;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .hours-content {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hours-content h2 {
+            color: #5c3a1f;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #fafaf8;
+            border-radius: 8px;
+        }
+
+        .hours-item strong {
+            color: #5c3a1f;
+        }
+
+        .hours-item span {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c2c;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">☕ Northside Roast</div>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#hours">Hours</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Craft Coffee, Local Love</h1>
+            <p>Freshly roasted specialty coffee in the heart of the neighbourhood</p>
+            <button class="cta-button">Order Now</button>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <h2 class="section-title">Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Espresso</h3>
+                <p>Rich and bold, pulled fresh to order with our signature blend</p>
+                <div class="menu-price">$3.50</div>
+            </div>
+            <div class="menu-item">
+                <h3>Cappuccino</h3>
+                <p>Smooth espresso with velvety steamed milk and a touch of foam</p>
+                <div class="menu-price">$5.00</div>
+            </div>
+            <div class="menu-item">
+                <h3>Cold Brew</h3>
+                <p>Chilled, smooth, and naturally sweet. Perfect for warm days</p>
+                <div class="menu-price">$4.50</div>
+            </div>
+            <div class="menu-item">
+                <h3>Cortado</h3>
+                <p>Equal parts espresso and steamed milk for balanced perfection</p>
+                <div class="menu-price">$4.50</div>
+            </div>
+            <div class="menu-item">
+                <h3>Flat White</h3>
+                <p>Espresso with microfoam milk, smooth and silky every time</p>
+                <div class="menu-price">$5.50</div>
+            </div>
+            <div class="menu-item">
+                <h3>Oat Milk Latte</h3>
+                <p>Creamy and dairy-free. A plant-based favourite</p>
+                <div class="menu-price">$5.50</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="hours">
+        <div class="hours-content">
+            <h2>Opening Hours</h2>
+            <div class="hours-list">
+                <div class="hours-item">
+                    <strong>Monday – Friday</strong>
+                    <span>7:00 AM – 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <strong>Saturday</strong>
+                    <span>8:00 AM – 5:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <strong>Sunday</strong>
+                    <span>9:00 AM – 4:00 PM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-text">
+                <h3 style="margin-bottom: 1rem;">Northside Roast</h3>
+                <p>Quality coffee, community vibes, neighbourhood spirit</p>
+            </div>
+            <div class="footer-contact">
+                <a href="tel:+15551234567">📞 (555) 123-4567</a>
+                <a href="mailto:hello@northsideroast.com">📧 hello@northsideroast.com</a>
+                <a href="#">📍 123 North Street, Northside</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Northside Roast. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+file,arm,primary_font,uses_serif,n_font_families,n_distinct_hex,body_bg,body_bg_lightness,dark_theme,uses_gradient,uses_shadow,max_radius_px,n_radius_values,container_max_w,uses_grid,sticky_header,n_sections,n_css_rules,html_chars,tier,run
+absent_0.html,absent,-apple-system,False,1,9,,,,True,True,50.0,2,1200,True,True,3,41,9121,haiku,0
+absent_1.html,absent,Segoe UI,False,1,11,,,,True,True,8.0,2,900,True,False,3,35,8365,haiku,1
+absent_2.html,absent,Georgia,True,1,9,#faf8f3,0.97,False,True,True,50.0,2,900,True,False,3,34,8516,haiku,2
+fable_absent_0.html,absent,Georgia,True,2,12,var,,,True,False,999.0,3,600,True,True,3,43,9088,fable,0
+fable_absent_1.html,absent,Georgia,True,3,16,var,,,True,True,999.0,2,600,True,True,3,43,9447,fable,1
+fable_absent_2.html,absent,Georgia,True,3,10,var,,,True,False,999.0,2,600,True,True,3,45,9366,fable,2
+fable_modern_0.html,modern,-apple-system,False,1,21,var,,,True,True,999.0,3,860,True,True,3,77,14516,fable,0
+fable_modern_1.html,modern,-apple-system,False,1,9,var,,,True,True,999.0,4,860,True,True,3,60,12621,fable,1
+fable_modern_2.html,modern,-apple-system,False,1,9,var,,,True,True,999.0,3,900,True,True,3,79,14646,fable,2
+modern_0.html,modern,-apple-system,False,1,10,#fafafa,0.98,False,True,True,50.0,2,1200,True,True,3,41,9894,haiku,0
+modern_1.html,modern,-apple-system,False,1,12,#fafaf8,0.98,False,True,True,50.0,2,1200,True,True,3,45,10696,haiku,1
+modern_2.html,modern,-apple-system,False,1,6,#fafaf8,0.98,False,True,True,50.0,3,1200,True,True,3,43,10003,haiku,2
+opus_absent_0.html,absent,Georgia,True,2,14,var,,,True,True,999.0,1,820,True,True,3,61,10301,opus,0
+opus_absent_1.html,absent,Georgia,True,2,13,var,,,True,True,999.0,1,760,True,True,3,72,15482,opus,1
+opus_absent_2.html,absent,Georgia,True,2,13,var,,,True,True,999.0,3,800,True,True,3,83,13464,opus,2
+opus_modern_0.html,modern,-apple-system,False,1,20,var,,,True,True,999.0,6,900,True,True,3,97,20062,opus,0
+opus_modern_1.html,modern,system-ui,True,3,17,var,,,True,True,999.0,3,900,True,True,3,96,20653,opus,1
+opus_modern_2.html,modern,system-ui,True,2,17,var,,,True,True,999.0,4,860,True,True,3,66,13190,opus,2
+sonnet_absent_0.html,absent,Georgia,True,1,13,var,,,True,True,30.0,2,1000,True,True,3,39,7224,sonnet,0
+sonnet_absent_1.html,absent,Trebuchet MS,False,1,13,var,,,True,False,30.0,2,1000,True,True,3,42,8350,sonnet,1
+sonnet_absent_2.html,absent,Trebuchet MS,False,1,14,var,,,True,True,30.0,4,1100,True,True,3,48,9467,sonnet,2
+sonnet_modern_0.html,modern,Segoe UI,False,1,10,var,,,True,True,999.0,1,1100,True,True,3,66,13822,sonnet,0
+sonnet_modern_1.html,modern,Segoe UI,False,1,7,var,,,True,True,50.0,1,1100,True,True,3,48,8993,sonnet,1
+sonnet_modern_2.html,modern,Segoe UI,False,1,14,var,,,True,True,999.0,1,1100,True,True,3,64,13381,sonnet,2

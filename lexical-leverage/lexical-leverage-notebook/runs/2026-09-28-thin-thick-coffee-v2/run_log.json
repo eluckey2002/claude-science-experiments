@@ -1,0 +1,167 @@
+{
+ "model": "claude-sonnet-5",
+ "max_tokens": 10000,
+ "temperature": 1.0,
+ "k": 5,
+ "wall_s": 140.3,
+ "prompts": {
+  "thin|absent": "Build a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Return only the HTML.",
+  "thin|neutral": "Build a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Write all copy in English. Return only the HTML.",
+  "thin|modern": "Build a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Make it modern. Return only the HTML.",
+  "thick|absent": "Design spec (follow exactly):\n- Body font: Lora (serif). Heading font: Playfair Display (serif). Load both via Google Fonts links.\n- Page background: #FAF6F0 (light cream). Body text colour: #2B1D14.\n- Accent colour (buttons, links, highlights): #7A4A2A (espresso). No other accent hues.\n- Border radius: 4px on all rounded elements. No pill shapes.\n- No gradients. No CSS animations or transitions. No box shadows.\n- Content max-width: 1100px, centred.\n- Header is static (not sticky, not fixed).\n\nBuild a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Return only the HTML.",
+  "thick|neutral": "Design spec (follow exactly):\n- Body font: Lora (serif). Heading font: Playfair Display (serif). Load both via Google Fonts links.\n- Page background: #FAF6F0 (light cream). Body text colour: #2B1D14.\n- Accent colour (buttons, links, highlights): #7A4A2A (espresso). No other accent hues.\n- Border radius: 4px on all rounded elements. No pill shapes.\n- No gradients. No CSS animations or transitions. No box shadows.\n- Content max-width: 1100px, centred.\n- Header is static (not sticky, not fixed).\n\nBuild a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Write all copy in English. Return only the HTML.",
+  "thick|modern": "Design spec (follow exactly):\n- Body font: Lora (serif). Heading font: Playfair Display (serif). Load both via Google Fonts links.\n- Page background: #FAF6F0 (light cream). Body text colour: #2B1D14.\n- Accent colour (buttons, links, highlights): #7A4A2A (espresso). No other accent hues.\n- Border radius: 4px on all rounded elements. No pill shapes.\n- No gradients. No CSS animations or transitions. No box shadows.\n- Content max-width: 1100px, centred.\n- Header is static (not sticky, not fixed).\n\nBuild a single-file landing page (HTML with embedded CSS, no external libraries) for a neighbourhood coffee shop called Northside Roast. Include a header, a hero, a short menu section, opening hours, and a footer. Make it modern. Return only the HTML."
+ },
+ "runs": [
+  {
+   "cell": "thin|absent|0",
+   "out_tok": 4734,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|absent|1",
+   "out_tok": 3571,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|absent|2",
+   "out_tok": 3409,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|absent|3",
+   "out_tok": 3745,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|absent|4",
+   "out_tok": 3360,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|neutral|0",
+   "out_tok": 3442,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|neutral|1",
+   "out_tok": 4332,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|neutral|2",
+   "out_tok": 3815,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|neutral|3",
+   "out_tok": 3692,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|neutral|4",
+   "out_tok": 4678,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|modern|0",
+   "out_tok": 4628,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|modern|1",
+   "out_tok": 5529,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|modern|2",
+   "out_tok": 3964,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|modern|3",
+   "out_tok": 4975,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thin|modern|4",
+   "out_tok": 7242,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|absent|0",
+   "out_tok": 4642,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|absent|1",
+   "out_tok": 4850,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|absent|2",
+   "out_tok": 4280,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|absent|3",
+   "out_tok": 4805,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|absent|4",
+   "out_tok": 3844,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|neutral|0",
+   "out_tok": 5043,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|neutral|1",
+   "out_tok": 4655,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|neutral|2",
+   "out_tok": 3841,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|neutral|3",
+   "out_tok": 4507,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|neutral|4",
+   "out_tok": 4570,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|modern|0",
+   "out_tok": 4600,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|modern|1",
+   "out_tok": 4839,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|modern|2",
+   "out_tok": 4842,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|modern|3",
+   "out_tok": 5462,
+   "stop": "end_turn"
+  },
+  {
+   "cell": "thick|modern|4",
+   "out_tok": 5564,
+   "stop": "end_turn"
+  }
+ ]
+}

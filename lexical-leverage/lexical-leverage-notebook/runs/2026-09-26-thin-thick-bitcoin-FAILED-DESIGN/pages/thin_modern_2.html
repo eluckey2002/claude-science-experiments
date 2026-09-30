@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Vault — Bitcoin Savings, Simplified</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#07090c;
+    --bg-1:#0d1117;
+    --bg-2:#131a23;
+    --panel:#111721;
+    --panel-border:rgba(255,255,255,0.07);
+    --gold:#f7a53c;
+    --gold-2:#ffcf7a;
+    --text-0:#f5f6f8;
+    --text-1:#aab2bf;
+    --text-2:#6b7382;
+    --shadow:0 20px 60px rgba(0,0,0,0.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 600px at 85% -10%, rgba(247,165,60,0.14), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(90,140,255,0.08), transparent 60%),
+      var(--bg-0);
+    color:var(--text-0);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.logo{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.02em;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:1160px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(7,9,12,0.72);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:19px;
+    font-weight:700;
+    color:var(--text-0);
+  }
+  .logo .mark{
+    width:34px; height:34px;
+    border-radius:10px;
+    background:linear-gradient(145deg, var(--gold-2), var(--gold) 70%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:#241203;
+    font-size:18px;
+    box-shadow:0 6px 18px rgba(247,165,60,0.35);
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:36px;
+    font-size:14.5px;
+    color:var(--text-1);
+    font-weight:500;
+  }
+  .nav-links a:hover{color:var(--text-0);}
+  .nav-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:11px 22px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-ghost{
+    color:var(--text-0);
+    border-color:rgba(255,255,255,0.14);
+    background:rgba(255,255,255,0.02);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.06);}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    color:#241203;
+    box-shadow:0 10px 30px rgba(247,165,60,0.28);
+  }
+  .btn-primary:hover{box-shadow:0 14px 34px rgba(247,165,60,0.4);}
+  .btn-lg{padding:15px 28px; font-size:15.5px;}
+  .btn-block{width:100%;}
+
+  /* Hero */
+  .hero{
+    padding:96px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--gold-2);
+    background:rgba(247,165,60,0.1);
+    border:1px solid rgba(247,165,60,0.25);
+    padding:7px 14px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 0 3px rgba(247,165,60,0.2);
+  }
+  .hero h1{
+    font-size:52px;
+    font-weight:700;
+    line-height:1.08;
+    margin:0 0 22px;
+    color:var(--text-0);
+  }
+  .hero h1 span{
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    font-size:17.5px;
+    color:var(--text-1);
+    max-width:520px;
+    margin:0 0 34px;
+  }
+  .hero-ctas{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:38px;
+  }
+  .hero-note{
+    font-size:13px;
+    color:var(--text-2);
+  }
+  .trust-row{
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    color:var(--text-2);
+    font-size:13px;
+  }
+  .trust-row span{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .trust-row svg{width:16px;height:16px;flex-shrink:0;color:var(--gold);}
+
+  /* Hero visual card */
+  .hero-visual{
+    position:relative;
+  }
+  .card{
+    background:linear-gradient(180deg, var(--panel), var(--bg-2));
+    border:1px solid var(--panel-border);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+  }
+  .balance-card{
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .balance-card::before{
+    content:"";
+    position:absolute;
+    top:-60px; right:-60px;
+    width:220px;height:220px;
+    background:radial-gradient(circle, rgba(247,165,60,0.25), transparent 70%);
+    filter:blur(10px);
+  }
+  .balance-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:26px;
+  }
+  .balance-label{
+    font-size:13px;
+    color:var(--text-2);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .pill{
+    font-size:12px;
+    font-weight:600;
+    color:#39d98a;
+    background:rgba(57,217,138,0.12);
+    border:1px solid rgba(57,217,138,0.28);
+    padding:5px 10px;
+    border-radius:999px;
+  }
+  .balance-amount{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .balance-sub{
+    color:var(--text-2);
+    font-size:14px;
+    margin-bottom:28px;
+  }
+  .chart{
+    height:110px;
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .chart i{
+    flex:1;
+    background:linear-gradient(180deg, rgba(247,165,60,0.9), rgba(247,165,60,0.15));
+    border-radius:6px 6px 2px 2px;
+  }
+  .row-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding-top:20px;
+    border-top:1px solid var(--panel-border);
+  }
+  .row-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:14px;
+  }
+  .row-item .left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--text-1);
+  }
+  .row-item .icon{
+    width:30px;height:30px;
+    border-radius:8px;
+    background:rgba(247,165,60,0.12);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+    font-size:14px;
+  }
+  .row-item .amt{font-weight:600; color:var(--text-0);}
+  .float-badge{
+    position:absolute;
+    bottom:-18px;
+    left:-18px;
+    background:var(--bg-2);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    padding:14px 18px;
+    box-shadow:var(--shadow);
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .float-badge .icon{
+    width:38px;height:38px;
+    border-radius:10px;
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    color:#241203;
+    font-weight:700;
+  }
+  .float-badge .txt{font-size:13px;}
+  .float-badge .txt b{display:block; font-size:14px; color:var(--text-0);}
+
+  /* Section shared */
+  section{padding:100px 0;}
+  .section-head{
+    text-align:center;
+    max-width:620px;
+    margin:0 auto 60px;
+  }
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{
+    font-size:36px;
+    margin:0 0 14px;
+  }
+  .section-head p{
+    color:var(--text-1);
+    font-size:16px;
+  }
+
+  /* Features */
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  .feature-card{
+    padding:34px 28px;
+    border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+    border:1px solid var(--panel-border);
+    transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(247,165,60,0.3);
+    background:linear-gradient(180deg, rgba(247,165,60,0.06), rgba(255,255,255,0));
+  }
+  .feature-icon{
+    width:52px;height:52px;
+    border-radius:14px;
+    background:rgba(247,165,60,0.12);
+    color:var(--gold-2);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:22px;
+  }
+  .feature-card h3{
+    font-size:19px;
+    margin:0 0 12px;
+    color:var(--text-0);
+  }
+  .feature-card p{
+    color:var(--text-1);
+    font-size:14.5px;
+    margin:0;
+  }
+
+  /* Pricing */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+    align-items:stretch;
+  }
+  .price-card{
+    padding:36px 30px;
+    border-radius:18px;
+    border:1px solid var(--panel-border);
+    background:var(--panel);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .price-card.featured{
+    border-color:rgba(247,165,60,0.45);
+    background:linear-gradient(180deg, rgba(247,165,60,0.09), var(--panel) 55%);
+    box-shadow:0 24px 60px rgba(247,165,60,0.12);
+  }
+  .price-tag{
+    position:absolute;
+    top:-13px; left:30px;
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    color:#241203;
+    font-size:12px;
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:999px;
+  }
+  .plan-name{
+    font-size:14px;
+    color:var(--text-2);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:14px;
+  }
+  .plan-price{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .plan-price span{
+    font-size:15px;
+    color:var(--text-2);
+    font-weight:500;
+    font-family:'Inter', sans-serif;
+  }
+  .plan-desc{
+    color:var(--text-1);
+    font-size:14px;
+    margin-bottom:26px;
+  }
+  .plan-features{
+    list-style:none;
+    padding:0; margin:0 0 30px;
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+    flex:1;
+  }
+  .plan-features li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14px;
+    color:var(--text-1);
+  }
+  .plan-features svg{
+    width:18px;height:18px;
+    color:var(--gold);
+    flex-shrink:0;
+    margin-top:1px;
+  }
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--panel-border);
+    padding:64px 0 30px;
+    background:var(--bg-1);
+  }
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:50px;
+  }
+  .footer-brand p{
+    color:var(--text-2);
+    font-size:14px;
+    max-width:280px;
+    margin-top:14px;
+  }
+  .footer-col h4{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-2);
+    margin:0 0 18px;
+  }
+  .footer-col ul{
+    list-style:none;
+    padding:0; margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .footer-col a{
+    color:var(--text-1);
+    font-size:14px;
+  }
+  .footer-col a:hover{color:var(--text-0);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:26px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-2);
+    font-size:13px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials a{
+    width:36px;height:36px;
+    border-radius:9px;
+    border:1px solid var(--panel-border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-1);
+  }
+  .socials a:hover{color:var(--gold-2); border-color:rgba(247,165,60,0.35);}
+
+  @media (max-width: 900px){
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:38px;}
+    .features-grid, .pricing-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr; row-gap:32px;}
+    section{padding:70px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="mark">₿</span> Northside Vault</a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#pricing" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Now with automated recurring buys</div>
+        <h1>Save in bitcoin.<br>Stay in <span>control</span>.</h1>
+        <p class="lead">Northside Vault helps you build a bitcoin savings habit with automatic buys, self-custody options, and a clean view of your progress — no trading screens, no noise.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary btn-lg">Start saving free</a>
+          <a href="#features" class="btn btn-ghost btn-lg">See how it works</a>
+        </div>
+        <div class="trust-row">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg> Non-custodial option</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> No hidden spreads</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg> Set up in 5 minutes</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="card balance-card">
+          <div class="balance-top">
+            <span class="balance-label">Vault Balance</span>
+            <span class="pill">+4.8% this month</span>
+          </div>
+          <div class="balance-amount">₿ 0.4127</div>
+          <div class="balance-sub">≈ $27,940.12 · auto-buying weekly</div>
+          <div class="chart">
+            <i style="height:35%"></i>
+            <i style="height:52%"></i>
+            <i style="height:40%"></i>
+            <i style="height:68%"></i>
+            <i style="height:58%"></i>
+            <i style="height:82%"></i>
+            <i style="height:74%"></i>
+            <i style="height:95%"></i>
+          </div>
+          <div class="row-list">
+            <div class="row-item">
+              <span class="left"><span class="icon">↻</span> Weekly auto-buy</span>
+              <span class="amt">+ $50.00</span>
+            </div>
+            <div class="row-item">
+              <span class="left"><span class="icon">↓</span> Withdrawal to cold storage</span>
+              <span class="amt">− ₿ 0.05</span>
+            </div>
+          </div>
+        </div>
+        <div class="float-badge">
+          <span class="icon">✓</span>
+          <span class="txt">Vault secured<b>Multisig protected</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span> Why Northside Vault</div>
+        <h2>Built for savers, not traders</h2>
+        <p>Three simple pillars that keep your bitcoin savings automatic, secure, and easy to understand.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.85 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          </div>
+          <h3>Automated recurring buys</h3>
+          <p>Set a schedule once — daily, weekly, or monthly — and Northside Vault dollar-cost averages into bitcoin for you, on autopilot.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/><path d="M9.5 12l1.8 1.8L14.5 10"/></svg>
+          </div>
+          <h3>Self-custody, your way</h3>
+          <p>Withdraw to your own wallet anytime, or use our optional multisig vault with two-key protection for extra peace of mind.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M15 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+          </div>
+          <h3>Clear savings insights</h3>
+          <p>Track your average cost basis, growth over time, and progress toward savings goals in one clean, jargon-free dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow"><span class="dot"></span> Pricing</div>
+        <h2>Simple plans, no surprises</h2>
+        <p>Start free, upgrade when you're ready to automate more of your savings.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">$0<span> / month</span></div>
+          <div class="plan-desc">For anyone getting their first sats.</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Manual buys anytime</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 1 savings goal</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Basic portfolio view</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Standard withdrawal</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-block">Get started</a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-tag">Most popular</div>
+          <div class="plan-name">Vault</div>
+          <div class="plan-price">$7<span> / month</span></div>
+          <div class="plan-desc">For consistent, automated savers.</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Automated recurring buys</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Unlimited savings goals</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Multisig vault storage</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-block">Start free trial</a>
+        </div>
+
+        <div class="price-card">
+          <div class="plan-name">Family</div>
+          <div class="plan-price">$15<span> / month</span></div>
+          <div class="plan-desc">Shared vaults for households.</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Everything in Vault</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Up to 5 member accounts</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Shared family goals</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Inheritance planning tools</li>
+          </ul>
+          <a href="#" class="btn btn-ghost btn-block">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="mark">₿</span> Northside Vault</a>
+        <p>A simpler way to save in bitcoin — automated, transparent, and built around your goals.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#">Mobile app</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Northside Vault. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M12 11c0-1.5 1-2 2-2s2 .5 2 2v5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

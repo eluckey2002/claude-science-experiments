@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Vault — Secure Bitcoin Savings</title>
+<meta name="description" content="Northside Vault is a Bitcoin savings app engineered for security, precision, and long-term growth of your sats.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #030304;
+    --surface: #0F1115;
+    --fg: #FFFFFF;
+    --muted: #94A3B8;
+    --border: #1E293B;
+    --orange: #F7931A;
+    --burnt: #EA580C;
+    --gold: #FFD600;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .font-heading{ font-family: 'Space Grotesk', sans-serif; }
+  .font-mono{ font-family: 'JetBrains Mono', monospace; }
+
+  a{ color: inherit; text-decoration: none; }
+  img{ max-width: 100%; display:block; }
+  ul{ list-style: none; }
+
+  .container{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Reusable glow / gradient helpers ---------- */
+  .gradient-text{
+    background: linear-gradient(to right, var(--orange), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 14px 32px;
+    min-height: 44px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .btn-primary{
+    background: linear-gradient(to right, var(--burnt), var(--orange));
+    color: #fff;
+    box-shadow: 0 0 20px -5px rgba(234,88,12,0.5);
+  }
+  .btn-primary:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px rgba(247,147,26,0.6);
+  }
+  .btn-outline{
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  .btn-outline:hover{
+    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+  .btn-ghost{
+    background: transparent;
+    color: #fff;
+  }
+  .btn-ghost:hover{
+    background: rgba(255,255,255,0.1);
+    color: var(--orange);
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(3,3,4,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .logo-mark{
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--burnt), var(--orange), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px -4px rgba(247,147,26,0.7);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #030304;
+  }
+  nav.primary-nav{
+    display: flex;
+    gap: 36px;
+  }
+  nav.primary-nav a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  nav.primary-nav a:hover{ color: var(--fg); }
+
+  .header-actions{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-actions .btn-ghost{
+    display: none;
+  }
+
+  @media (min-width: 768px){
+    .header-actions .btn-ghost{ display: inline-flex; }
+  }
+  @media (max-width: 900px){
+    nav.primary-nav{ display: none; }
+  }
+
+  /* ---------- Backgrounds ---------- */
+  .bg-grid{
+    background-size: 50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(30,41,59,0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30,41,59,0.5) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  }
+
+  .blob{
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 110px 0 140px;
+    overflow: hidden;
+  }
+  .hero .bg-grid{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero .blob-orange{
+    width: 600px; height: 600px;
+    background: var(--orange);
+    opacity: 0.13;
+    top: -200px;
+    left: -100px;
+  }
+  .hero .blob-gold{
+    width: 500px; height: 500px;
+    background: var(--gold);
+    opacity: 0.08;
+    bottom: -200px;
+    right: -100px;
+  }
+
+  .hero-inner{
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px){
+    .hero-inner{ grid-template-columns: 1.05fr 0.95fr; }
+  }
+
+  .hero-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(247,147,26,0.4);
+    background: rgba(247,147,26,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 28px;
+  }
+  .ping-dot{
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .ping-dot::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: ping 1.8s cubic-bezier(0,0,0.2,1) infinite;
+  }
+  @keyframes ping{
+    0%{ transform: scale(1); opacity: 0.8; }
+    75%, 100%{ transform: scale(2.6); opacity: 0; }
+  }
+
+  .hero h1{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 640px){ .hero h1{ font-size: 58px; } }
+  @media (min-width: 768px){ .hero h1{ font-size: 76px; } }
+
+  .hero p.lead{
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 540px;
+    margin-bottom: 40px;
+  }
+  @media (min-width: 768px){ .hero p.lead{ font-size: 20px; } }
+
+  .hero-ctas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .hero-stats-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+  }
+  .hero-stats-row .stat-num{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+  }
+  .hero-stats-row .stat-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Orbital graphic */
+  .orbit-wrap{
+    position: relative;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 768px){ .orbit-wrap{ height: 470px; } }
+
+  .orbit-core{
+    position: relative;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #FFD600, #F7931A 45%, #EA580C 80%);
+    box-shadow: 0 0 90px 10px rgba(247,147,26,0.55), 0 0 150px 40px rgba(255,214,0,0.15);
+    animation: float 8s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes float{
+    0%, 100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-20px); }
+  }
+  .orbit-core svg{
+    width: 84px; height: 84px;
+    color: rgba(3,3,4,0.85);
+  }
+
+  .ring{
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(247,147,26,0.35);
+  }
+  .ring-outer{
+    width: 340px; height: 340px;
+    animation: spin 16s linear infinite;
+  }
+  .ring-inner{
+    width: 270px; height: 270px;
+    border-color: rgba(255,214,0,0.3);
+    animation: spin 11s linear infinite reverse;
+  }
+  @media (min-width: 768px){
+    .ring-outer{ width: 430px; height: 430px; }
+    .ring-inner{ width: 330px; height: 330px; }
+  }
+  @keyframes spin{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+  }
+
+  .float-card{
+    position: absolute;
+    padding: 12px 16px;
+    background: rgba(15,17,21,0.85);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px -10px rgba(247,147,26,0.35);
+    font-family: 'JetBrains Mono', monospace;
+    animation: bounce 4s ease-in-out infinite;
+  }
+  .float-card .label{ font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .float-card .value{ font-size: 16px; font-weight: 500; color: var(--fg); margin-top: 2px; }
+  .float-card.c1{ top: 6%; left: 0%; animation-duration: 5s; }
+  .float-card.c2{ bottom: 10%; right: 0%; animation-duration: 4s; animation-delay: 0.6s; }
+  .float-card.c3{ top: 48%; right: -4%; animation-duration: 6s; animation-delay: 1.2s; }
+  @keyframes bounce{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-14px); }
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ position: relative; padding: 96px 0; }
+  .section-alt{ background: var(--surface); }
+
+  .section-head{
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 64px;
+  }
+  .eyebrow{
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .section-head h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 768px){ .section-head h2{ font-size: 44px; } }
+  .section-head p{
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* ---------- Features ---------- */
+  .features-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 768px){
+    .features-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .feature-card{
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px 32px;
+    transition: all 0.3s ease;
+  }
+  .feature-card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(247,147,26,0.5);
+    box-shadow: 0 0 30px -10px rgba(247,147,26,0.2);
+  }
+  .feature-card::before{
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 22px; height: 22px;
+    border-top: 1px solid rgba(247,147,26,0.6);
+    border-left: 1px solid rgba(247,147,26,0.6);
+  }
+  .feature-card::after{
+    content: '';
+    position: absolute;
+    bottom: 12px; right: 12px;
+    width: 22px; height: 22px;
+    border-bottom: 1px solid rgba(247,147,26,0.6);
+    border-right: 1px solid rgba(247,147,26,0.6);
+  }
+  .feature-watermark{
+    position: absolute;
+    right: -10px;
+    bottom: -20px;
+    width: 130px;
+    height: 130px;
+    color: var(--orange);
+    opacity: 0.06;
+    transform: rotate(-12deg);
+    transition: opacity 0.3s ease;
+  }
+  .feature-card:hover .feature-watermark{ opacity: 0.14; }
+
+  .icon-box{
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(234,88,12,0.15);
+    border: 1px solid rgba(234,88,12,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: box-shadow 0.3s ease;
+  }
+  .feature-card:hover .icon-box{
+    box-shadow: 0 0 20px rgba(234,88,12,0.4);
+  }
+  .icon-box svg{ width: 26px; height: 26px; color: var(--orange); }
+
+  .feature-card h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .feature-card p{
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- Stats ticker ---------- */
+  .ticker{
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 0;
+  }
+  .ticker-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  @media (min-width: 768px){ .ticker-grid{ grid-template-columns: repeat(4, 1fr); } }
+  .ticker-grid .num{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    background: linear-gradient(to right, var(--orange), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ticker-grid .lbl{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (min-width: 900px){
+    .pricing-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .price-card{
+    position: relative;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+  }
+  .price-card:hover{ opacity: 1; transform: translateY(-4px); }
+
+  .price-card.popular{
+    opacity: 1;
+    border-color: var(--orange);
+    box-shadow: 0 0 40px -10px rgba(247,147,26,0.25);
+  }
+  @media (min-width: 900px){
+    .price-card.popular{ transform: scale(1.06); z-index: 2; }
+    .price-card.popular:hover{ transform: scale(1.06) translateY(-4px); }
+  }
+
+  .popular-tag{
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, var(--burnt), var(--orange));
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    box-shadow: 0 0 20px -5px rgba(247,147,26,0.6);
+  }
+
+  .price-card h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .price-card .desc{
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .price-amount{
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 28px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .price-amount .amt{ font-size: 44px; font-weight: 700; }
+  .price-amount .period{ color: var(--muted); font-size: 14px; font-family: 'JetBrains Mono', monospace; }
+
+  .price-features{
+    margin-bottom: 32px;
+  }
+  .price-features li{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .price-features li:last-child{ border-bottom: none; }
+  .price-features svg{
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--gold);
+  }
+
+  .price-card .btn{ width: 100%; }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    padding: 72px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(234,88,12,0.18), rgba(15,17,21,0.9) 60%);
+    border: 1px solid rgba(247,147,26,0.3);
+  }
+  .cta-banner h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 768px){ .cta-banner h2{ font-size: 40px; } }
+  .cta-banner p{
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    font-size: 16px;
+  }
+  .cta-banner .btn-row{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background: var(--surface);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 72px 0 32px;
+  }
+  .footer-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  @media (min-width: 768px){
+    .footer-grid{ grid-template-columns: 1.4fr repeat(3, 1fr); }
+  }
+  .footer-brand p{
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 320px;
+    margin-top: 16px;
+  }
+  .footer-col h4{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .footer-col li{ margin-bottom: 12px; }
+  .footer-col a{
+    color: var(--muted);
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+  .footer-col a:hover{ color: var(--orange); }
+
+  .footer-bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  @media (min-width: 768px){
+    .footer-bottom{ flex-direction: row; text-align: left; }
+  }
+  .footer-bottom p{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .socials{ display: flex; gap: 16px; }
+  .socials a{
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: all 0.2s ease;
+  }
+  .socials a:hover{
+    color: var(--orange);
+    border-color: rgba(247,147,26,0.5);
+    box-shadow: 0 0 14px -4px rgba(247,147,26,0.5);
+  }
+  .socials svg{ width: 16px; height: 16px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrap">
+    <a href="#top" class="logo" aria-label="Northside Vault home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H7"/></svg>
+      </span>
+      Northside Vault
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#features">Protocol</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Security</a>
+      <a href="#footer">Support</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#login" class="btn btn-ghost">Log In</a>
+      <a href="#signup" class="btn btn-primary">Open Vault</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="bg-grid"></div>
+    <div class="blob blob-orange"></div>
+    <div class="blob blob-gold"></div>
+
+    <div class="container hero-inner">
+      <div>
+        <span class="hero-badge">
+          <span class="ping-dot" aria-hidden="true"></span>
+          Non-custodial · Audited · Live on Mainnet
+        </span>
+        <h1>
+          Stack sats with<br>
+          <span class="gradient-text">mathematical certainty.</span>
+        </h1>
+        <p class="lead">
+          Northside Vault is a self-custodial Bitcoin savings app engineered for precision.
+          Automate your accumulation, watch your keys stay yours, and grow your position
+          with the discipline of a protocol — not a promise.
+        </p>
+        <div class="hero-ctas">
+          <a href="#signup" class="btn btn-primary">Start Saving Free</a>
+          <a href="#demo" class="btn btn-outline">Watch Demo →</a>
+        </div>
+        <div class="hero-stats-row">
+          <div>
+            <div class="stat-num font-heading">₿ 2,410</div>
+            <div class="stat-label">Vaulted On-Chain</div>
+          </div>
+          <div>
+            <div class="stat-num font-heading">41,200+</div>
+            <div class="stat-label">Vault Holders</div>
+          </div>
+          <div>
+            <div class="stat-num font-heading">100%</div>
+            <div class="stat-label">Self-Custody</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit-wrap" role="img" aria-label="Animated orbital graphic representing the Bitcoin savings vault">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-inner"></div>
+        <div class="orbit-core">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H7"/></svg>
+        </div>
+        <div class="float-card c1">
+          <div class="label">Vault Balance</div>
+          <div class="value font-mono">0.8421 BTC</div>
+        </div>
+        <div class="float-card c2">
+          <div class="label">Auto-Stack</div>
+          <div class="value font-mono">+$25 / wk</div>
+        </div>
+        <div class="float-card c3">
+          <div class="label">Network Fee</div>
+          <div class="value font-mono">2 sat/vB</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS TICKER -->
+  <div class="ticker section-alt">
+    <div class="container ticker-grid">
+      <div><div class="num">$0</div><div class="lbl">Custody Fees, Ever</div></div>
+      <div><div class="num">128-bit</div><div class="lbl">Client-Side Encryption</div></div>
+      <div><div class="num">3-of-5</div><div class="lbl">Multisig Architecture</div></div>
+      <div><div class="num">24/7</div><div class="lbl">Chain Monitoring</div></div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features" class="section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The Protocol</span>
+        <h2>Engineered for savers, not speculators.</h2>
+        <p>Three primitives make Northside Vault the most disciplined way to hold Bitcoin for the long term.</p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>True Self-Custody</h3>
+          <p>Your keys are generated and encrypted on-device with a 3-of-5 multisig quorum. Northside never holds a signing key that can move your funds without you.</p>
+        </div>
+
+        <div class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Automated Stacking</h3>
+          <p>Schedule recurring buys straight to your vault address, sourced at spot with transparent, itemized network fees. Set it once, let the protocol compound.</p>
+        </div>
+
+        <div class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 4v16"/></svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 4v16"/></svg>
+          </div>
+          <h3>On-Chain Transparency</h3>
+          <p>Every transaction is independently verifiable on the Bitcoin ledger. Full audit trail, exportable proofs of reserve, zero black boxes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Pricing</span>
+        <h2>Simple tiers. No hidden spreads.</h2>
+        <p>Choose the plan that matches your stacking cadence. Upgrade or downgrade anytime — your keys never change custody.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <h3>Starter</h3>
+          <p class="desc">For casual savers getting their first sats off exchange.</p>
+          <div class="price-amount"><span class="amt font-heading">$0</span><span class="period font-mono">/ month</span></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Single-sig vault</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Manual buys only</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Community support</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Standard network fees</li>
+          </ul>
+          <a href="#signup" class="btn btn-outline">Get Started</a>
+        </div>
+
+        <div class="price-card popular">
+          <span class="popular-tag">Most Popular</span>
+          <h3>Vault Pro</h3>
+          <p class="desc">For disciplined stackers automating their accumulation.</p>
+          <div class="price-amount"><span class="amt font-heading">$9</span><span class="period font-mono">/ month</span></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 3-of-5 multisig vault</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Automated recurring buys</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority chat support</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Reduced network fees</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Exportable proof-of-reserve</li>
+          </ul>
+          <a href="#signup" class="btn btn-primary">Open Vault Pro</a>
+        </div>
+
+        <div class="price-card">
+          <h3>Institutional</h3>
+          <p class="desc">For funds, DAOs, and treasuries managing serious reserves.</p>
+          <div class="price-amount"><span class="amt font-heading">Custom</span></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Configurable multisig quorum</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Dedicated security review</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> White-glove onboarding</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> SLA-backed uptime</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Talk to Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section id="faq">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="bg-grid" style="position:absolute; inset:0; opacity:0.4;"></div>
+        <div style="position:relative;">
+          <h2>Your keys. Your Bitcoin. <span class="gradient-text">Your terms.</span></h2>
+          <p>Northside Vault never takes custody of your funds. Open a vault in minutes and start stacking with confidence.</p>
+          <div class="btn-row">
+            <a href="#signup" class="btn btn-primary">Create Free Vault</a>
+            <a href="#footer" class="btn btn-outline">Read the Security Model</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H7"/></svg>
+          </span>
+          Northside Vault
+        </a>
+        <p>A self-custodial Bitcoin savings protocol built for disciplined, long-term accumulation. Engineered in the open, secured by math.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">Security Model</a></li>
+          <li><a href="#signup">Open a Vault</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#careers">Careers</a></li>
+          <li><a href="#press">Press Kit</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#disclosures">Risk Disclosures</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 Northside Vault. Not financial advice. Bitcoin holdings are subject to market risk.</p>
+      <div class="socials">
+        <a href="#" aria-label="Northside Vault on X">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"/></svg>
+        </a>
+        <a href="#" aria-label="Northside Vault on GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a href="#" aria-label="Northside Vault on Telegram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

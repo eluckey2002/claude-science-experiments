@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "doc_id",
+    "source",
+    "subsource",
+    "url",
+    "retrieved_at",
+    "text",
+    "text_sha256",
+    "n_chars",
+    "license_or_terms",
+    "meta"
+  ],
+  "properties": {
+    "doc_id": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 24
+    },
+    "source": {
+      "enum": [
+        "github",
+        "reddit",
+        "web"
+      ]
+    },
+    "subsource": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "retrieved_at": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 40
+    },
+    "text_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "n_chars": {
+      "type": "integer",
+      "minimum": 40
+    },
+    "license_or_terms": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

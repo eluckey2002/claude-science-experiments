@@ -1,0 +1,7 @@
+body_font,body_font_class,heading_font,heading_font_class,bg,bg_lightness,dark_theme,accent,accent_hue,n_distinct_colors,n_gradients,max_radius_px,container_px,n_keyframes,uses_backdrop_blur,n_sections,html_chars,thick,arm,out_tok,in_tok,stop,model
+georgia,serif,georgia,serif,#f6efe4,0.93,False,#2e1e14,orange,8,1,30.0,1000,0,False,3,7348,thin,absent,3426,85,end_turn,claude-sonnet-5
+trebuchet ms,named-sans,trebuchet ms,named-sans,#f6efe4,0.93,False,#c78b4f,orange,18,2,30.0,950,0,False,3,10141,thin,neutral,4361,93,end_turn,claude-sonnet-5
+segoe ui,system-sans,segoe ui,system-sans,#fffaf3,0.98,False,#d98a44,orange,15,4,40.0,1100,0,True,3,11147,thin,modern,5088,91,end_turn,claude-sonnet-5
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,9,0,4.0,1100,0,False,3,9701,thick,absent,4573,288,end_turn,claude-sonnet-5
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,10,0,4.0,1100,0,False,3,11636,thick,neutral,4885,296,end_turn,claude-sonnet-5
+lora,serif,playfair display,serif,#faf6f0,0.96,False,#7a4a2a,orange,10,0,4.0,1100,0,False,3,10822,thick,modern,5021,294,end_turn,claude-sonnet-5

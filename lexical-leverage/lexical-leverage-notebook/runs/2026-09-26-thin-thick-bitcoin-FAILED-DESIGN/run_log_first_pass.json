@@ -1,0 +1,266 @@
+[
+ {
+  "thick": "thin",
+  "arm": "absent",
+  "run": 0,
+  "in_tok": 125,
+  "out_tok": 8835,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "absent",
+  "run": 1,
+  "in_tok": 125,
+  "out_tok": 7895,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "absent",
+  "run": 2,
+  "in_tok": 125,
+  "out_tok": 8689,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "absent",
+  "run": 3,
+  "in_tok": 125,
+  "out_tok": 7807,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "absent",
+  "run": 4,
+  "in_tok": 125,
+  "out_tok": 7488,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thick",
+  "arm": "absent",
+  "run": 0,
+  "in_tok": 8293,
+  "out_tok": 15107,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thick",
+  "arm": "absent",
+  "run": 1,
+  "in_tok": 8293,
+  "out_tok": 14098,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thick",
+  "arm": "absent",
+  "run": 2,
+  "in_tok": 8293,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "absent",
+  "run": 3,
+  "in_tok": 8293,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "absent",
+  "run": 4,
+  "in_tok": 8293,
+  "out_tok": 12697,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "neutral",
+  "run": 0,
+  "in_tok": 133,
+  "out_tok": 8645,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "neutral",
+  "run": 1,
+  "in_tok": 133,
+  "out_tok": 9183,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "neutral",
+  "run": 2,
+  "in_tok": 133,
+  "out_tok": 8452,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "neutral",
+  "run": 3,
+  "in_tok": 133,
+  "out_tok": 7925,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "neutral",
+  "run": 4,
+  "in_tok": 133,
+  "out_tok": 8722,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thick",
+  "arm": "neutral",
+  "run": 0,
+  "error": "llm_batch: model returned an empty response (stop_reason=\"max_tokens\", model=\"claude-sonnet-5\")"
+ },
+ {
+  "thick": "thick",
+  "arm": "neutral",
+  "run": 1,
+  "in_tok": 8301,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "neutral",
+  "run": 2,
+  "in_tok": 8301,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "neutral",
+  "run": 3,
+  "in_tok": 8301,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "neutral",
+  "run": 4,
+  "in_tok": 8301,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thin",
+  "arm": "modern",
+  "run": 0,
+  "in_tok": 131,
+  "out_tok": 7951,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "modern",
+  "run": 1,
+  "in_tok": 131,
+  "out_tok": 8510,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "modern",
+  "run": 2,
+  "in_tok": 131,
+  "out_tok": 10506,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "modern",
+  "run": 3,
+  "in_tok": 131,
+  "out_tok": 9224,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thin",
+  "arm": "modern",
+  "run": 4,
+  "in_tok": 131,
+  "out_tok": 7913,
+  "stop": "end_turn",
+  "has_html": true
+ },
+ {
+  "thick": "thick",
+  "arm": "modern",
+  "run": 0,
+  "in_tok": 8299,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "modern",
+  "run": 1,
+  "in_tok": 8299,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "modern",
+  "run": 2,
+  "error": "llm_batch: model returned an empty response (stop_reason=\"max_tokens\", model=\"claude-sonnet-5\")"
+ },
+ {
+  "thick": "thick",
+  "arm": "modern",
+  "run": 3,
+  "in_tok": 8299,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ },
+ {
+  "thick": "thick",
+  "arm": "modern",
+  "run": 4,
+  "in_tok": 8299,
+  "out_tok": 16000,
+  "stop": "max_tokens",
+  "has_html": false
+ }
+]

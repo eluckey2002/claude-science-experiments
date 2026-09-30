@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Roast | Neighbourhood Coffee Shop</title>
+<style>
+  :root {
+    --cream: #f7f1e6;
+    --dark-brown: #2e1e14;
+    --brown: #5c3a26;
+    --accent: #c8763a;
+    --light-brown: #a9764c;
+    --text: #3b2a1f;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Trebuchet MS', 'Segoe UI', Verdana, sans-serif;
+    background-color: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Header */
+  header {
+    background-color: var(--dark-brown);
+    color: var(--cream);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .logo span {
+    color: var(--accent);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.8rem;
+  }
+
+  nav ul li a {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+  }
+
+  nav ul li a:hover {
+    color: var(--accent);
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--brown), var(--dark-brown));
+    color: var(--cream);
+    text-align: center;
+    padding: 6rem 1.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200,118,58,0.25), transparent 70%);
+    top: -100px;
+    right: -100px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: #e8dcc9;
+    position: relative;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--dark-brown);
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    position: relative;
+  }
+
+  .btn:hover {
+    background-color: #e08a4c;
+    transform: translateY(-2px);
+  }
+
+  /* Sections */
+  section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--brown);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent);
+    margin: 0.6rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* Menu */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .menu-item {
+    background-color: #fffaf2;
+    border: 1px solid #e5d7c3;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .menu-item:hover {
+    box-shadow: 0 6px 16px rgba(92,58,38,0.15);
+    transform: translateY(-3px);
+  }
+
+  .menu-item h3 {
+    color: var(--brown);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+  }
+
+  .menu-item h3 .price {
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  .menu-item p {
+    font-size: 0.9rem;
+    color: #6b5445;
+  }
+
+  /* Hours */
+  .hours {
+    background-color: #fffaf2;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 14px rgba(92,58,38,0.1);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #ecdfc9;
+    font-size: 1rem;
+  }
+
+  .hours-row:last-child {
+    border-bottom: none;
+  }
+
+  .hours-row span.day {
+    font-weight: bold;
+    color: var(--brown);
+  }
+
+  /* Footer */
+  footer {
+    background-color: var(--dark-brown);
+    color: #d9c9b3;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  footer .footer-brand {
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  footer .footer-brand span {
+    color: var(--accent);
+  }
+
+  footer p {
+    margin: 0.3rem 0;
+  }
+
+  footer .socials {
+    margin-top: 1rem;
+  }
+
+  footer .socials a {
+    margin: 0 0.6rem;
+    color: #d9c9b3;
+    transition: color 0.2s ease;
+  }
+
+  footer .socials a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      gap: 0.8rem;
+      text-align: center;
+    }
+    nav ul {
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Northside <span>Roast</span></div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#footer">Visit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero">
+    <h1>Good Coffee. Good Neighbours.</h1>
+    <p>Small-batch roasted beans, warm pastries, and a corner table waiting for you — right here on the northside.</p>
+    <a href="#menu" class="btn">See Our Menu</a>
+  </section>
+
+  <section id="menu">
+    <h2 class="section-title">Our Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h3>House Espresso <span class="price">$3.25</span></h3>
+        <p>Rich, dark-roasted single-origin shot pulled fresh to order.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Flat White <span class="price">$4.50</span></h3>
+        <p>Velvety steamed milk over a double shot of espresso.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Northside Cold Brew <span class="price">$4.75</span></h3>
+        <p>Steeped 18 hours for a smooth, low-acid finish.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Matcha Latte <span class="price">$4.95</span></h3>
+        <p>Stone-ground ceremonial matcha with your choice of milk.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Butter Croissant <span class="price">$3.50</span></h3>
+        <p>Flaky, buttery, baked fresh every morning in-house.</p>
+      </div>
+      <div class="menu-item">
+        <h3>Cinnamon Roll <span class="price">$4.25</span></h3>
+        <p>Warm, gooey, topped with cream cheese icing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours">
+    <h2 class="section-title">Opening Hours</h2>
+    <div class="hours">
+      <div class="hours-row"><span class="day">Monday – Friday</span><span>6:30 AM – 6:00 PM</span></div>
+      <div class="hours-row"><span class="day">Saturday</span><span>7:00 AM – 6:00 PM</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span>7:30 AM – 4:00 PM</span></div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-brand">Northside <span>Roast</span></div>
+    <p>123 Maple Street, Northside District</p>
+    <p>hello@northsideroast.example &middot; (555) 012-3456</p>
+    <div class="socials">
+      <a href="#">Instagram</a> &middot; <a href="#">Facebook</a> &middot; <a href="#">Twitter</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color:#a8967c;">&copy; 2024 Northside Roast. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

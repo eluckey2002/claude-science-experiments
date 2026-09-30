@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Roast | Neighbourhood Coffee Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Lora', serif;
+    background-color: #FAF6F0;
+    color: #2B1D14;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #2B1D14;
+  }
+
+  a {
+    color: #7A4A2A;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header {
+    background-color: #FAF6F0;
+    border-bottom: 1px solid #e3d9cb;
+    padding: 20px 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .logo span {
+    color: #7A4A2A;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: #2B1D14;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    color: #7A4A2A;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 80px 0 90px;
+    border-bottom: 1px solid #e3d9cb;
+  }
+
+  .hero .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 700px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #4a352a;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: #7A4A2A;
+    color: #FAF6F0;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid #7A4A2A;
+  }
+
+  .btn:hover {
+    background-color: #6a3f22;
+    text-decoration: none;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid #7A4A2A;
+    color: #7A4A2A;
+  }
+
+  .btn-outline:hover {
+    text-decoration: none;
+    background-color: #efe6da;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  /* Section generic */
+  section {
+    padding: 70px 0;
+    border-bottom: 1px solid #e3d9cb;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .section-intro {
+    max-width: 600px;
+    color: #4a352a;
+    margin-bottom: 40px;
+  }
+
+  /* Menu */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 28px;
+  }
+
+  .menu-item {
+    background-color: #F3ECE1;
+    border: 1px solid #e3d9cb;
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  .menu-item .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    gap: 10px;
+  }
+
+  .menu-item h3 {
+    font-size: 1.15rem;
+  }
+
+  .menu-item .price {
+    color: #7A4A2A;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .menu-item p {
+    color: #4a352a;
+    font-size: 0.95rem;
+  }
+
+  /* Hours */
+  .hours-table {
+    max-width: 500px;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e3d9cb;
+  }
+
+  .hours-row:last-child {
+    border-bottom: none;
+  }
+
+  .hours-row .day {
+    font-weight: 600;
+  }
+
+  .hours-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background-color: #F3ECE1;
+    border: 1px solid #e3d9cb;
+    border-radius: 4px;
+    color: #4a352a;
+    max-width: 500px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 50px 0;
+    background-color: #F3ECE1;
+  }
+
+  footer .wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-col p, .footer-col a {
+    color: #4a352a;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e3d9cb;
+    font-size: 0.85rem;
+    color: #6a5648;
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="wrapper">
+      <div class="logo">Northside <span>Roast</span></div>
+      <nav>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#hours">Hours</a></li>
+          <li><a href="#footer">Visit Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrapper">
+      <h1>Good coffee, made for the neighbourhood.</h1>
+      <p>Northside Roast is a small-batch coffee shop serving carefully roasted beans, fresh pastries, and a warm seat by the window. Come as you are, stay as long as you like.</p>
+      <div class="hero-buttons">
+        <a href="#menu" class="btn">View the Menu</a>
+        <a href="#hours" class="btn-outline">Opening Hours</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrapper">
+      <h2>From the Menu</h2>
+      <p class="section-intro">A short list of daily favourites, brewed and baked in-house every morning.</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>House Filter</h3>
+            <span class="price">$3.50</span>
+          </div>
+          <p>Rotating single-origin, brewed fresh every hour.</p>
+        </div>
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>Flat White</h3>
+            <span class="price">$4.75</span>
+          </div>
+          <p>Double ristretto with steamed whole milk.</p>
+        </div>
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>Cold Brew</h3>
+            <span class="price">$4.25</span>
+          </div>
+          <p>Steeped for eighteen hours, served over ice.</p>
+        </div>
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>Almond Croissant</h3>
+            <span class="price">$5.00</span>
+          </div>
+          <p>Baked fresh daily, filled with almond cream.</p>
+        </div>
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>Sourdough Toast</h3>
+            <span class="price">$6.50</span>
+          </div>
+          <p>Local sourdough with butter and seasonal jam.</p>
+        </div>
+        <div class="menu-item">
+          <div class="item-row">
+            <h3>Chai Latte</h3>
+            <span class="price">$4.50</span>
+          </div>
+          <p>House-spiced chai concentrate with steamed milk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours">
+    <div class="wrapper">
+      <h2>Opening Hours</h2>
+      <p class="section-intro">Drop in any day of the week — we're usually open before the sun's fully up.</p>
+      <div class="hours-table">
+        <div class="hours-row">
+          <span class="day">Monday – Friday</span>
+          <span>7:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="day">Saturday</span>
+          <span>8:00 AM – 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="day">Sunday</span>
+          <span>8:00 AM – 3:00 PM</span>
+        </div>
+      </div>
+      <div class="hours-note">
+        Public holidays: hours may vary — check our socials for updates.
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="wrapper">
+      <div class="footer-col">
+        <h3>Northside Roast</h3>
+        <p>142 Elm Street</p>
+        <p>Northside, NE 68000</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <a href="mailto:hello@northsideroast.com">hello@northsideroast.com</a>
+        <a href="tel:+15551234567">(555) 123-4567</a>
+      </div>
+      <div class="footer-col">
+        <h3>Follow</h3>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Northside Roast. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

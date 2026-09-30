@@ -1,0 +1,31 @@
+body_font,body_font_class,heading_font,heading_font_class,bg,bg_lightness,dark_theme,accent,accent_hue,n_distinct_colors,n_gradients,max_radius_px,container_px,n_keyframes,uses_backdrop_blur,n_sections,html_chars,thick,arm,run
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,10,7,999.0,1280,4,True,3,20723,thick,absent,0
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,14,11,999.0,1280,5,True,4,32092,thick,absent,1
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,12,9,999.0,1280,5,True,3,30632,thick,absent,2
+inter,named-sans,inter,named-sans,#030304,0.01,True,#f7931a,orange,11,10,999.0,1280,4,True,3,33486,thick,absent,3
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,10,11,999.0,1280,4,True,3,32516,thick,absent,4
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,8,11,999.0,1280,4,True,4,32893,thick,modern,0
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,11,10,999.0,1280,5,True,3,32112,thick,modern,1
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,11,9,9999.0,1280,4,True,3,30588,thick,modern,2
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,12,10,999.0,1280,4,True,4,32748,thick,modern,3
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,14,14,999.0,1280,4,True,3,31937,thick,modern,4
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,13,11,999.0,1280,5,True,3,33236,thick,neutral,0
+inter,named-sans,inter,named-sans,#030304,0.01,True,#f7931a,orange,9,11,999.0,1280,4,True,4,34859,thick,neutral,1
+inter,named-sans,inter,named-sans,#030304,0.01,True,#94a3b8,blue,10,10,999.0,1280,0,True,3,31409,thick,neutral,2
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,10,10,999.0,1280,5,True,3,29052,thick,neutral,3
+inter,named-sans,space grotesk,named-sans,#030304,0.01,True,#f7931a,orange,11,10,9999.0,1280,4,True,3,27479,thick,neutral,4
+inter,named-sans,space grotesk,named-sans,#0b0d10,0.05,True,#f7931a,orange,14,6,999.0,1160,0,True,4,19752,thin,absent,0
+inter,named-sans,space grotesk,named-sans,#0b0d10,0.05,True,#f7931a,orange,11,6,999.0,1180,0,True,3,18002,thin,absent,1
+inter,named-sans,space grotesk,named-sans,#0b0d10,0.05,True,#232830,blue,16,11,999.0,1160,0,True,3,19389,thin,absent,2
+inter,named-sans,space grotesk,named-sans,#0b0e14,0.06,True,#f7931a,orange,10,4,999.0,1140,0,True,3,18253,thin,absent,3
+inter,named-sans,space grotesk,named-sans,#0b0d12,0.06,True,#9aa4b8,blue,17,5,999.0,1140,0,True,3,16777,thin,absent,4
+inter,named-sans,space grotesk,named-sans,#0a0b0d,0.05,True,#f7931a,orange,15,8,999.0,1160,0,True,3,17882,thin,modern,0
+inter,named-sans,space grotesk,named-sans,#0a0b0f,0.05,True,#f7931a,orange,11,9,999.0,1160,0,True,3,18989,thin,modern,1
+inter,named-sans,space grotesk,named-sans,#07090c,0.04,True,#f7a53c,orange,14,13,999.0,1160,0,True,3,22718,thin,modern,2
+inter,named-sans,space grotesk,named-sans,#0b0d10,0.05,True,#f7931a,orange,14,9,999.0,1160,0,True,3,19682,thin,modern,3
+inter,named-sans,space grotesk,named-sans,#06080d,0.04,True,#f7931a,orange,13,6,999.0,1160,0,True,3,18141,thin,modern,4
+inter,named-sans,space grotesk,named-sans,#0b0d12,0.06,True,#232834,blue,11,5,999.0,1160,0,True,4,19284,thin,neutral,0
+inter,named-sans,sora,named-sans,#0b0f14,0.06,True,#f7931a,orange,18,8,999.0,1160,0,True,3,20615,thin,neutral,1
+inter,named-sans,space grotesk,named-sans,#0b0d12,0.06,True,#f2a900,orange,13,8,999.0,1140,0,True,3,19313,thin,neutral,2
+inter,named-sans,sora,named-sans,#0b0e14,0.06,True,#f7931a,orange,14,6,999.0,1180,0,True,3,17607,thin,neutral,3
+inter,named-sans,space grotesk,named-sans,#0b0f14,0.06,True,#f7931a,orange,14,9,999.0,1160,0,True,4,18978,thin,neutral,4

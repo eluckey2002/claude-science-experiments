@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Vault — Bitcoin Savings, Simplified</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-alt: #10131a;
+    --panel: #151923;
+    --border: rgba(255,255,255,0.08);
+    --text: #eef1f6;
+    --muted: #9aa3b2;
+    --accent: #f2a900;
+    --accent-soft: rgba(242,169,0,0.14);
+    --accent-dark: #b97c00;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .logo {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Background flourish */
+  body {
+    background-image:
+      radial-gradient(600px circle at 15% 0%, rgba(242,169,0,0.10), transparent 60%),
+      radial-gradient(500px circle at 90% 10%, rgba(242,169,0,0.06), transparent 55%);
+    background-repeat: no-repeat;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11,13,18,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #1a1200;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #1a1200;
+    box-shadow: 0 6px 20px rgba(242,169,0,0.25);
+  }
+
+  .btn-primary:hover { box-shadow: 0 10px 26px rgba(242,169,0,0.35); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.04); }
+
+  .nav-toggle { display: none; }
+
+  /* HERO */
+  .hero {
+    padding: 100px 24px 90px;
+  }
+
+  .hero-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid rgba(242,169,0,0.3);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.12;
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), #ffd873);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p.lead {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 34px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .btn-lg { padding: 14px 28px; font-size: 15.5px; }
+
+  .hero-note {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .hero-visual {
+    position: relative;
+  }
+
+  .vault-card {
+    background: linear-gradient(160deg, var(--panel), var(--bg-alt));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+
+  .vault-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+
+  .vault-card-head span {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .pill {
+    background: rgba(20,180,110,0.12);
+    color: #34d399;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .balance-figure {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 6px;
+  }
+
+  .balance-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 26px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 90px;
+    margin-bottom: 22px;
+  }
+
+  .bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+    border-radius: 6px 6px 2px 2px;
+    opacity: 0.85;
+  }
+
+  .vault-card-foot {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+
+  .vault-card-foot div span {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .vault-card-foot div strong {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* SECTION TITLES */
+  .section-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 56px;
+  }
+
+  .section-head .eyebrow { margin-bottom: 16px; }
+
+  .section-head h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .section-head p {
+    color: var(--muted);
+    font-size: 16.5px;
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 100px 24px;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(242,169,0,0.35);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .feature-card h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .feature-card p {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 100px 24px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    max-width: 1140px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .price-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(242,169,0,0.08), var(--panel));
+    box-shadow: 0 25px 50px -25px rgba(242,169,0,0.35);
+    position: relative;
+  }
+
+  .featured-tag {
+    position: absolute;
+    top: -13px;
+    left: 30px;
+    background: var(--accent);
+    color: #1a1200;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  .price-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .price-card .plan-desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+    min-height: 40px;
+  }
+
+  .price-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .price-amount .num {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .price-amount .period {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .price-list {
+    list-style: none;
+    margin-bottom: 28px;
+    flex-grow: 1;
+  }
+
+  .price-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--muted);
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .price-list li:first-child { border-top: none; }
+
+  .price-list li .check {
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .price-card .btn { width: 100%; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    padding: 64px 24px 28px;
+  }
+
+  .footer-grid {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-top: 16px;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li { margin-bottom: 10px; }
+
+  .footer-col ul li a {
+    color: var(--muted);
+    font-size: 14.5px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col ul li a:hover { color: var(--text); }
+
+  .footer-bottom {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-bottom p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 22px;
+  }
+
+  .footer-legal a {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .footer-legal a:hover { color: var(--text); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero p.lead { max-width: 100%; }
+    .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 34px; }
+    .section-head h2 { font-size: 27px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav-cta .btn-ghost { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav container">
+      <a class="logo" href="#top">
+        <span class="logo-mark">₿</span>
+        Northside Vault
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">Security</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="#pricing">Log In</a>
+        <a class="btn btn-primary" href="#pricing">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">🔒 Self-custody, made simple</span>
+        <h1>Save in Bitcoin.<br><span>Sleep easy at night.</span></h1>
+        <p class="lead">Northside Vault helps you accumulate Bitcoin automatically, store it with bank-grade security, and track your progress toward long-term financial goals — without needing to be a crypto expert.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#pricing">Start Saving Free</a>
+          <a class="btn btn-ghost btn-lg" href="#features">See How It Works</a>
+        </div>
+        <p class="hero-note">No credit card required · Bank-grade encryption · Cancel anytime</p>
+      </div>
+      <div class="hero-visual">
+        <div class="vault-card">
+          <div class="vault-card-head">
+            <strong>Your Vault</strong>
+            <span class="pill">▲ 12.4% this year</span>
+          </div>
+          <div class="balance-figure">0.4271 BTC</div>
+          <div class="balance-sub">≈ $27,340.12 · Auto-saved since Jan 2024</div>
+          <div class="bar-row">
+            <div class="bar" style="height:35%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:40%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:85%"></div>
+            <div class="bar" style="height:100%"></div>
+          </div>
+          <div class="vault-card-foot">
+            <div>
+              <span>Weekly deposit</span>
+              <strong>$50.00</strong>
+            </div>
+            <div>
+              <span>Next round-up</span>
+              <strong>Fri, 9:00 AM</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Northside Vault</span>
+        <h2>Everything you need to build a Bitcoin habit</h2>
+        <p>Designed for people who want to save consistently in Bitcoin without babysitting the markets.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔁</div>
+          <h3>Automated Recurring Buys</h3>
+          <p>Set a daily, weekly, or monthly savings plan and let Northside Vault dollar-cost average into Bitcoin for you — no manual orders, no missed weeks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Bank-Grade Custody</h3>
+          <p>Funds are secured with multi-signature cold storage, 24/7 monitoring, and insurance coverage on custodial balances, so your savings stay protected.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Clear Goal Tracking</h3>
+          <p>Set savings targets, visualize your average cost basis, and see real progress toward milestones with simple, jargon-free reporting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Simple Pricing</span>
+        <h2>Plans that grow with your savings</h2>
+        <p>Start free, upgrade whenever automation and lower fees start paying for themselves.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Starter</h3>
+          <p class="plan-desc">For anyone testing the Bitcoin savings habit.</p>
+          <div class="price-amount">
+            <span class="num">$0</span>
+            <span class="period">/ month</span>
+          </div>
+          <ul class="price-list">
+            <li><span class="check">✓</span> Manual & recurring buys</li>
+            <li><span class="check">✓</span> Standard custody & security</li>
+            <li><span class="check">✓</span> Basic goal tracking</li>
+            <li><span class="check">✓</span> 1.5% transaction fee</li>
+          </ul>
+          <a class="btn btn-ghost" href="#top">Get Started Free</a>
+        </div>
+        <div class="price-card featured">
+          <span class="featured-tag">Most Popular</span>
+          <h3>Vault Plus</h3>
+          <p class="plan-desc">For consistent savers who want lower fees and more control.</p>
+          <div class="price-amount">
+            <span class="num">$9</span>
+            <span class="period">/ month</span>
+          </div>
+          <ul class="price-list">
+            <li><span class="check">✓</span> Everything in Starter</li>
+            <li><span class="check">✓</span> 0.5% transaction fee</li>
+            <li><span class="check">✓</span> Round-up savings from purchases</li>
+            <li><span class="check">✓</span> Advanced goal & cost-basis tools</li>
+            <li><span class="check">✓</span> Priority support</li>
+          </ul>
+          <a class="btn btn-primary" href="#top">Start Free Trial</a>
+        </div>
+        <div class="price-card">
+          <h3>Family Vault</h3>
+          <p class="plan-desc">For households saving together across multiple vaults.</p>
+          <div class="price-amount">
+            <span class="num">$19</span>
+            <span class="period">/ month</span>
+          </div>
+          <ul class="price-list">
+            <li><span class="check">✓</span> Everything in Vault Plus</li>
+            <li><span class="check">✓</span> Up to 5 linked vaults</li>
+            <li><span class="check">✓</span> Custodial vaults for kids</li>
+            <li><span class="check">✓</span> Shared savings goals</li>
+            <li><span class="check">✓</span> Dedicated account manager</li>
+          </ul>
+          <a class="btn btn-ghost" href="#top">Choose Family Vault</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="faq">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#top">
+          <span class="logo-mark">₿</span>
+          Northside Vault
+        </a>
+        <p>Automated Bitcoin savings for people who'd rather build wealth than watch charts. Secure, simple, and built for the long term.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#top">Security</a></li>
+          <li><a href="#top">Mobile App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#top">About Us</a></li>
+          <li><a href="#top">Careers</a></li>
+          <li><a href="#top">Blog</a></li>
+          <li><a href="#top">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#top">Terms of Service</a></li>
+          <li><a href="#top">Privacy Policy</a></li>
+          <li><a href="#top">Risk Disclosure</a></li>
+          <li><a href="#top">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Northside Vault. All rights reserved. Bitcoin is a volatile asset — savings are not FDIC insured.</p>
+      <div class="footer-legal">
+        <a href="#top">Terms</a>
+        <a href="#top">Privacy</a>
+        <a href="#top">Status</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+# Allow-listed web sources for design-brief vocabulary. Each entry is either a sitemap or a list of seed URLs.
+# The collecting agent may NOT add entries without the owner's OK. Excluded on purpose (terms prohibit scraping):
+# Upwork, Fiverr, LinkedIn, Dribbble (API closed), Awwwards.
+#
+# kind: sitemap | urls
+# max_pages: hard cap per source
+# include: substring filters on URL (any match keeps the page); empty = keep all
+sources:
+  behance_api:
+    kind: note
+    note: "Behance has an official API (project descriptions). Needs an API key; implement as a separate adapter if the owner wants it."
+  v0_community:
+    kind: urls
+    urls: ["https://v0.dev/chat/community"]
+    include: []
+    max_pages: 300
+  lovable_launched:
+    kind: urls
+    urls: ["https://launched.lovable.dev/"]
+    include: []
+    max_pages: 300
+  agency_briefs_examples:
+    kind: urls
+    urls: []
+    include: ["brief", "rfp", "proposal"]
+    max_pages: 200
+    note: "Owner to fill: agency/RFP pages they have found. Empty list = skipped."

@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Vault — Save Bitcoin Like a Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#030304;
+    --surface:#0F1115;
+    --fg:#ffffff;
+    --muted:#94A3B8;
+    --border:#1E293B;
+    --primary:#F7931A;
+    --secondary:#EA580C;
+    --tertiary:#FFD600;
+    --max-w:1280px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4,.font-heading{ font-family:'Space Grotesk', sans-serif; margin:0; }
+  .font-mono{ font-family:'JetBrains Mono', monospace; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; margin:0; padding:0; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  ::selection{ background:rgba(247,147,26,0.35); color:#fff; }
+
+  /* focus states */
+  a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--primary);
+    border-radius:6px;
+  }
+
+  /* ============ Background Textures ============ */
+  .bg-grid{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-size:50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(30,41,59,0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30,41,59,0.5) 1px, transparent 1px);
+    -webkit-mask-image:radial-gradient(circle at 50% 0%, black 0%, transparent 70%);
+    mask-image:radial-gradient(circle at 50% 0%, black 0%, transparent 70%);
+    opacity:0.7;
+  }
+
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .container{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 24px;
+    position:relative;
+    z-index:1;
+  }
+
+  section{ position:relative; overflow:hidden; }
+
+  /* ============ Buttons ============ */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:44px;
+    padding:0 28px;
+    border-radius:999px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border:1px solid transparent;
+    transition:all 0.3s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(to right, var(--secondary), var(--primary));
+    color:#fff;
+    box-shadow:0 0 20px -5px rgba(234,88,12,0.5);
+  }
+  .btn-primary:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px -5px rgba(247,147,26,0.65);
+  }
+  .btn-outline{
+    background:transparent;
+    border:2px solid rgba(255,255,255,0.2);
+    color:#fff;
+  }
+  .btn-outline:hover{
+    border-color:#fff;
+    background:rgba(255,255,255,0.1);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:#fff;
+  }
+  .btn-ghost:hover{
+    background:rgba(255,255,255,0.1);
+    color:var(--primary);
+  }
+  .btn-sm{ min-height:38px; padding:0 20px; font-size:12px; }
+  .btn-block{ width:100%; }
+
+  /* ============ Header ============ */
+  header.site-header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(3,3,4,0.7);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .nav-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:-0.02em;
+  }
+  .logo-mark{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--secondary), var(--primary));
+    box-shadow:0 0 20px -4px rgba(247,147,26,0.6);
+    color:#fff;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:18px;
+  }
+
+  nav.main-nav{ display:flex; align-items:center; gap:36px; }
+  nav.main-nav .nav-link{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    color:var(--muted);
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  nav.main-nav .nav-link:hover{ color:#fff; }
+  nav.main-nav .nav-link::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:-6px;
+    width:0; height:1px;
+    background:var(--primary);
+    transition:width 0.25s ease;
+  }
+  nav.main-nav .nav-link:hover::after{ width:100%; }
+
+  .header-actions{ display:flex; align-items:center; gap:14px; }
+  .sign-in-link{ font-size:13px; font-weight:600; color:var(--muted); }
+  .sign-in-link:hover{ color:#fff; }
+
+  .nav-toggle-checkbox{ display:none; }
+  .nav-toggle-label{
+    display:none;
+    width:40px; height:40px;
+    align-items:center; justify-content:center;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.1);
+    cursor:pointer;
+  }
+  .mobile-menu{ display:none; }
+
+  /* ============ Hero ============ */
+  .hero{ padding:96px 0 120px; }
+  .badge-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 16px;
+    border-radius:999px;
+    border:1px solid rgba(247,147,26,0.35);
+    background:rgba(247,147,26,0.08);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:#FDBA74;
+    text-transform:uppercase;
+    margin-bottom:28px;
+  }
+  .ping-dot{
+    position:relative;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--primary);
+    flex-shrink:0;
+  }
+  .ping-dot::after{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border-radius:50%;
+    background:var(--primary);
+    animation:ping 1.8s cubic-bezier(0,0,0.2,1) infinite;
+  }
+  @keyframes ping{
+    0%{ transform:scale(1); opacity:0.7; }
+    75%,100%{ transform:scale(2.4); opacity:0; }
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+
+  .hero h1{
+    font-size:44px;
+    line-height:1.05;
+    font-weight:700;
+    letter-spacing:-0.02em;
+  }
+  .gradient-text{
+    background:linear-gradient(to right, var(--primary), var(--tertiary));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    margin-top:24px;
+    font-size:17px;
+    color:var(--muted);
+    max-width:540px;
+    line-height:1.7;
+  }
+  .hero-ctas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:36px;
+  }
+  .trust-row{
+    margin-top:44px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .trust-row .dash{ width:24px; height:1px; background:rgba(255,255,255,0.2); }
+
+  /* Orbital graphic */
+  .orb-stage{
+    position:relative;
+    height:420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .orb-glow{
+    position:absolute;
+    width:260px; height:260px;
+    border-radius:50%;
+    background:var(--primary);
+    opacity:0.18;
+    filter:blur(90px);
+  }
+  .orb-ring{
+    position:absolute;
+    border-radius:50%;
+    border:1px dashed rgba(247,147,26,0.35);
+  }
+  .ring-outer{
+    width:320px; height:320px;
+    animation:spin 14s linear infinite;
+    border-color:rgba(255,214,0,0.25);
+  }
+  .ring-inner{
+    width:230px; height:230px;
+    animation:spinrev 10s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes spinrev{ to{ transform:rotate(-360deg); } }
+
+  .orb-core{
+    position:relative;
+    width:150px; height:150px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--secondary), var(--primary) 60%, var(--tertiary));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:56px;
+    font-weight:700;
+    color:#fff;
+    box-shadow:0 0 60px -5px rgba(247,147,26,0.6), 0 0 120px -20px rgba(255,214,0,0.4);
+    animation:float 8s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-18px); }
+  }
+
+  .float-card{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    box-shadow:0 0 30px -10px rgba(247,147,26,0.25);
+  }
+  .float-card .fc-label{ color:var(--muted); display:block; font-size:10px; letter-spacing:0.05em; text-transform:uppercase; }
+  .float-card .fc-value{ color:#fff; font-weight:500; }
+  .fc-1{ top:6px; left:-10px; animation:bounce 4s ease-in-out infinite; }
+  .fc-2{ bottom:30px; right:-20px; animation:bounce 3.4s ease-in-out infinite 0.6s; }
+  .fc-3{ bottom:-10px; left:30px; animation:bounce 3.8s ease-in-out infinite 1.1s; }
+  @keyframes bounce{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-10px); }
+  }
+
+  /* ============ Section headings ============ */
+  .section-head{
+    max-width:640px;
+    margin:0 auto 64px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--primary);
+    display:block;
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:34px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.2;
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  /* ============ Features ============ */
+  .features{ padding:112px 0; background:var(--surface); }
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+  }
+  .feature-card{
+    position:relative;
+    background:var(--bg);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;
+    padding:36px 32px;
+    overflow:hidden;
+    transition:all 0.3s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(247,147,26,0.5);
+    box-shadow:0 0 30px -10px rgba(247,147,26,0.2);
+  }
+  .feature-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:26px; height:26px;
+    border-top:1px solid var(--primary);
+    border-left:1px solid var(--primary);
+    opacity:0.6;
+  }
+  .feature-card::after{
+    content:"";
+    position:absolute;
+    bottom:0; right:0;
+    width:26px; height:26px;
+    border-bottom:1px solid var(--primary);
+    border-right:1px solid var(--primary);
+    opacity:0.6;
+  }
+  .feature-watermark{
+    position:absolute;
+    top:-10px; right:-10px;
+    width:110px; height:110px;
+    color:var(--primary);
+    opacity:0.08;
+    transform:rotate(12deg);
+    transition:opacity 0.3s ease;
+    pointer-events:none;
+  }
+  .feature-card:hover .feature-watermark{ opacity:0.18; }
+  .icon-box{
+    width:52px; height:52px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(234,88,12,0.15);
+    border:1px solid rgba(234,88,12,0.45);
+    color:var(--primary);
+    margin-bottom:24px;
+    position:relative;
+    z-index:1;
+    transition:box-shadow 0.3s ease;
+  }
+  .feature-card:hover .icon-box{ box-shadow:0 0 20px rgba(234,88,12,0.4); }
+  .feature-card h3{
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:12px;
+    position:relative; z-index:1;
+  }
+  .feature-card p{
+    color:var(--muted);
+    font-size:14.5px;
+    line-height:1.7;
+    position:relative; z-index:1;
+  }
+
+  /* ============ Pricing ============ */
+  .pricing{ padding:112px 0; }
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+    align-items:center;
+  }
+  .price-card{
+    background:var(--surface);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;
+    padding:40px 32px;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    transition:all 0.3s ease;
+    opacity:0.85;
+  }
+  .price-card:hover{ opacity:1; transform:translateY(-4px); }
+  .price-card.popular{
+    border-color:var(--primary);
+    background:linear-gradient(180deg, rgba(247,147,26,0.08), var(--surface) 40%);
+    transform:scale(1.05);
+    box-shadow:0 0 40px -10px rgba(247,147,26,0.25);
+    opacity:1;
+    position:relative;
+    z-index:2;
+  }
+  .price-card.popular:hover{ transform:scale(1.05) translateY(-4px); }
+  .popular-tag{
+    position:absolute;
+    top:-13px; left:50%;
+    transform:translateX(-50%);
+    background:linear-gradient(to right, var(--secondary), var(--primary));
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius:999px;
+    box-shadow:0 0 20px -4px rgba(247,147,26,0.6);
+  }
+  .plan-name{ font-size:15px; font-weight:600; letter-spacing:0.02em; color:var(--muted); text-transform:uppercase; font-family:'JetBrains Mono', monospace; font-size:12px; }
+  .plan-price{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:44px;
+    font-weight:700;
+    margin:14px 0 6px;
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+  }
+  .plan-price span{ font-size:15px; color:var(--muted); font-family:'Inter',sans-serif; font-weight:400; }
+  .plan-desc{ color:var(--muted); font-size:14px; margin-bottom:28px; }
+  .plan-features{ margin-bottom:32px; flex-grow:1; }
+  .plan-features li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14px;
+    color:#e5e7eb;
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .plan-features li svg{ flex-shrink:0; margin-top:2px; color:var(--primary); }
+
+  /* ============ Footer ============ */
+  footer{
+    background:var(--surface);
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding:80px 0 32px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:48px;
+    padding-bottom:56px;
+  }
+  .footer-brand p{ color:var(--muted); font-size:14px; margin-top:16px; max-width:280px; line-height:1.7; }
+  .footer-col h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .footer-col li{ margin-bottom:12px; }
+  .footer-col a{ color:var(--muted); font-size:14px; transition:color 0.2s ease; }
+  .footer-col a:hover{ color:var(--primary); }
+
+  .newsletter-form{ display:flex; gap:0; margin-top:8px; max-width:320px; }
+  .vault-input{
+    flex:1;
+    height:48px;
+    background:rgba(0,0,0,0.5);
+    border:none;
+    border-bottom:2px solid rgba(255,255,255,0.2);
+    border-radius:8px 0 0 8px;
+    padding:0 16px;
+    color:#fff;
+    font-size:14px;
+    font-family:'Inter', sans-serif;
+    transition:all 0.2s ease;
+  }
+  .vault-input::placeholder{ color:rgba(255,255,255,0.3); }
+  .vault-input:focus-visible{
+    outline:none;
+    border-bottom-color:var(--primary);
+    box-shadow:0 10px 20px -10px rgba(247,147,26,0.3);
+  }
+  .newsletter-form .btn{ border-radius:0 8px 8px 0; padding:0 20px; }
+
+  .social-row{ display:flex; gap:12px; margin-top:24px; }
+  .social-row a{
+    width:38px; height:38px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted);
+    transition:all 0.2s ease;
+  }
+  .social-row a:hover{ color:var(--primary); border-color:rgba(247,147,26,0.5); box-shadow:0 0 20px rgba(247,147,26,0.2); }
+
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-bottom p{ color:rgba(148,163,184,0.7); font-size:12.5px; font-family:'JetBrains Mono', monospace; }
+  .footer-legal{ display:flex; gap:20px; }
+  .footer-legal a{ color:rgba(148,163,184,0.7); font-size:12.5px; font-family:'JetBrains Mono', monospace; }
+  .footer-legal a:hover{ color:#fff; }
+
+  /* ============ Responsive ============ */
+  @media (max-width:1024px){
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  @media (max-width:900px){
+    nav.main-nav, .header-actions .sign-in-link{ display:none; }
+    .nav-toggle-label{ display:flex; }
+    .nav-toggle-checkbox:checked ~ .mobile-menu{
+      display:flex;
+    }
+    .mobile-menu{
+      flex-direction:column;
+      position:absolute;
+      top:76px; left:0; right:0;
+      background:rgba(3,3,4,0.98);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      padding:16px 24px 24px;
+      gap:4px;
+    }
+    .mobile-menu a{
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      font-family:'JetBrains Mono', monospace;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .mobile-menu .btn{ margin-top:16px; }
+
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:38px; }
+    .orb-stage{ height:320px; margin-top:20px; }
+    .feature-grid, .pricing-grid{ grid-template-columns:1fr; }
+    .price-card.popular{ transform:none; order:-1; }
+    .price-card.popular:hover{ transform:translateY(-4px); }
+  }
+
+  @media (max-width:640px){
+    .hero{ padding:56px 0 72px; }
+    .hero h1{ font-size:32px; }
+    .section-head h2{ font-size:26px; }
+    .footer-grid{ grid-template-columns:1fr; gap:36px; }
+    .footer-bottom{ flex-direction:column; align-items:flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="#" class="logo" aria-label="Northside Vault home">
+      <span class="logo-mark">₿</span>
+      Northside Vault
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a class="nav-link" href="#features">FEATURES</a>
+      <a class="nav-link" href="#pricing">PRICING</a>
+      <a class="nav-link" href="#security">SECURITY</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="sign-in-link" href="#signin">Sign In</a>
+      <a class="btn btn-primary btn-sm" href="#pricing">Get Started</a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </label>
+    </div>
+  </div>
+  <div class="mobile-menu">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#security">Security</a>
+    <a href="#faq">FAQ</a>
+    <a href="#signin">Sign In</a>
+    <a class="btn btn-primary btn-block" href="#pricing">Get Started</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob" style="width:500px;height:500px;background:#F7931A;top:-180px;left:-160px;"></div>
+    <div class="blob" style="width:400px;height:400px;background:#FFD600;top:60px;right:-140px;"></div>
+
+    <div class="container hero-grid">
+      <div>
+        <span class="badge-pill"><span class="ping-dot"></span> LIVE — 12,847.42 BTC secured on-chain</span>
+
+        <h1>
+          Your Bitcoin.<br>
+          Secured, Growing,<br>
+          <span class="gradient-text">Yours Forever.</span>
+        </h1>
+
+        <p class="lede">
+          Northside Vault is the disciplined way to accumulate Bitcoin — automated
+          recurring buys, cold‑storage‑grade security, and real‑time proof of reserves.
+          No custodial shortcuts. No hidden spreads. Just a vault built to outlast the noise.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary">Start Saving Free</a>
+          <a href="#security" class="btn btn-outline">Read Security Docs</a>
+        </div>
+
+        <div class="trust-row">
+          <span>TRUSTED BY 40,000+ SELF-CUSTODY BITCOINERS</span>
+          <span class="dash"></span>
+          <span>99.99% UPTIME</span>
+        </div>
+      </div>
+
+      <div class="orb-stage" aria-hidden="true">
+        <div class="orb-glow"></div>
+        <div class="orb-ring ring-outer"></div>
+        <div class="orb-ring ring-inner"></div>
+        <div class="orb-core">₿</div>
+
+        <div class="float-card fc-1">
+          <span>🔒</span>
+          <span><span class="fc-label">Storage</span><span class="fc-value">Multisig Cold</span></span>
+        </div>
+        <div class="float-card fc-2">
+          <span>📈</span>
+          <span><span class="fc-label">Avg. Stack Rate</span><span class="fc-value">+12.4% / yr</span></span>
+        </div>
+        <div class="float-card fc-3">
+          <span>⚡</span>
+          <span><span class="fc-label">Settlement</span><span class="fc-value">Instant</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="blob" style="width:380px;height:380px;background:#EA580C;bottom:-140px;left:40%;"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Northside</span>
+        <h2>Engineered Like a Vault</h2>
+        <p>Every layer of Northside Vault is built for one purpose: protecting your Bitcoin while it compounds, block by block.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Military-Grade Cold Storage</h3>
+          <p>95% of deposits are held in geographically distributed, multi-signature cold storage — offline, air-gapped, and independently audited every quarter.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Instant Settlement Rails</h3>
+          <p>Deposit fiat, receive Bitcoin in seconds via our Lightning-native settlement engine. Withdraw on-chain anytime — no lockups, no waiting periods.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="feature-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3>Automated Stacking Plans</h3>
+          <p>Set a daily, weekly, or monthly recurring buy and let dollar-cost averaging do the heavy lifting — fully automated, fully auditable, fully yours.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Pricing</span>
+        <h2>Simple, Transparent Pricing</h2>
+        <p>No hidden spreads. No custodial games. Just the honest cost of running a vault.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <span class="plan-name">Starter</span>
+          <div class="plan-price">$0<span>/ month</span></div>
+          <p class="plan-desc">For new stackers getting started.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Up to $1,000/mo recurring buys</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Standard cold storage</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Email support</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Proof-of-reserves access</li>
+          </ul>
+          <a href="#signup" class="btn btn-outline btn-block">Create Free Account</a>
+        </div>
+
+        <div class="price-card popular">
+          <span class="popular-tag">Most Popular</span>
+          <span class="plan-name">Vault Pro</span>
+          <div class="plan-price">$9<span>/ month</span></div>
+          <p class="plan-desc">For serious long-term holders.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Unlimited recurring buys</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Multisig cold storage</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Priority 24/7 support</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Instant Lightning withdrawals</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Tax-lot reporting</li>
+          </ul>
+          <a href="#signup" class="btn btn-primary btn-block">Start Pro Trial</a>
+        </div>
+
+        <div class="price-card">
+          <span class="plan-name">Institutional</span>
+          <div class="plan-price">Custom</div>
+          <p class="plan-desc">For funds, treasuries &amp; businesses.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated vault infrastructure</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Custom multisig quorum</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> White-glove onboarding</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> SLA-backed uptime</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated account manager</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline btn-block">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="faq">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark">₿</span>Northside Vault</a>
+        <p>The disciplined way to save Bitcoin — automated, self-custodial, and engineered for trust from the ground up.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Northside Vault on X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-7-6.2 7H1.3l8.1-9.3L1 2h7l4.9 6.4L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z"/></svg></a>
+          <a href="#" aria-label="Northside Vault on GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.93.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+          <a href="#" aria-label="Northside Vault on Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 5.5A17 17 0 0 0 15.6 4l-.24.44a12.9 12.9 0 0 1 3.7 1.4 15.6 15.6 0 0 0-13.1 0 12.9 12.9 0 0 1 3.7-1.4L9.4 4A17 17 0 0 0 5 5.5C2.6 9 1.9 12.4 2.2 15.8a17 17 0 0 0 5.1 2.6l.7-1.1a11 11 0 0 1-1.7-.8l.4-.3a12.3 12.3 0 0 0 10.6 0l.4.3a11 11 0 0 1-1.7.8l.7 1.1a17 17 0 0 0 5.1-2.6c.4-4-.6-7.4-2.8-10.3ZM9.2 13.9c-.7 0-1.4-.7-1.4-1.5s.6-1.5 1.4-1.5 1.4.7 1.4 1.5-.6 1.5-1.4 1.5Zm5.6 0c-.7 0-1.4-.7-1.4-1.5s.6-1.5 1.4-1.5 1.4.7 1.4 1.5-.6 1.5-1.4 1.5Z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Vault Updates</h4>
+        <p style="color:var(--muted); font-size:14px; margin-bottom:14px;">Monthly notes on security audits, reserves, and product releases.</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <label for="footer-email" style="position:absolute; left:-9999px;">Email address</label>
+          <input id="footer-email" class="vault-input" type="email" placeholder="you@domain.com" required>
+          <button type="submit" class="btn btn-primary" aria-label="Subscribe">Join</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 NORTHSIDE VAULT · SELF-CUSTODY BITCOIN VAULTS · NOT FDIC INSURED</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Compliance</a>
+        <a href="#">Licenses</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
