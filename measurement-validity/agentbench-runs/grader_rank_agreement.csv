@@ -1,0 +1,3 @@
+suite,split,n_runs,n_arms,spearman_rho,mean_abs_delta,best_arm_recorded_grader,best_arm_harness_grader,ranking_inverted
+chat-archaeologist,holdout,15,1,,0.18999999999999997,lexical,lexical,False
+chat-archaeologist,visible,60,2,0.484875200919444,0.19319500000000003,lexical,baseline,True

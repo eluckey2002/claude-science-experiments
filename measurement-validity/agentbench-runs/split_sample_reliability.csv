@@ -1,0 +1,2 @@
+experiment,metric,n_candidates,n_measurements,samples,spearman_rank_rho,pearson_r,mean_within_sample_sd,between_candidate_spread,sd_to_spread_ratio
+RESULT-0021,terminal achievable score before target stopping,53,6360,a/b,0.9995157580404341,0.9994285501968727,6689.087203933923,219384.66666666666,0.030490222063228014

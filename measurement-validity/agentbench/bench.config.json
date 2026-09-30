@@ -1,0 +1,15 @@
+{
+  "sources": {
+    "chat-archaeologist": "/Users/eluckey/Documents/Adverserial Bot!/chat-archaeologist",
+    "evidence-escape-room": "/Users/eluckey/Documents/Adverserial Bot!/evidence-escape-room",
+    "coevolution-arena": "/Users/eluckey/Documents/Adverserial Bot!/adversarial-coevolution-arena",
+    "2248-policy": "/Users/eluckey/Developer/research and games/2248-challenge",
+    "2248-search-depth": "/Users/eluckey/Developer/research and games/2248-challenge",
+    "2248-exact-greed": "/Users/eluckey/Developer/research and games/2248-challenge"
+  },
+  "regrade_suites": [
+    "chat-archaeologist"
+  ],
+  "ledger_root": "/Users/eluckey/Developer/research and games/2248-challenge",
+  "measurement_root": "/Users/eluckey/Developer/research and games/2248-challenge"
+}

@@ -1,0 +1,264 @@
+{
+  "generated": "2026-09-20T00:00:00Z",
+  "repo": "LuckeyOrg/loop-lab",
+  "usage": "python3 verify_claims.py claims.json --repo <path to a loop-lab checkout>",
+  "claims": [
+    {
+      "id": "objective",
+      "type": "QUOTED",
+      "statement": "The successor's declared objective is causal decomposition of an already-observed advantage, not a method comparison.",
+      "source": "studies/small-league-successor/RESEARCH-BRIEF.md",
+      "source_sha256": "be74bd3a2f76ded9157631700b5a615446efa45c7337b0fb55c049db18318e53",
+      "quote": "> Under an equal model-call budget, is the observed sealed-quality advantage caused by specialized\n> independent roles, by retaining multiple non-dominated candidates between generations, or by an\n> interaction between those two mechanisms?"
+    },
+    {
+      "id": "power-analysis-is-conditional",
+      "type": "QUOTED",
+      "statement": "The power analysis is a precondition for causal language, not an unconditional requirement.",
+      "source": "studies/small-league-successor/RESEARCH-BRIEF.md",
+      "source_sha256": "be74bd3a2f76ded9157631700b5a615446efa45c7337b0fb55c049db18318e53",
+      "quote": "descriptive only. Before using causal-effect language, freeze a minimum relevant pass-count\ndifference, estimate block-level variance without sealed peeking, and set the required block count\nfrom a documented power or precision analysis. Arms are randomized and interleaved within each"
+    },
+    {
+      "id": "headroom-stop-condition",
+      "type": "QUOTED",
+      "statement": "Headroom was a declared stop condition, phrased as distance-from-ceiling rather than spread-across-candidates.",
+      "source": "studies/small-league-successor/RESEARCH-BRIEF.md",
+      "source_sha256": "be74bd3a2f76ded9157631700b5a615446efa45c7337b0fb55c049db18318e53",
+      "quote": "- the fresh bank has no headroom or every qualified candidate saturates it; or"
+    },
+    {
+      "id": "declined-causal-language",
+      "type": "QUOTED",
+      "statement": "The study explicitly declined the causal language that would have required a power analysis.",
+      "source": "studies/small-league-successor/RESULTS.md",
+      "source_sha256": "de215436be2b100b930e9980f0588189683b269da617ea44329ca506dd88dfc3",
+      "quote": "No p-values, confidence intervals, or composite supported/harmful label are warranted."
+    },
+    {
+      "id": "activation-gate-declared",
+      "type": "QUOTED",
+      "statement": "A treatment-activation gate was declared in advance with an explicit stop instruction.",
+      "source": "studies/small-league-successor/RESEARCH-BRIEF.md",
+      "source_sha256": "be74bd3a2f76ded9157631700b5a615446efa45c7337b0fb55c049db18318e53",
+      "quote": "If the empirical preflight again collapses to one vector, stop. Change the artifact or the family\ndecomposition before running the experiment; do not reinterpret a single-candidate arm as a"
+    },
+    {
+      "id": "finalist-committed-before-sealed",
+      "type": "QUOTED",
+      "statement": "Finalist commitment preceded sealed evaluation - preregistration in practice.",
+      "source": "studies/small-league-successor/RESULTS.md",
+      "source_sha256": "de215436be2b100b930e9980f0588189683b269da617ea44329ca506dd88dfc3",
+      "quote": "arms reused one parent. Every arm committed one finalist with the same non-sealed selector before\nsealed evaluation."
+    },
+    {
+      "id": "task4-discriminating-cases",
+      "type": "MEASURED",
+      "statement": "Task 4: 2 of 24 sealed cases have a pass rate in [0.10, 0.90] across the 48-candidate pool.",
+      "expression": "len(discriminating(4))",
+      "expected": 2
+    },
+    {
+      "id": "task4-constant-cases",
+      "type": "MEASURED",
+      "statement": "Task 4: 14 of 24 sealed cases are passed or failed by all 48 candidates alike.",
+      "expression": "len(constant_cases(4))",
+      "expected": 14
+    },
+    {
+      "id": "task4-distinct-behaviours",
+      "type": "MEASURED",
+      "statement": "Task 4: the 48 candidates collapse to 8 distinct sealed-bank behaviours.",
+      "expression": "distinct_behaviours(4)",
+      "expected": 8
+    },
+    {
+      "id": "task4-constant-policy-ceiling",
+      "type": "MEASURED",
+      "statement": "Task 4: the best input-ignoring constant policy scores 1 of 24, so the bank is not gameable.",
+      "expression": "constant_policy_ceiling(4)",
+      "expected": 1
+    },
+    {
+      "id": "task4-discriminating-all-invalid-input",
+      "type": "MEASURED",
+      "statement": "Task 4: every discriminating case declares outcome INVALID_INPUT.",
+      "expression": "sorted(set(outcomes(4)[c] for c in discriminating(4)))",
+      "expected": [
+        "INVALID_INPUT"
+      ]
+    },
+    {
+      "id": "task5-discriminating-cases",
+      "type": "MEASURED",
+      "statement": "Task 5: 2 of 24 sealed cases have a pass rate in [0.10, 0.90] across the 48-candidate pool.",
+      "expression": "len(discriminating(5))",
+      "expected": 2
+    },
+    {
+      "id": "task5-constant-cases",
+      "type": "MEASURED",
+      "statement": "Task 5: 20 of 24 sealed cases are passed or failed by all 48 candidates alike.",
+      "expression": "len(constant_cases(5))",
+      "expected": 20
+    },
+    {
+      "id": "task5-distinct-behaviours",
+      "type": "MEASURED",
+      "statement": "Task 5: the 48 candidates collapse to 8 distinct sealed-bank behaviours.",
+      "expression": "distinct_behaviours(5)",
+      "expected": 8
+    },
+    {
+      "id": "task5-constant-policy-ceiling",
+      "type": "MEASURED",
+      "statement": "Task 5: the best input-ignoring constant policy scores 1 of 24, so the bank is not gameable.",
+      "expression": "constant_policy_ceiling(5)",
+      "expected": 1
+    },
+    {
+      "id": "task5-discriminating-all-invalid-input",
+      "type": "MEASURED",
+      "statement": "Task 5: every discriminating case declares outcome INVALID_INPUT.",
+      "expression": "sorted(set(outcomes(5)[c] for c in discriminating(5)))",
+      "expected": [
+        "INVALID_INPUT"
+      ]
+    },
+    {
+      "id": "task4-descriptor-fidelity",
+      "type": "MEASURED",
+      "statement": "Task 4: P(same behaviour | same descriptor)=0.602, P(same descriptor | same behaviour)=0.139 - the two partitions cross-cut.",
+      "expression": "descriptor_fidelity(4)",
+      "expected": {
+        "p_behaviour_given_class": 0.602,
+        "p_class_given_behaviour": 0.139
+      }
+    },
+    {
+      "id": "task5-descriptor-fidelity",
+      "type": "MEASURED",
+      "statement": "Task 5: P(same behaviour | same descriptor)=0.318, P(same descriptor | same behaviour)=0.083.",
+      "expression": "descriptor_fidelity(5)",
+      "expected": {
+        "p_behaviour_given_class": 0.318,
+        "p_class_given_behaviour": 0.083
+      }
+    },
+    {
+      "id": "task4-max-within-descriptor-spread",
+      "type": "MEASURED",
+      "statement": "Task 4: one descriptor group spans 9 sealed cases, from 8 to 17 of 24.",
+      "expression": "max_within_descriptor_spread(4)",
+      "expected": 9
+    },
+    {
+      "id": "no-contrast-sign-consistent-across-blocks",
+      "type": "MEASURED",
+      "statement": "For each of the three outcome measures separately, no contrast keeps one non-zero sign across all four blocks.",
+      "expression": "sign_consistent_contrasts()",
+      "expected": []
+    },
+    {
+      "id": "union-vs-finalist-max-gap",
+      "type": "MEASURED",
+      "statement": "Union-of-six coverage exceeds the committed finalist's pass count by at most 1 case anywhere in the dataset.",
+      "expression": "union_vs_finalist_max_gap()",
+      "expected": 1
+    },
+    {
+      "id": "task4-diagnostic-saturated",
+      "type": "MEASURED",
+      "statement": "Task 4: 38 of 48 candidates scored a perfect non-sealed diagnostic rate, and those candidates' sealed scores span 8 to 17 of 24.",
+      "expression": "diagnostic_saturation(4)",
+      "expected": {
+        "n_candidates": 48,
+        "n_perfect_diagnostic": 38,
+        "sealed_min": 8,
+        "sealed_max": 17
+      }
+    },
+    {
+      "id": "task5-diagnostic-saturated",
+      "type": "MEASURED",
+      "statement": "Task 5: 45 of 48 candidates scored a perfect non-sealed diagnostic rate, and those candidates' sealed scores span 19 to 23 of 24.",
+      "expression": "diagnostic_saturation(5)",
+      "expected": {
+        "n_candidates": 48,
+        "n_perfect_diagnostic": 45,
+        "sealed_min": 19,
+        "sealed_max": 23
+      }
+    },
+    {
+      "id": "task4-proxy-does-not-predict-sealed",
+      "type": "MEASURED",
+      "statement": "Task 4: Spearman correlation between the non-sealed diagnostic rate and sealed pass count is +0.050 - the qualification proxy carried essentially no rank information about sealed standing.",
+      "expression": "diagnostic_predicts_sealed(4)",
+      "expected": 0.05
+    },
+    {
+      "id": "task5-proxy-does-not-predict-sealed",
+      "type": "MEASURED",
+      "statement": "Task 5: Spearman correlation between the non-sealed diagnostic rate and sealed pass count is -0.029.",
+      "expression": "diagnostic_predicts_sealed(5)",
+      "expected": -0.029
+    },
+    {
+      "id": "task4-band-resolution-equals-pool-resolution",
+      "type": "MEASURED",
+      "statement": "Task 4: restricting to the 15-17 comparison band leaves the same 2 discriminating cases as the full pool, so the resolution failure is not a band-versus-extremes artefact.",
+      "expression": "discriminating_in_band(4, 15, 17)",
+      "expected": 2
+    },
+    {
+      "id": "task5-band-resolution-equals-pool-resolution",
+      "type": "MEASURED",
+      "statement": "Task 5: restricting to the 21-23 comparison band leaves the same 2 discriminating cases as the full pool.",
+      "expression": "discriminating_in_band(5, 21, 23)",
+      "expected": 2
+    },
+    {
+      "id": "mechanism-question",
+      "type": "ARGUED",
+      "statement": "OPEN QUESTION, not a claim: would specialized roles and retained portfolios differ on a task whose discriminating cases test search quality rather than validation-error enumeration?",
+      "basis": "Downgraded from a claim. Not testable without a new bank, so it is stated as the question it is. The falsifying test is a 2x2 on a bank whose discriminating cases test search quality; until that runs, no position is warranted either way."
+    },
+    {
+      "id": "headroom-gate-probe-scores",
+      "type": "QUOTED",
+      "statement": "The headroom gate passed attempt 4 on three fixed probes: a repair pass at 16/24, baseline 14/24, ceiling 24 - three points, not the candidate pool.",
+      "source": "studies/small-league/runs/pilot-002/RESULT.md",
+      "source_sha256": "c872e07112ec6f6ff26fe7b45d4ec89d2e1d553ca55fc251ecd0d23818c61460",
+      "quote": "**Headroom, established before the run:** `HEADROOM-CHECK.md` attempt 4 PASS (one Haiku repair pass of the baseline scored 16/24; baseline 14/24; ceiling 24)."
+    },
+    {
+      "id": "task4-cases-fail-band-probe-gate",
+      "type": "MEASURED",
+      "statement": "Task 4: 22 of 24 cases fail an authoring gate that requires each case's pool pass-rate to land in [0.10,0.90].",
+      "expression": "24 - len(discriminating(4))",
+      "expected": 22
+    },
+    {
+      "id": "task4-cases-fail-plain-probe-gate",
+      "type": "MEASURED",
+      "statement": "Task 4: 14 of 24 cases fail the weaker rule 'passed by at least one and failed by at least one candidate in the pool'.",
+      "expression": "24 - int(((rate(4)>0)&(rate(4)<1)).sum())",
+      "expected": 14
+    },
+    {
+      "id": "task5-cases-fail-band-probe-gate",
+      "type": "MEASURED",
+      "statement": "Task 5: 22 of 24 cases fail an authoring gate that requires each case's pool pass-rate to land in [0.10,0.90].",
+      "expression": "24 - len(discriminating(5))",
+      "expected": 22
+    },
+    {
+      "id": "task5-cases-fail-plain-probe-gate",
+      "type": "MEASURED",
+      "statement": "Task 5: 20 of 24 cases fail the weaker rule 'passed by at least one and failed by at least one candidate in the pool'.",
+      "expression": "24 - int(((rate(5)>0)&(rate(5)<1)).sum())",
+      "expected": 20
+    }
+  ]
+}

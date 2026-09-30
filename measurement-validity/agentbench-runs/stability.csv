@@ -1,0 +1,9 @@
+suite,arm,n_cases_with_repeats,mean_within_case_sd,frac_cases_unstable,max_within_case_range
+chat-archaeologist,baseline,10,0.02199358737117772,0.2,0.2666666666666666
+chat-archaeologist,lexical,15,0.0,0.0,0.0
+coevolution-arena,baseline-v0,2,0.0,0.0,0.0
+coevolution-arena,candidate-v0,2,0.0,0.0,0.0
+coevolution-arena,candidate-v1-retry,0,,,
+coevolution-arena,public-shakeout,4,0.5773502691896257,1.0,1.0
+evidence-escape-room,baseline,1,0.09425696260754426,1.0,0.20999999999999996
+evidence-escape-room,challenger,1,0.15971328477410177,1.0,0.3

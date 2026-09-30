@@ -1,0 +1,17 @@
+experiment,ledger_artifacts,closure_status,primary_outcome,n_claims,n_claims_pass,n_deviations,corpus_verdict,corpus_reportable,preregistered,claim
+RESULT-0020,,,,,,,,,,
+RESULT-0021,measurement,,,,,,,,,structural candidate ranking is stable across two disjoint seed samples and single-seed reliability is sufficient for candidate differentiation
+RESULT-0022,,,,,,,,,,
+RESULT-0023,,,,,,,,,,
+RESULT-0024,,,,,,,,,,
+RESULT-0026,"confirmation,qualification",,,,,,,,,
+RESULT-0029,corpus,,,,,,INCONCLUSIVE,True,True,
+RESULT-0030,corpus,,,,,,,True,True,
+RESULT-0031,corpus,,,,,,,True,True,
+RESULT-0032,corpus,,,,,,,True,True,
+RESULT-0033,corpus,,,,,,,True,True,
+RESULT-0034,corpus,,,,,,,True,True,
+RESULT-0035,"closure,corpus",CLOSED,MAP_CORPUS_INCONCLUSIVE,9.0,9.0,0.0,,True,True,
+RESULT-0036,"closure,corpus",UNVERIFIED,,13.0,5.0,1.0,,True,True,
+RESULT-0037,"closure,corpus,qualification",UNVERIFIED,,12.0,5.0,1.0,,True,True,
+RESULT-0038,"closure,corpus,qualification",CLOSED,INCONCLUSIVE,12.0,12.0,0.0,,True,True,

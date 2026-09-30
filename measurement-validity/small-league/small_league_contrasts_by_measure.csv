@@ -1,0 +1,13 @@
+task,block,measure,role_SG_GG,role_SP_GP,state_GP_GG,state_SP_SG,interaction
+4,1,finalist_sealed,0,-1,0,-1,-1
+4,1,union_of_6,0,0,0,0,0
+4,1,best_of_6,0,-1,0,-1,-1
+4,2,finalist_sealed,-1,-1,-1,-1,0
+4,2,union_of_6,0,0,-1,-1,0
+4,2,best_of_6,0,-1,-1,-2,-1
+5,1,finalist_sealed,0,0,0,0,0
+5,1,union_of_6,0,1,-1,0,1
+5,1,best_of_6,1,0,0,-1,-1
+5,2,finalist_sealed,-1,0,0,1,1
+5,2,union_of_6,-1,0,0,1,1
+5,2,best_of_6,0,1,0,1,1

@@ -1,0 +1,16 @@
+suite,split,arm_a,arm_b,metric,n_shared_cases,n_cases_only_a,n_cases_only_b,mean_a,mean_b,mean_diff,diff_ci_lo,diff_ci_hi,n_cases_b_better,n_cases_a_better,n_cases_tied,wilcoxon_p,wilcoxon_note,separated,wilcoxon_n_nonzero,note
+2248-exact-greed,visible,RESULT-0036,RESULT-0037,primary_score,16,0,0,0.234375,0.25,0.015625,-0.0234375,0.06269531249999716,2.0,2.0,12.0,,only 4 non-tied cases; test not run,False,,
+2248-exact-greed,visible,RESULT-0036,RESULT-0038,primary_score,16,0,0,0.234375,0.25,0.015625,-0.015625,0.0546875,2.0,1.0,13.0,,only 3 non-tied cases; test not run,False,,
+2248-exact-greed,visible,RESULT-0037,RESULT-0038,primary_score,16,0,0,0.25,0.25,0.0,-0.03125,0.03125,2.0,2.0,12.0,,only 4 non-tied cases; test not run,False,,
+2248-policy,holdout,handmade,reference,primary_score,225,0,0,0.96,0.9866666666666667,0.02666666666666667,0.008888888888888889,0.04888888888888889,6.0,0.0,219.0,0.03125,,True,6.0,
+2248-policy,visible,handmade,reference,primary_score,2,0,0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,2.0,,only 0 non-tied cases; test not run,False,,
+2248-search-depth,visible,deep,shallow,primary_score,208,0,0,1.0,0.8990384615384616,-0.10096153846153846,-0.14423076923076922,-0.0625,0.0,21.0,187.0,4.592833711753967e-06,,True,21.0,
+chat-archaeologist,visible,baseline,lexical,primary_score,10,0,0,0.5333333333333332,0.3,-0.2333333333333333,-0.36,-0.06499999999999999,2.0,8.0,0.0,0.076171875,,True,10.0,
+coevolution-arena,holdout,baseline-v0,candidate-v0,primary_score,6,0,0,0.6666666666666666,1.0,0.3333333333333333,0.0,0.6666666666666666,2.0,0.0,4.0,,only 2 non-tied cases; test not run,False,,
+coevolution-arena,visible,baseline-v0,candidate-v0,primary_score,4,0,0,0.5,1.0,0.5,0.0,1.0,2.0,0.0,2.0,,only 2 non-tied cases; test not run,False,,
+coevolution-arena,visible,baseline-v0,candidate-v1-retry,primary_score,3,1,0,0.3333333333333333,0.6666666666666666,0.3333333333333333,0.0,1.0,1.0,0.0,2.0,,only 1 non-tied cases; test not run,False,,
+coevolution-arena,visible,baseline-v0,public-shakeout,primary_score,0,4,4,,,,,,,,,,,,,insufficient shared cases for a paired comparison
+coevolution-arena,visible,candidate-v0,candidate-v1-retry,primary_score,3,1,0,1.0,0.6666666666666666,-0.3333333333333333,-1.0,0.0,0.0,1.0,2.0,,only 1 non-tied cases; test not run,False,,
+coevolution-arena,visible,candidate-v0,public-shakeout,primary_score,0,4,4,,,,,,,,,,,,,insufficient shared cases for a paired comparison
+coevolution-arena,visible,candidate-v1-retry,public-shakeout,primary_score,0,3,4,,,,,,,,,,,,,insufficient shared cases for a paired comparison
+evidence-escape-room,visible,baseline,challenger,primary_score,1,0,0,,,,,,,,,,,,,insufficient shared cases for a paired comparison
