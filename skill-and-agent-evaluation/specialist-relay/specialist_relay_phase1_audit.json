@@ -1,0 +1,52 @@
+{
+  "frame_id": "847a3b59-a70b-4d3a-bee4-aecfc52caf3e",
+  "name": "Audit",
+  "agent_name": "FRESH_EYES_AUDITOR",
+  "status": "completed",
+  "_completion_bullets": [
+    "Read corpus-librarian SKILL.md artifact in full",
+    "Checked for a kernel.py sidecar (none found) via host.artifacts search",
+    "Verified the delegate/send_message/wait=False vocabulary against this session's own repl and wait_for_notification tool documentation",
+    "Identified three blocking gaps, all rooted in the undefined 'channel' mechanism, plus four improvement notes"
+  ],
+  "structured_output": {
+    "blocking": [
+      {
+        "span": "then query it repeatedly over the channel instead of spawning a fresh agent per question",
+        "location": "frontmatter `description` field",
+        "defect": "The skill's entire premise is 'spawn once, then query repeatedly' \u2014 but 'the channel' is never defined anywhere in the body. No step names a mechanism for re-addressing an already-spawned agent. The real platform primitives that would make this executable (host.delegate with a non-blocking mode, then host.send_message(frame_id, ...) to steer/re-address a still-running child, and wait_for_notification/host.collect() to retrieve its reply) are documented in this session's own tool-call reference for the `repl` tool and `wait_for_notification` (e.g. 'Steer delegated children with host.stop_child() / host.send_message()'; 'children spawned by BLOCKING delegate calls' vs 'wait=False children are immune'). None of that vocabulary \u2014 delegate, wait=False, send_message, frame_id, collect \u2014 appears anywhere in this SKILL.md. A future agent with no other context has no way to turn 'query it repeatedly over the channel' into an actual tool call.",
+        "breaks_at": "Step 4 ('Send questions one per message rather than batched') \u2014 the implementer must construct the second and later messages to 'the librarian' and has no named call to do it with."
+      },
+      {
+        "span": "Spawn one agent with a read-only brief: read thoroughly, questions are coming afterward, re-reading will not be cheap.",
+        "location": "## Steps, step 2",
+        "defect": "Does not specify that the spawn must use a non-blocking / kept-alive mode to remain addressable for the later Q&A steps. The platform's delegate call is blocking by default (per this session's own `repl`/`wait_for_notification` tool documentation, a plain delegate call runs to completion and only 'wait=False children' stay reachable while background work continues). If an implementer follows step 2 literally with a default (blocking) spawn, the agent will have already run to completion and returned its result before step 3's 'ask for a short orientation' \u2014 at which point, by this document's own rule in step 5 ('A finished cold agent cannot be asked, and its report is all you get'), it is no longer askable. The doc gives no parameter, flag, or tool name to avoid landing in exactly that terminal state.",
+        "breaks_at": "Immediately after step 2 if executed with an ordinary blocking spawn \u2014 steps 4 and 5 (repeated Q&A with 'the librarian') become impossible."
+      },
+      {
+        "span": "The librarian is still alive, so the question is available. A finished cold agent cannot be asked, and its report is all you get.",
+        "location": "## Steps, step 5",
+        "defect": "Introduces a load-bearing 'still alive' vs 'finished cold agent' distinction that the whole workflow depends on, but never says how to check which state the spawned agent is in before attempting to ask it something. No status check, no named field, no tool call is given.",
+        "breaks_at": "Step 5, the moment the implementer must decide whether a follow-up question can even be sent."
+      }
+    ],
+    "improvements": [
+      "No worked example or concrete tool-call snippet anywhere in the file \u2014 every step is prose describing an outcome, not an instruction that maps to a callable primitive. Given the workflow depends on a specific SDK pattern that exists on this platform, a short 'Usage' section naming the actual calls (spawn in a kept-alive mode, address it again, retrieve its reply, check whether it's still running) would remove all three blocking defects at once.",
+      "Confirmed via host.artifacts(search=\"corpus-librarian\") that this SKILL.md has no sibling kernel.py \u2014 there is no helper code backing any part of the described mechanism, so the gap above cannot be closed by inspecting a sidecar.",
+      "Step 1 ('File count and total bytes are enough') doesn't name how to obtain those numbers in this environment (e.g. host.artifacts() metadata vs. a bash walk) \u2014 minor, but every other step has the same category of gap at a smaller scale.",
+      "No guidance on how many follow-up rounds are reasonable before the pattern's cost exceeds a fresh-agent-per-question baseline; the Verification section addresses whether it was worth it in hindsight but gives no forward-looking budget."
+    ],
+    "verdict": "Blocking. The skill's one procedural idea \u2014 keep a single agent addressable across multiple rounds of questions instead of re-spawning \u2014 depends entirely on a specific kept-alive/re-address/status-check mechanism that this platform does provide (per its own repl/wait_for_notification tool documentation) but that the document never names. As written, an implementing agent has no way to execute steps 2-5 without independently guessing at (and possibly getting wrong) the underlying SDK calls, and the doc's own step-5 caveat about 'finished cold agents' shows the failure mode is one the author was aware of but did not close."
+  },
+  "deviations": [
+    "none"
+  ],
+  "reviewer_findings": [
+    {
+      "verdict": "warn",
+      "severity": "low",
+      "claim": "The submitted blocking-defects list is not ordered by which defect breaks earliest at execution time, despite the task explicitly requiring that ordering.",
+      "evidence": "The task (msg[2]) said 'Report blocking defects first, ordered by what breaks earliest at execution time.' The agent's own breaks_at fields in the submitted output (msg[19]) state finding #2 (frontmatter/description gap) breaks at 'Step 4', while finding #2's Step-2 spawn-mode defect breaks 'Immedia\u2026 [+351 chars elided]"
+    }
+  ]
+}

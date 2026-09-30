@@ -1,0 +1,33 @@
+{
+ "target_skill": "repo-rules-preflight",
+ "judge_model": "claude-sonnet-5",
+ "repeats": 3,
+ "distractors": [
+  "customize",
+  "skill-creator",
+  "self-awareness",
+  "verify",
+  "retro-triage",
+  "loop-run-card",
+  "agent-debrief",
+  "propagate-source-of-truth",
+  "corpus-librarian",
+  "docs",
+  "red-team-prompt",
+  "finish-line",
+  "session-harvest",
+  "compute-env-setup",
+  "remote-compute-ssh",
+  "figure-style",
+  "literature-review"
+ ],
+ "variants": {
+  "v1_published": "Find and read a repository's own agent rulebook (the AGENTS.md / CLAUDE.md chain, nested files included) before editing, measuring, or reporting on anything inside it. Use this whenever work touches a user repo or granted host folder - running an ablation or benchmark, regrading runs, adding an experiment result, writing to an evidence ledger, registering a protocol, or opening a PR - and also for any task in a directory that might carry house rules. This matters because Claude Science does not auto-load CLAUDE.md the way Claude Code does, so a repo's rules are invisible here unless you go and read them, and a result produced in violation of them is not usable.",
+  "v2_exclusion": "Find and read a repository's own agent rulebook (the AGENTS.md / CLAUDE.md chain, nested files included) before editing, measuring, or reporting on anything inside it. Use this whenever work touches a user repo or granted host folder - running an ablation or benchmark, regrading runs, adding an experiment result, writing to an evidence ledger, registering a protocol, or opening a PR - and also for any task in a directory that might carry house rules. This matters because Claude Science does not auto-load CLAUDE.md the way Claude Code does, so a repo's rules are invisible here unless you go and read them, and a result produced in violation of them is not usable. Not for simply reading, summarising, or rewriting a rules file as a document - this is about finding the rules that govern work you are about to do.",
+  "v3_exclusion_orient": "Find and read a repository's own agent rulebook (the AGENTS.md / CLAUDE.md chain, nested files included) before editing, measuring, or reporting on anything inside it. Use this whenever work touches a user repo or granted host folder - running an ablation or benchmark, regrading runs, adding an experiment result, writing to an evidence ledger, registering a protocol, or opening a PR - and also for any task in a directory that might carry house rules. This matters because Claude Science does not auto-load CLAUDE.md the way Claude Code does, so a repo's rules are invisible here unless you go and read them, and a result produced in violation of them is not usable. Not for simply reading, summarising, or rewriting a rules file as a document - this is about finding the rules that govern work you are about to do. Also load it when getting oriented in an unfamiliar project directory, and load it alongside run-design, benchmarking, or experiment-protocol skills rather than instead of them - the repo's rulebook decides which comparison and which protocol that repo will accept."
+ },
+ "independent_variable": {
+  "v2_exclusion": "adds an exclusion clause (not for summarising a rules file)",
+  "v3_exclusion_orient": "v2 plus an orientation/complementarity clause"
+ }
+}

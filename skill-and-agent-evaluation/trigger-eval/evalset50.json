@@ -1,0 +1,252 @@
+[
+ {
+  "id": 1,
+  "should_trigger": true,
+  "query": "im about to run an ablation on the solver in '~/Developer/research and games/2248-challenge' - two prompt variants, 30 seeds each, and i want the arm comparison written up. can you set that up"
+ },
+ {
+  "id": 2,
+  "should_trigger": true,
+  "query": "add a new experiment result under experiments/ for the chain-offer sweep in the 2248 repo and record it in the evidence ledger"
+ },
+ {
+  "id": 3,
+  "should_trigger": true,
+  "query": "tests pass locally, open a PR on the 2248 repo with the regrade fix"
+ },
+ {
+  "id": 4,
+  "should_trigger": true,
+  "query": "before you touch anything in this repo, figure out what conventions it expects agents to follow"
+ },
+ {
+  "id": 5,
+  "should_trigger": true,
+  "query": "the node test suite in solver/ has four failures. clean them up so the suite is green"
+ },
+ {
+  "id": 6,
+  "should_trigger": true,
+  "query": "we're benchmarking two graders on the chat-archaeologist corpus under '~/Documents/Adverserial Bot!'. get oriented in that project first, then propose the comparison"
+ },
+ {
+  "id": 7,
+  "should_trigger": true,
+  "query": "i cloned a teammate's agent repo into ~/Developer/idea-loop. add an eval script to it that scores the saved traces"
+ },
+ {
+  "id": 8,
+  "should_trigger": true,
+  "query": "regrade runs.jsonl in the 2248 repo with the fixed scorer and write the arm comparison into docs/"
+ },
+ {
+  "id": 9,
+  "should_trigger": true,
+  "query": "claude code followed different conventions than you did when working on this repo yesterday. why, and how do i stop that happening"
+ },
+ {
+  "id": 10,
+  "should_trigger": true,
+  "query": "set up a preregistered protocol for the seed sweep in the 2248 solver before i run anything"
+ },
+ {
+  "id": 11,
+  "should_trigger": false,
+  "query": "what are our house rules for figures again - 300dpi, no chart title, colorblind-safe palette? apply them to this scatter"
+ },
+ {
+  "id": 12,
+  "should_trigger": false,
+  "query": "create a new agent profile for reviewing SQL migrations, restricted to just the db skills"
+ },
+ {
+  "id": 13,
+  "should_trigger": false,
+  "query": "turn the regrade workflow we just worked out into a skill so i dont have to re-explain it"
+ },
+ {
+  "id": 14,
+  "should_trigger": false,
+  "query": "read AGENTS.md and turn it into a short onboarding page for a new hire joining the team next monday"
+ },
+ {
+  "id": 15,
+  "should_trigger": false,
+  "query": "what model am i running right now and how many tokens has this session burned"
+ },
+ {
+  "id": 16,
+  "should_trigger": false,
+  "query": "set up a conda env with torch and transformers so i can finetune the 7b on the grading data"
+ },
+ {
+  "id": 17,
+  "should_trigger": false,
+  "query": "draft a retro on the three frictions that came up this morning - same import error twice, and the stale handoff file"
+ },
+ {
+  "id": 18,
+  "should_trigger": false,
+  "query": "walk me through designing the run card for the sweep before i spend money on it"
+ },
+ {
+  "id": 19,
+  "should_trigger": false,
+  "query": "pull the last 20 papers on agent evaluation benchmarks and summarise what metrics they actually report"
+ },
+ {
+  "id": 20,
+  "should_trigger": false,
+  "query": "interview the subagent that did the corpus pass and find out what it cut from its report"
+ },
+ {
+  "id": 21,
+  "should_trigger": true,
+  "query": "the eval harness in ~/Developer/workflow-test keeps writing results into the wrong folder. fix the output path and re-run it"
+ },
+ {
+  "id": 22,
+  "should_trigger": true,
+  "query": "add a caching layer to the retriever in the chat-archaeologist project and show me before/after latency"
+ },
+ {
+  "id": 23,
+  "should_trigger": true,
+  "query": "commit the scorer fix and push it straight to main, its a one liner"
+ },
+ {
+  "id": 24,
+  "should_trigger": true,
+  "query": "i want to change the scoring weights in the 2248 solver away from the shipped curve. do it and tell me what it costs on the benchmark"
+ },
+ {
+  "id": 25,
+  "should_trigger": true,
+  "query": "a new play session file showed up in play-sessions/. what do i do with it"
+ },
+ {
+  "id": 26,
+  "should_trigger": true,
+  "query": "someone on the team says our win rates on the shipped levels prove the new policy is better. sanity check that claim"
+ },
+ {
+  "id": 27,
+  "should_trigger": true,
+  "query": "start working in ~/Developer/Priority/Git-Backed/osbrain-vault - first task is adding a metrics module"
+ },
+ {
+  "id": 28,
+  "should_trigger": true,
+  "query": "im handing this repo to another agent tomorrow. what does it need to know before it touches anything"
+ },
+ {
+  "id": 29,
+  "should_trigger": true,
+  "query": "write last night's sweep results into the ledger as a claim about seed robustness in general"
+ },
+ {
+  "id": 30,
+  "should_trigger": true,
+  "query": "the experiment gate check is red on my PR. make it green so i can merge"
+ },
+ {
+  "id": 31,
+  "should_trigger": true,
+  "query": "before we measure anything in the solver directory, whats the right comparison to use here"
+ },
+ {
+  "id": 32,
+  "should_trigger": true,
+  "query": "i pulled the repo fresh onto a new laptop. get me set up to contribute to it"
+ },
+ {
+  "id": 33,
+  "should_trigger": true,
+  "query": "refactor level-author.js to pull the identity helpers out into their own module"
+ },
+ {
+  "id": 34,
+  "should_trigger": true,
+  "query": "run the ablation and if the candidate beats baseline write it up as evidence"
+ },
+ {
+  "id": 35,
+  "should_trigger": true,
+  "query": "is it ok to archive those two stale candidate receipts so the test suite stops complaining"
+ },
+ {
+  "id": 36,
+  "should_trigger": false,
+  "query": "whats the difference between a cluster bootstrap and a plain bootstrap for my arm comparison"
+ },
+ {
+  "id": 37,
+  "should_trigger": false,
+  "query": "our slack rules say no @channel pings after 6pm. draft an announcement that respects that"
+ },
+ {
+  "id": 38,
+  "should_trigger": false,
+  "query": "summarize what this session accomplished so i can paste it into standup tomorrow"
+ },
+ {
+  "id": 39,
+  "should_trigger": false,
+  "query": "make a diagram of the orchestration topology for the slide deck"
+ },
+ {
+  "id": 40,
+  "should_trigger": false,
+  "query": "which of my conda envs has statsmodels in it"
+ },
+ {
+  "id": 41,
+  "should_trigger": false,
+  "query": "the anthropic sdk call is throwing a 401, what should i check"
+ },
+ {
+  "id": 42,
+  "should_trigger": false,
+  "query": "give me a second opinion on this system prompt, poke holes in it before i ship it"
+ },
+ {
+  "id": 43,
+  "should_trigger": false,
+  "query": "explain what a held out split actually buys me when i only have 20 test cases"
+ },
+ {
+  "id": 44,
+  "should_trigger": false,
+  "query": "set up a recurring weekday brief with my calendar and open PRs"
+ },
+ {
+  "id": 45,
+  "should_trigger": false,
+  "query": "convert this csv of grades into a markdown table for the report"
+ },
+ {
+  "id": 46,
+  "should_trigger": false,
+  "query": "whats in the artifact store from the last three sessions in this project"
+ },
+ {
+  "id": 47,
+  "should_trigger": false,
+  "query": "draft a PRD for the harness so i can share it with product"
+ },
+ {
+  "id": 48,
+  "should_trigger": false,
+  "query": "rename the PROMPT_TOOL_OPTIMIZER profile to something shorter"
+ },
+ {
+  "id": 49,
+  "should_trigger": false,
+  "query": "my ggplot legend is overlapping the panel, fix it"
+ },
+ {
+  "id": 50,
+  "should_trigger": false,
+  "query": "how much did last nights sweep cost in tokens"
+ }
+]

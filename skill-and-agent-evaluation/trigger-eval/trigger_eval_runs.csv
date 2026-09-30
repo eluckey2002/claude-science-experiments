@@ -1,0 +1,481 @@
+query_id,repeat,should_trigger,triggered,n_selected,selected,error,arm,correct,phase
+1,0,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,True,pilot_n20
+1,1,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,True,pilot_n20
+1,2,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,True,pilot_n20
+2,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+2,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+2,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+3,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+3,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+3,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+4,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+4,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+4,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+5,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+5,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+5,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+6,0,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,False,pilot_n20
+6,1,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,False,pilot_n20
+6,2,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,False,pilot_n20
+7,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+7,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+7,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+8,0,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,True,pilot_n20
+8,1,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,True,pilot_n20
+8,2,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,True,pilot_n20
+9,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+9,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+9,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,True,pilot_n20
+10,0,True,False,1,"[""loop-run-card""]",,v1_published,False,pilot_n20
+10,1,True,False,1,"[""loop-run-card""]",,v1_published,False,pilot_n20
+10,2,True,False,1,"[""loop-run-card""]",,v1_published,False,pilot_n20
+11,0,False,False,1,"[""figure-style""]",,v1_published,True,pilot_n20
+11,1,False,False,1,"[""figure-style""]",,v1_published,True,pilot_n20
+11,2,False,False,1,"[""figure-style""]",,v1_published,True,pilot_n20
+12,0,False,False,1,"[""customize""]",,v1_published,True,pilot_n20
+12,1,False,False,1,"[""customize""]",,v1_published,True,pilot_n20
+12,2,False,False,1,"[""customize""]",,v1_published,True,pilot_n20
+13,0,False,False,1,"[""skill-creator""]",,v1_published,True,pilot_n20
+13,1,False,False,1,"[""skill-creator""]",,v1_published,True,pilot_n20
+13,2,False,False,1,"[""skill-creator""]",,v1_published,True,pilot_n20
+14,0,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,False,pilot_n20
+14,1,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,False,pilot_n20
+14,2,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,False,pilot_n20
+15,0,False,False,1,"[""self-awareness""]",,v1_published,True,pilot_n20
+15,1,False,False,1,"[""self-awareness""]",,v1_published,True,pilot_n20
+15,2,False,False,1,"[""self-awareness""]",,v1_published,True,pilot_n20
+16,0,False,False,1,"[""compute-env-setup""]",,v1_published,True,pilot_n20
+16,1,False,False,1,"[""compute-env-setup""]",,v1_published,True,pilot_n20
+16,2,False,False,1,"[""compute-env-setup""]",,v1_published,True,pilot_n20
+17,0,False,False,1,"[""retro-triage""]",,v1_published,True,pilot_n20
+17,1,False,False,1,"[""retro-triage""]",,v1_published,True,pilot_n20
+17,2,False,False,1,"[""retro-triage""]",,v1_published,True,pilot_n20
+18,0,False,False,1,"[""loop-run-card""]",,v1_published,True,pilot_n20
+18,1,False,False,1,"[""loop-run-card""]",,v1_published,True,pilot_n20
+18,2,False,False,1,"[""loop-run-card""]",,v1_published,True,pilot_n20
+19,0,False,False,1,"[""literature-review""]",,v1_published,True,pilot_n20
+19,1,False,False,1,"[""literature-review""]",,v1_published,True,pilot_n20
+19,2,False,False,1,"[""literature-review""]",,v1_published,True,pilot_n20
+20,0,False,False,1,"[""agent-debrief""]",,v1_published,True,pilot_n20
+20,1,False,False,1,"[""agent-debrief""]",,v1_published,True,pilot_n20
+20,2,False,False,1,"[""agent-debrief""]",,v1_published,True,pilot_n20
+1,0,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+1,1,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+1,2,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+2,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+2,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+2,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+3,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+3,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+3,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+4,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+4,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+4,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+5,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+5,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+5,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+6,0,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v2_exclusion,False,pilot_n20
+6,1,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v2_exclusion,False,pilot_n20
+6,2,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v2_exclusion,False,pilot_n20
+7,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+7,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+7,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+8,0,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v2_exclusion,True,pilot_n20
+8,1,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v2_exclusion,True,pilot_n20
+8,2,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v2_exclusion,False,pilot_n20
+9,0,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+9,1,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+9,2,True,True,1,"[""repo-rules-preflight""]",,v2_exclusion,True,pilot_n20
+10,0,True,False,1,"[""loop-run-card""]",,v2_exclusion,False,pilot_n20
+10,1,True,False,1,"[""loop-run-card""]",,v2_exclusion,False,pilot_n20
+10,2,True,False,1,"[""loop-run-card""]",,v2_exclusion,False,pilot_n20
+11,0,False,False,1,"[""figure-style""]",,v2_exclusion,True,pilot_n20
+11,1,False,False,1,"[""figure-style""]",,v2_exclusion,True,pilot_n20
+11,2,False,False,1,"[""figure-style""]",,v2_exclusion,True,pilot_n20
+12,0,False,False,1,"[""customize""]",,v2_exclusion,True,pilot_n20
+12,1,False,False,1,"[""customize""]",,v2_exclusion,True,pilot_n20
+12,2,False,False,1,"[""customize""]",,v2_exclusion,True,pilot_n20
+13,0,False,False,1,"[""skill-creator""]",,v2_exclusion,True,pilot_n20
+13,1,False,False,1,"[""skill-creator""]",,v2_exclusion,True,pilot_n20
+13,2,False,False,1,"[""skill-creator""]",,v2_exclusion,True,pilot_n20
+14,0,False,False,1,"[""docs""]",,v2_exclusion,True,pilot_n20
+14,1,False,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v2_exclusion,True,pilot_n20
+14,2,False,False,1,"[""docs""]",,v2_exclusion,True,pilot_n20
+15,0,False,False,1,"[""self-awareness""]",,v2_exclusion,True,pilot_n20
+15,1,False,False,1,"[""self-awareness""]",,v2_exclusion,True,pilot_n20
+15,2,False,False,1,"[""self-awareness""]",,v2_exclusion,True,pilot_n20
+16,0,False,False,1,"[""compute-env-setup""]",,v2_exclusion,True,pilot_n20
+16,1,False,False,1,"[""compute-env-setup""]",,v2_exclusion,True,pilot_n20
+16,2,False,False,1,"[""compute-env-setup""]",,v2_exclusion,True,pilot_n20
+17,0,False,False,1,"[""retro-triage""]",,v2_exclusion,True,pilot_n20
+17,1,False,False,1,"[""retro-triage""]",,v2_exclusion,True,pilot_n20
+17,2,False,False,1,"[""retro-triage""]",,v2_exclusion,True,pilot_n20
+18,0,False,False,1,"[""loop-run-card""]",,v2_exclusion,True,pilot_n20
+18,1,False,False,1,"[""loop-run-card""]",,v2_exclusion,True,pilot_n20
+18,2,False,False,1,"[""loop-run-card""]",,v2_exclusion,True,pilot_n20
+19,0,False,False,1,"[""literature-review""]",,v2_exclusion,True,pilot_n20
+19,1,False,False,1,"[""literature-review""]",,v2_exclusion,True,pilot_n20
+19,2,False,False,1,"[""literature-review""]",,v2_exclusion,True,pilot_n20
+20,0,False,False,1,"[""agent-debrief""]",,v2_exclusion,True,pilot_n20
+20,1,False,False,1,"[""agent-debrief""]",,v2_exclusion,True,pilot_n20
+20,2,False,False,1,"[""agent-debrief""]",,v2_exclusion,True,pilot_n20
+1,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+1,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+1,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+2,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+2,1,True,True,2,"[""repo-rules-preflight"", ""propagate-source-of-truth""]",,v3_exclusion_orient,True,pilot_n20
+2,2,True,True,2,"[""repo-rules-preflight"", ""propagate-source-of-truth""]",,v3_exclusion_orient,True,pilot_n20
+3,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+3,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+3,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+4,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+4,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+4,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+5,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+5,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+5,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+6,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""corpus-librarian""]",,v3_exclusion_orient,True,pilot_n20
+6,1,True,True,3,"[""repo-rules-preflight"", ""corpus-librarian"", ""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+6,2,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""corpus-librarian""]",,v3_exclusion_orient,True,pilot_n20
+7,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+7,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+7,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+8,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""docs""]",,v3_exclusion_orient,True,pilot_n20
+8,1,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v3_exclusion_orient,True,pilot_n20
+8,2,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v3_exclusion_orient,True,pilot_n20
+9,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+9,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+9,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,True,pilot_n20
+10,0,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,False,pilot_n20
+10,1,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,False,pilot_n20
+10,2,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,False,pilot_n20
+11,0,False,False,1,"[""figure-style""]",,v3_exclusion_orient,True,pilot_n20
+11,1,False,False,1,"[""figure-style""]",,v3_exclusion_orient,True,pilot_n20
+11,2,False,False,1,"[""figure-style""]",,v3_exclusion_orient,True,pilot_n20
+12,0,False,False,1,"[""customize""]",,v3_exclusion_orient,True,pilot_n20
+12,1,False,False,1,"[""customize""]",,v3_exclusion_orient,True,pilot_n20
+12,2,False,False,1,"[""customize""]",,v3_exclusion_orient,True,pilot_n20
+13,0,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,True,pilot_n20
+13,1,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,True,pilot_n20
+13,2,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,True,pilot_n20
+14,0,False,False,1,"[""docs""]",,v3_exclusion_orient,True,pilot_n20
+14,1,False,False,1,"[""docs""]",,v3_exclusion_orient,True,pilot_n20
+14,2,False,False,1,"[""docs""]",,v3_exclusion_orient,True,pilot_n20
+15,0,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,True,pilot_n20
+15,1,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,True,pilot_n20
+15,2,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,True,pilot_n20
+16,0,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,True,pilot_n20
+16,1,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,True,pilot_n20
+16,2,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,True,pilot_n20
+17,0,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,True,pilot_n20
+17,1,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,True,pilot_n20
+17,2,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,True,pilot_n20
+18,0,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+18,1,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+18,2,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,True,pilot_n20
+19,0,False,False,1,"[""literature-review""]",,v3_exclusion_orient,True,pilot_n20
+19,1,False,False,1,"[""literature-review""]",,v3_exclusion_orient,True,pilot_n20
+19,2,False,False,1,"[""literature-review""]",,v3_exclusion_orient,True,pilot_n20
+20,0,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,True,pilot_n20
+20,1,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,True,pilot_n20
+20,2,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,True,pilot_n20
+1,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""docs""]",,v1_published,,final_n50
+1,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+1,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+2,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+2,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+2,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+3,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+3,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+3,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+4,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+4,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+4,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+5,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+5,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+5,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+6,0,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,,final_n50
+6,1,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,,final_n50
+6,2,True,False,2,"[""corpus-librarian"", ""loop-run-card""]",,v1_published,,final_n50
+7,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+7,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+7,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+8,0,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+8,1,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+8,2,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+9,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+9,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+9,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+10,0,True,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+10,1,True,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+10,2,True,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+11,0,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+11,1,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+11,2,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+12,0,False,False,1,"[""customize""]",,v1_published,,final_n50
+12,1,False,False,1,"[""customize""]",,v1_published,,final_n50
+12,2,False,False,1,"[""customize""]",,v1_published,,final_n50
+13,0,False,False,1,"[""skill-creator""]",,v1_published,,final_n50
+13,1,False,False,1,"[""skill-creator""]",,v1_published,,final_n50
+13,2,False,False,1,"[""skill-creator""]",,v1_published,,final_n50
+14,0,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+14,1,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+14,2,False,True,2,"[""repo-rules-preflight"", ""docs""]",,v1_published,,final_n50
+15,0,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+15,1,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+15,2,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+16,0,False,False,1,"[""compute-env-setup""]",,v1_published,,final_n50
+16,1,False,False,1,"[""compute-env-setup""]",,v1_published,,final_n50
+16,2,False,False,1,"[""compute-env-setup""]",,v1_published,,final_n50
+17,0,False,False,1,"[""retro-triage""]",,v1_published,,final_n50
+17,1,False,False,1,"[""retro-triage""]",,v1_published,,final_n50
+17,2,False,False,1,"[""retro-triage""]",,v1_published,,final_n50
+18,0,False,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+18,1,False,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+18,2,False,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+19,0,False,False,1,"[""literature-review""]",,v1_published,,final_n50
+19,1,False,False,1,"[""literature-review""]",,v1_published,,final_n50
+19,2,False,False,1,"[""literature-review""]",,v1_published,,final_n50
+20,0,False,False,1,"[""agent-debrief""]",,v1_published,,final_n50
+20,1,False,False,1,"[""agent-debrief""]",,v1_published,,final_n50
+20,2,False,False,1,"[""agent-debrief""]",,v1_published,,final_n50
+21,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+21,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+21,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+22,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""figure-style""]",,v1_published,,final_n50
+22,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+22,2,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""figure-style""]",,v1_published,,final_n50
+23,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+23,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+23,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+24,0,True,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+24,1,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,,final_n50
+24,2,True,False,1,"[""loop-run-card""]",,v1_published,,final_n50
+25,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+25,1,True,False,0,[],,v1_published,,final_n50
+25,2,True,False,0,[],,v1_published,,final_n50
+26,0,True,False,0,[],,v1_published,,final_n50
+26,1,True,False,0,[],,v1_published,,final_n50
+26,2,True,False,0,[],,v1_published,,final_n50
+27,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+27,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+27,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+28,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+28,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+28,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+29,0,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v1_published,,final_n50
+29,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+29,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+30,0,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v1_published,,final_n50
+30,1,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v1_published,,final_n50
+30,2,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v1_published,,final_n50
+31,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+31,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+31,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v1_published,,final_n50
+32,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+32,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+32,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+33,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+33,1,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+33,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+34,0,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,,final_n50
+34,1,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,,final_n50
+34,2,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v1_published,,final_n50
+35,0,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+35,1,True,False,0,[],,v1_published,,final_n50
+35,2,True,True,1,"[""repo-rules-preflight""]",,v1_published,,final_n50
+36,0,False,False,0,[],,v1_published,,final_n50
+36,1,False,False,0,[],,v1_published,,final_n50
+36,2,False,False,0,[],,v1_published,,final_n50
+37,0,False,False,0,[],,v1_published,,final_n50
+37,1,False,False,0,[],,v1_published,,final_n50
+37,2,False,False,0,[],,v1_published,,final_n50
+38,0,False,False,1,"[""session-harvest""]",,v1_published,,final_n50
+38,1,False,False,1,"[""session-harvest""]",,v1_published,,final_n50
+38,2,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+39,0,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+39,1,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+39,2,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+40,0,False,False,0,[],,v1_published,,final_n50
+40,1,False,False,0,[],,v1_published,,final_n50
+40,2,False,False,0,[],,v1_published,,final_n50
+41,0,False,False,0,[],,v1_published,,final_n50
+41,1,False,False,0,[],,v1_published,,final_n50
+41,2,False,False,0,[],,v1_published,,final_n50
+42,0,False,False,2,"[""skill-creator"", ""red-team-prompt""]",,v1_published,,final_n50
+42,1,False,False,0,[],,v1_published,,final_n50
+42,2,False,False,0,[],,v1_published,,final_n50
+43,0,False,False,0,[],,v1_published,,final_n50
+43,1,False,False,0,[],,v1_published,,final_n50
+43,2,False,False,0,[],,v1_published,,final_n50
+44,0,False,False,0,[],,v1_published,,final_n50
+44,1,False,False,0,[],,v1_published,,final_n50
+44,2,False,False,0,[],,v1_published,,final_n50
+45,0,False,False,0,[],,v1_published,,final_n50
+45,1,False,False,0,[],,v1_published,,final_n50
+45,2,False,False,0,[],,v1_published,,final_n50
+46,0,False,False,0,[],,v1_published,,final_n50
+46,1,False,False,0,[],,v1_published,,final_n50
+46,2,False,False,0,[],,v1_published,,final_n50
+47,0,False,False,1,"[""docs""]",,v1_published,,final_n50
+47,1,False,False,1,"[""docs""]",,v1_published,,final_n50
+47,2,False,False,1,"[""docs""]",,v1_published,,final_n50
+48,0,False,False,1,"[""customize""]",,v1_published,,final_n50
+48,1,False,False,1,"[""customize""]",,v1_published,,final_n50
+48,2,False,False,1,"[""customize""]",,v1_published,,final_n50
+49,0,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+49,1,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+49,2,False,False,1,"[""figure-style""]",,v1_published,,final_n50
+50,0,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+50,1,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+50,2,False,False,1,"[""self-awareness""]",,v1_published,,final_n50
+1,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+1,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+1,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+2,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+2,1,True,True,2,"[""repo-rules-preflight"", ""propagate-source-of-truth""]",,v3_exclusion_orient,,final_n50
+2,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+3,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+3,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+3,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+4,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+4,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+4,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+5,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+5,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+5,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+6,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+6,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+6,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+7,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+7,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+7,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+8,0,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v3_exclusion_orient,,final_n50
+8,1,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v3_exclusion_orient,,final_n50
+8,2,True,True,2,"[""repo-rules-preflight"", ""docs""]",,v3_exclusion_orient,,final_n50
+9,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+9,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+9,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+10,0,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+10,1,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+10,2,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+11,0,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+11,1,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+11,2,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+12,0,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+12,1,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+12,2,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+13,0,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,,final_n50
+13,1,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,,final_n50
+13,2,False,False,1,"[""skill-creator""]",,v3_exclusion_orient,,final_n50
+14,0,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+14,1,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+14,2,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+15,0,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
+15,1,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
+15,2,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
+16,0,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+16,1,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+16,2,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+17,0,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,,final_n50
+17,1,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,,final_n50
+17,2,False,False,1,"[""retro-triage""]",,v3_exclusion_orient,,final_n50
+18,0,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+18,1,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+18,2,False,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+19,0,False,False,1,"[""literature-review""]",,v3_exclusion_orient,,final_n50
+19,1,False,False,1,"[""literature-review""]",,v3_exclusion_orient,,final_n50
+19,2,False,False,1,"[""literature-review""]",,v3_exclusion_orient,,final_n50
+20,0,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,,final_n50
+20,1,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,,final_n50
+20,2,False,False,1,"[""agent-debrief""]",,v3_exclusion_orient,,final_n50
+21,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+21,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+21,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+22,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""figure-style""]",,v3_exclusion_orient,,final_n50
+22,1,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""figure-style""]",,v3_exclusion_orient,,final_n50
+22,2,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""figure-style""]",,v3_exclusion_orient,,final_n50
+23,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+23,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+23,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+24,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+24,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+24,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+25,0,True,False,0,[],,v3_exclusion_orient,,final_n50
+25,1,True,False,0,[],,v3_exclusion_orient,,final_n50
+25,2,True,False,0,[],,v3_exclusion_orient,,final_n50
+26,0,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+26,1,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+26,2,True,False,1,"[""loop-run-card""]",,v3_exclusion_orient,,final_n50
+27,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+27,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+27,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+28,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+28,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+28,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+29,0,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+29,1,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+29,2,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+30,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+30,1,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+30,2,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+31,0,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+31,1,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+31,2,True,True,2,"[""repo-rules-preflight"", ""loop-run-card""]",,v3_exclusion_orient,,final_n50
+32,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+32,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+32,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+33,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+33,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+33,2,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+34,0,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""propagate-source-of-truth""]",,v3_exclusion_orient,,final_n50
+34,1,True,True,2,"[""loop-run-card"", ""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+34,2,True,True,3,"[""repo-rules-preflight"", ""loop-run-card"", ""propagate-source-of-truth""]",,v3_exclusion_orient,,final_n50
+35,0,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+35,1,True,True,1,"[""repo-rules-preflight""]",,v3_exclusion_orient,,final_n50
+35,2,True,False,0,[],"llm_batch: model returned an empty response (stop_reason=""max_tokens"", model=""claude-sonnet-5"")",v3_exclusion_orient,,final_n50
+36,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+36,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+36,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+37,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+37,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+37,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+38,0,False,False,1,"[""session-harvest""]",,v3_exclusion_orient,,final_n50
+38,1,False,False,1,"[""session-harvest""]",,v3_exclusion_orient,,final_n50
+38,2,False,False,1,"[""session-harvest""]",,v3_exclusion_orient,,final_n50
+39,0,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+39,1,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+39,2,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+40,0,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+40,1,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+40,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+41,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+41,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+41,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+42,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+42,1,False,False,1,"[""red-team-prompt""]",,v3_exclusion_orient,,final_n50
+42,2,False,False,1,"[""red-team-prompt""]",,v3_exclusion_orient,,final_n50
+43,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+43,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+43,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+44,0,False,False,1,"[""compute-env-setup""]",,v3_exclusion_orient,,final_n50
+44,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+44,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+45,0,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+45,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+45,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+46,0,False,False,0,[],,v3_exclusion_orient,,final_n50
+46,1,False,False,0,[],,v3_exclusion_orient,,final_n50
+46,2,False,False,0,[],,v3_exclusion_orient,,final_n50
+47,0,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+47,1,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+47,2,False,False,1,"[""docs""]",,v3_exclusion_orient,,final_n50
+48,0,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+48,1,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+48,2,False,False,1,"[""customize""]",,v3_exclusion_orient,,final_n50
+49,0,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+49,1,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+49,2,False,False,1,"[""figure-style""]",,v3_exclusion_orient,,final_n50
+50,0,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
+50,1,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
+50,2,False,False,1,"[""self-awareness""]",,v3_exclusion_orient,,final_n50
