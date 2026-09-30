@@ -1,0 +1,12 @@
+failure_type,what_it_is,everyday_name,cheapest_early_check
+Rewarding the wrong thing,A grader gives credit for behaviour that is not the goal,Teaching to the test,Regrade a sample from the case definitions alone; run an always-hedge arm through the grader
+Unreliable scale,The same input scores differently on repeat,A scale that gives a new weight each time,Run one identical case three or more times before comparing arms
+Test too easy to separate anyone,"Most cases are passed or failed by every candidate, so the test cannot rank them",Everyone gets an A,"Count the cases that split candidates before the run, using probe implementations that span the expected quality band"
+Bad proxy,A practice or qualification measure does not predict the real score,The practice test does not predict the exam,Correlate the proxy with the real score on the existing pool
+Judging by the label,Items that share a label behave differently on the test,Judging a book by its cover,Check whether same-label items score the same on the bank
+Too few cases to count,"Too few cases, non-tied pairs or codable items for the statistic being quoted",Not enough data points,Count cases and non-tied pairs against the coverage rule before running
+Knob not connected,The treatment cannot move what the instrument reads,Turning a dial that is not wired to anything,Generate one page per arm first and check the instrument has room to move
+Measurement cut short,Outputs or judge calls were truncated by a token cap,An answer sheet cut off mid-answer,Size the cap from a preflight run; check every stop reason
+Scale changed between runs,"Batches were measured with different settings, so they cannot be pooled or compared",Changing the ruler mid-survey,Compare run settings across batches before pooling
+Labels that overlap,"Categories cannot be told apart by anything observable, so counts depend on the rater",Overlapping boxes on a form,Double-rate a sample; compare facet definitions before counting
+Auditor blind spot,The reviewer reports its own limits as findings about the system,Blaming the window for your own smudged glasses,Have the dispatcher confirm any flag the auditor could not verify from its own frame

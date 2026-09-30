@@ -2,10 +2,11 @@
 
 **Question.** Can the instruments we use to compare agents tell a real difference from a grader quirk, noise, or a test too easy to separate anyone?
 
-**Where it stands.** Six instrument failures have been found across three projects (a grader rewarding the wrong arm, unrepeatable scores, a test bank that could not separate candidates, a proxy that did not predict the sealed score, descriptors that did not match behaviour, too few cases to rate). Two are fully diagnosed and guarded in loop-lab's scar ledger; the rest are measured but not yet explained. A central register of instrument failures (with a denominator, cause, prevention and whether it was caught before or after spend) is planned for this program and is not built yet.
+**Where it stands.** Six instrument failures were found across three projects in the first pass, and the register now records every study examined (see `register/summary.md` for current counts). Two of the failures are fully diagnosed and guarded in loop-lab's scar ledger; several others are measured but not yet explained.
 
 ## Contents
 
+- `register/` : instrument-failure register (studies, failures, types, checker, generated summary)
 - `agentbench/` : scorekeeping harness (case, arm, repeat, split) and its tests
 - `agentbench-runs/` : canonical run table, reports and figures from the six suites; `2248_result_ledger.csv` is the 2248-challenge RESULT-00xx ledger, not a list of work done here
 - `small-league/` : sealed-bank resolution analysis, claims manifest and its checker
@@ -42,3 +43,4 @@
 | 2026-09-21 | 2248 experiment ledger census | Audit | 16 records on main | 3 supported, 7 inconclusive, 1 falsified, 2 unverified, 1 map-corpus inconclusive, 1 closed; one empty stub |
 | 2026-09-21 | Git branch and worktree audits (2248 and loop-lab) | Audit | ~65 branches | Six unpushed 2248 branches carrying records past RESULT-0038 found; user pushed them |
 | 2026-09-21 | Scar ledger audit and update (PR #24) | Audit + change | 13 -> 15 scars | Merged after auditor corrections |
+| 2026-09-30 | Instrument-failure register built from the 25 studies examined | Built + tested | 25 studies, 21 failure rows, 11 failure types | Checker validates both tables and regenerates summary.md; negative control rejects deliberately broken rows |
