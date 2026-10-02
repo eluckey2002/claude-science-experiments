@@ -1,6 +1,6 @@
 # Protocol: does "Make it modern." keep its meaning when the prompt pins only the content?
 
-Status: WRITTEN 2026-09-30. NOT RUN. No model call has been made. Generation waits for the owner's go.
+Status: RUN 2026-10-01. Outcome PARTIAL (see Results and Amendments at the end). Originally written 2026-09-30.
 Standing: exploratory screen, same as the 2026-09-28 thickness run (runs/2026-09-28-thin-thick-coffee-v2). It is sized to decide
 what to run next, not to be cited as an effect size.
 
@@ -95,3 +95,24 @@ is updated with the outcome and any instrument failure found.
 - The hero button is in both arms and may raise the chance of large radii in both; the headroom check covers it.
 - The generation path used in the thickness run is not recorded in its run log. The input-token check above is the guard.
 - The extractor can miss heading fonts set through a class. The body-font indicator does not depend on that.
+
+
+## Results (run 2026-10-01)
+Generated through Claude Science (host.llm, claude-sonnet-5, temperature 1.0, max_tokens 10000). 2 preflight pages, then 5 pages per arm. All 10 pages ended with end_turn.
+Preflight gates G1-G3 and M1 passed on the two preflight pages. Batch pages passed G1-G3 once HTML entities were decoded (see Amendment 2).
+
+| Indicator | Guide only | Guide + "Make it modern." | Headroom | Moved |
+|---|---|---|---|---|
+| Body font is system sans | 0/5 | 5/5 | yes | yes |
+| Backdrop blur present | 0/5 | 0/5 | yes | no |
+| Largest corner radius > 40px | 0/5 | 5/5 | yes | yes |
+| Two or more gradients | 0/5 | 0/5 | yes | no |
+
+Outcome by the frozen rule: headroom on 4, moved 2 -> PARTIAL. Reading 2 is ruled out for font and radius; blur did not arrive with the word, unlike the thin run (5/5).
+Predictions: P1 held after entity decoding; P3 half right (font moved, blur did not); P4 untestable (one font class in every page of both arms); P5 held (mean html_chars 5,545 vs 4,893).
+Files: fingerprints_coherence.csv, run_log_coherence.csv, coherence_pages.tar.gz.
+
+## Amendments (made after the run; no change to the frozen arms.json, sha256 unchanged)
+1. Token guard. The Step 1 guard ("above 600 input tokens means a system prompt rides along") compared the wrong quantity. Calls through Claude Science report uncached input (404/410 here) and cached input (4,888, platform text) separately. The earlier runs' logs hold a single in_tok, most likely the uncached count, so the platform text was present but invisible in them. The run was therefore not treated as a deviation from the thickness run. This is inferred, not verified: the earlier logs carry no cache fields, and the thick-run figure of about 8,300 is unexplained. Going forward, log cached and uncached input separately.
+2. Checker false failure. preflight_checks.py does not decode HTML entities, so it flagged 4 guide-only pages for missing en-dash and copyright strings written as &ndash; and &copy;. After html.unescape all pages pass. The checker should decode entities before matching.
+3. Power. At k=5 a moderate real shift is likely to read as PARTIAL; this outcome should be followed by the one-property-at-a-time follow-up (pin blur first) with a larger batch.

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northside Roast</title>
+<style>
+  :root {
+    --ink: #2b2420;
+    --cream: #faf6f1;
+    --tan: #e7dccc;
+    --accent: #a9622f;
+    --muted: #6b6058;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .shop-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.75rem;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    color: var(--muted);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+
+  .hero {
+    padding: 5rem 2rem 6rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--tan) 0%, var(--cream) 100%);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p {
+    margin-top: 0.9rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+  }
+
+  .button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.85rem 1.9rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(169, 98, 47, 0.25);
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .menu-item {
+    background: #fff;
+    border: 1px solid var(--tan);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+  }
+
+  .menu-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .menu-item-top h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .menu-item-top span {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .menu-item p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .hours {
+    background: var(--tan);
+  }
+
+  .hours-table {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.1rem 1.6rem;
+    font-size: 1rem;
+  }
+
+  .hours-row:not(:last-child) {
+    border-bottom: 1px solid var(--tan);
+  }
+
+  .hours-row span:first-child {
+    color: var(--muted);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  footer p {
+    margin: 0.2rem 0;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="shop-name">Northside Roast</div>
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#footer">Find us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Coffee, made to order.</h1>
+    <p>Open every day on Albion Street.</p>
+    <a href="#menu" class="button">See the menu</a>
+  </section>
+
+  <section id="menu">
+    <h2 class="section-title">Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Espresso</h3>
+          <span>$3.50</span>
+        </div>
+        <p>A short, strong shot pulled fresh for every order.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Flat white</h3>
+          <span>$4.50</span>
+        </div>
+        <p>Espresso with steamed milk and a thin layer of foam.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Filter coffee</h3>
+          <span>$3.80</span>
+        </div>
+        <p>A lighter, slow-brewed cup made in small batches.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Cold brew</h3>
+          <span>$4.80</span>
+        </div>
+        <p>Steeped for twelve hours and served over ice.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Hot chocolate</h3>
+          <span>$4.20</span>
+        </div>
+        <p>Melted dark chocolate with steamed milk.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <h3>Almond croissant</h3>
+          <span>$5.00</span>
+        </div>
+        <p>Baked daily and filled with almond cream.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hours" id="hours">
+    <h2 class="section-title">Opening hours</h2>
+    <div class="hours-table">
+      <div class="hours-row">
+        <span>Mon–Fri</span>
+        <span>7:00am–4:00pm</span>
+      </div>
+      <div class="hours-row">
+        <span>Sat–Sun</span>
+        <span>8:00am–3:00pm</span>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <p>12 Albion Street</p>
+    <p>© Northside Roast</p>
+  </footer>
+
+</body>
+</html>

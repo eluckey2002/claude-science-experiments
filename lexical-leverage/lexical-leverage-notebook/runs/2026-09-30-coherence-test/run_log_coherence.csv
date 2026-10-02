@@ -1,0 +1,11 @@
+cell,err,in_tok,cached,out_tok,stop
+guide|absent|0,,404,4888,2208,end_turn
+guide|absent|1,,404,4888,2334,end_turn
+guide|absent|2,,404,4888,2178,end_turn
+guide|absent|3,,404,4888,2565,end_turn
+guide|absent|4,,404,4888,2624,end_turn
+guide|modern|0,,410,4888,2447,end_turn
+guide|modern|1,,410,4888,2931,end_turn
+guide|modern|2,,410,4888,2611,end_turn
+guide|modern|3,,410,4888,2620,end_turn
+guide|modern|4,,410,4888,2973,end_turn

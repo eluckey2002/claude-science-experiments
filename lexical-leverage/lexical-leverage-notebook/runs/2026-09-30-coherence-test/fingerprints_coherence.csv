@@ -1,0 +1,11 @@
+body_font,body_font_class,heading_font,heading_font_class,bg,bg_lightness,dark_theme,accent,accent_hue,n_distinct_colors,n_gradients,max_radius_px,container_px,n_keyframes,uses_backdrop_blur,n_sections,html_chars,arm,run
+georgia,serif,georgia,serif,#faf6f0,0.96,False,#e2d9cc,orange,7,0,4.0,760,0,False,2,4912,guide|absent,0
+georgia,serif,georgia,serif,#faf6f0,0.96,False,#e4dcd2,orange,10,0,4.0,720,0,False,3,5067,guide|absent,1
+georgia,serif,georgia,serif,#faf6f1,0.96,False,#2e2420,orange,6,0,0.0,760,0,False,3,4675,guide|absent,2
+georgia,serif,georgia,serif,#faf6f1,0.96,False,#efe5d8,orange,8,0,4.0,800,0,False,3,5012,guide|absent,3
+georgia,serif,georgia,serif,#faf6f1,0.96,False,#efe6da,orange,7,0,4.0,720,0,False,3,4799,guide|absent,4
+-apple-system,system-sans,-apple-system,system-sans,#faf6f0,0.96,False,#ddd2bf,orange,9,1,999.0,900,0,False,3,5169,guide|modern,0
+-apple-system,system-sans,-apple-system,system-sans,#faf6f0,0.96,False,#e4dbd0,orange,7,0,999.0,1000,0,False,3,6044,guide|modern,1
+-apple-system,system-sans,-apple-system,system-sans,#faf6f1,0.96,False,#e8ddd0,orange,7,1,999.0,900,0,False,3,5539,guide|modern,2
+-apple-system,system-sans,-apple-system,system-sans,#faf6f1,0.96,False,#43291d,orange,7,1,999.0,900,0,False,3,5653,guide|modern,3
+helvetica neue,system-sans,helvetica neue,system-sans,#faf6f1,0.96,False,#4a3224,orange,9,1,999.0,960,0,False,3,5319,guide|modern,4
